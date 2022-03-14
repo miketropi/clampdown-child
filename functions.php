@@ -25,7 +25,7 @@
 
 
 function clampdown_enqueue_styles() {
-  $parenthandle = 'twentytwentytwo-style';
+  $parenthandle = 'twentytwentyone-style';
   $theme = wp_get_theme();
   wp_enqueue_style( 
     $parenthandle, 

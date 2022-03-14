@@ -1,0 +1,25 @@
+.main-header {
+  padding: 1.5em 0;
+}
+
+#site-navigation {
+
+  ul.menu-wrapper {
+
+    li.menu-item {
+
+      > a {
+        text-transform: uppercase;
+        font-size: 0.65em;
+      }
+
+      &:hover,
+      &.current-menu-item {
+
+        > a {
+          color: $accents-color;
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,26 @@
-$main-color: '' !default;
+html, body {
+  font-family: $body-font;
+  color: $body-color;
+  font-size: $body-font-size;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font;
+  color: $heading-color;
+}
+
+p {
+  margin-bottom: 1.5em;
+}   
+
+.site-container {
+  width: $site-width;
+  max-width: calc(100% - 30px);
+  margin: 0 auto;
+}
+
+.children-center-by-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
