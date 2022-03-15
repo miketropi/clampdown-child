@@ -36,6 +36,11 @@ p {
   text-transform: uppercase;
   font-size: 0.65em;
 }
+@media (max-width: 481px) {
+  #site-navigation ul.menu-wrapper li.menu-item > a {
+    font-size: 1.5em;
+  }
+}
 #site-navigation ul.menu-wrapper li.menu-item:hover > a, #site-navigation ul.menu-wrapper li.menu-item.current-menu-item > a {
   color: var(--theme-accents-color);
 }
