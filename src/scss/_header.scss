@@ -6,6 +6,21 @@
 
   ul.menu-wrapper {
 
+    @media(max-width: 481px) {
+      height: max-content;
+      width: 260px;
+    }
+
+    > li.menu-item {
+      
+      @media(max-width: 481px) {
+        
+        &:not(:last-child) {
+          border-bottom: solid 1px #979696;
+        }
+      }
+    }
+
     li.menu-item {
 
       > a {
@@ -15,13 +30,16 @@
         border-bottom: none;
         box-shadow: none;
 
-        @media(max-width: 481px) {
-          font-size: 1.5em;
-        }
-
         &:focus {
           background: none;
           color: black;
+        }
+
+        @media(max-width: 481px) {
+          text-align: center;
+          font-size: 1em;
+          letter-spacing: 2px;
+          padding: 1.2em 0;
         }
       }
 
@@ -31,7 +49,29 @@
         > a {
           color: $accents-color;
         }
+
+        @media(max-width: 481px) {
+
+          > a {
+            color: #7fccf7;
+          }
+        }
       }
     }
   }
+}
+
+@media(max-width: 481px) {
+
+  .primary-navigation-open {
+
+    #site-navigation {
+
+      .menu-button-container,
+      .primary-menu-container {
+        background: #e8e6e6;
+      }
+    }
+  }
+  
 }
