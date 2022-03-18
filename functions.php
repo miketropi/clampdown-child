@@ -21,6 +21,12 @@
   require(CLAMPDOWN_DIR . '/inc/helpers.php');
   require(CLAMPDOWN_DIR . '/inc/hooks.php');
   require(CLAMPDOWN_DIR . '/inc/ajax.php');
+
+  if(class_exists('WooCommerce')) {
+    require(CLAMPDOWN_DIR . '/inc/woocommerce/woo.php');
+    require(CLAMPDOWN_DIR . '/inc/woocommerce/woo-ajax.php');
+    require(CLAMPDOWN_DIR . '/inc/woocommerce/product-meta-field.php');
+  }
 }
 
 

@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: {
     frontend: './src/main.js',
+    woofrontend: './src/woo.js',
+    woobackend: './src/woo.backend.js',
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -11,6 +13,13 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+        }
+      },
       {
         test: /.(css|scss)$/,
         use: [
@@ -21,6 +30,17 @@ module.exports = {
           // Compiles Sass to CSS
           "sass-loader",
         ],
+      },
+      {
+        test: /.(jpg|jpeg|png|gif|mp3|svg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[path][name]-[hash:8].[ext]"
+            }
+          }
+        ]
       }
     ]
   },

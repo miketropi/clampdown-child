@@ -10,6 +10,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/main.scss */ \"./src/scss/main.scss\");\n/**\r\n * Clampdown Script\r\n * \r\n */\n\n/**\r\n * SCSS\r\n */\n\n;\n\n(function (w, $) {\n  'use strict';\n\n  var Ready = function Ready() {};\n  /**\r\n   * DOM Ready  \r\n   * \r\n   */\n\n\n  $(Ready);\n})(window, jQuery);\n\n//# sourceURL=webpack://clampdown-child/./src/main.js?");
+
+/***/ }),
+
 /***/ "./src/scss/main.scss":
 /*!****************************!*\
   !*** ./src/scss/main.scss ***!
@@ -17,16 +27,6 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://clampdown-child/./src/scss/main.scss?");
-
-/***/ }),
-
-/***/ "./src/main.js":
-/*!*********************!*\
-  !*** ./src/main.js ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/main.scss */ \"./src/scss/main.scss\");\n/**\r\n * Clampdown Script\r\n * \r\n */\r\n\r\n/**\r\n * SCSS\r\n */\r\n\r\n\r\n;((w, $) => { \r\n  'use strict';\r\n\r\n  const Ready = () => {\r\n\r\n  }\r\n\r\n  /**\r\n   * DOM Ready  \r\n   * \r\n   */\r\n  $(Ready);\r\n})(window, jQuery)\n\n//# sourceURL=webpack://clampdown-child/./src/main.js?");
 
 /***/ })
 
