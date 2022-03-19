@@ -1,5 +1,5 @@
 import react, { useContext, createContext, useState, useEffect } from 'react';
-import { getProductPricingSettings } from '../api/helpers';
+import { getProductPricingSettings, sendProductPricingSettingsToSave } from '../api/helpers';
 import { registerCustomerPricingFields } from '../lib';
 
 const ProductPricingSettingsContext = createContext();
@@ -10,16 +10,23 @@ const ProductPricingSettingsProvider = ({ product, children }) => {
   useEffect(() => {
     const __setSettingsData = async () => {
       const result = await getProductPricingSettings(product);
-      setSettings({ ...result })
+      const settings = result?.settings;
+      setSettings({ ...settings })
     }
     
     __setSettingsData();
   }, [])
 
+  const saveData = async (data) => {
+    const result = await sendProductPricingSettingsToSave(product, data);
+    console.log(result);
+  }
+
   const value = { 
     product,
     settings, setSettings,
     customerOptions: registerCustomerPricingFields(),
+    saveData,
   };
 
   return <ProductPricingSettingsContext.Provider value={ value }>

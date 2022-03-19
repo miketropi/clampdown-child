@@ -31,3 +31,8 @@ function clampdown_child_woo_admin_enqueue_scripts() {
 }
 
 add_action('admin_enqueue_scripts', 'clampdown_child_woo_admin_enqueue_scripts', 30);
+
+function clampdown_child_woo_get_product_pricing_settings($id = 0) {
+  $data = get_post_meta((int) $id, 'product_pricing_custom_settings', true);
+  return $data;
+}

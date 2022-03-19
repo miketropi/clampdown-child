@@ -11,7 +11,7 @@ import map from 'lodash/map';
 import styled from 'styled-components';
 
 const { __ } = wp.i18n; 
-const { Option } = Select;
+const { Option, OptGroup } = Select;
 const { Panel } = Collapse;
 
 const RuleItemContainer = styled.fieldset`
@@ -38,12 +38,41 @@ const RuleItemContainer = styled.fieldset`
 `
 
 export default function ProductPricingSettingsForm({ onChange, fields }) {
-  const { customerOptions } = userProductPricingSettings();
+  if(Object.keys(fields).length == 0) {
+    return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
+  }
+  
+  const { product, customerOptions, saveData } = userProductPricingSettings();
+  const [priceTags, setPriceTags] = useState([]);
   const [form] = Form.useForm();
 
   useEffect(() => {
     form.setFieldsValue(fields)
   }, [fields])
+
+  useEffect(() => {
+    let _priceTags = [...priceTags];
+    let newPriceTags = map(customerOptions, (o, keyName) => {
+      return { value: `{${ o.name }}`, label: o.label, keyName }
+    });
+
+    if(fields?.product_pricing_custom_tag_price_rules?.length > 0) {
+      fields.product_pricing_custom_tag_price_rules.forEach(item => {
+        if(!item?.name) return; 
+        newPriceTags.push({ value: `{${ item?.name }}`, label: item?.name })
+      })
+    }
+
+    setPriceTags(newPriceTags);
+  }, [fields]);
+
+  const onFinish = (values) => {
+    saveData(values);
+  }
+
+  const onFinishFailed = (errorInfo) => {
+    console.log(errorInfo);
+  }
 
   return <Fragment>
     {/* { JSON.stringify(fields) } */}
@@ -51,6 +80,8 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
       name="product_pricing_settings"
       form={ form }
       layout={ 'vertical' }
+      onFinish={ onFinish } 
+      onFinishFailed={ onFinishFailed } 
       onValuesChange={ (changedValues, allValues) => {
         onChange(allValues);
       } } >
@@ -77,9 +108,9 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
         <CustomerOptionsListView options={ customerOptions } />
 
         <br /> */}
-        <Divider orientation="left">{ __('Rules Custom Price', 'clampdown-child') }</Divider>
+        <Divider orientation="left">{ __('Custom Tag Price Rules', 'clampdown-child') }</Divider>
         <Form.List
-          name="product_pricing_custom_price_rules" >
+          name="product_pricing_custom_tag_price_rules" >
           { (_fields, { add, remove }) => (
             <Fragment>
               <Collapse>
@@ -87,7 +118,8 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                   _fields.map(({ key, name, ...restField }) => {
                     return <Panel 
                       key={ key } 
-                      header={ fields.product_pricing_custom_price_rules[name]?.name } >
+                      header={ fields.product_pricing_custom_tag_price_rules[name]?.name } 
+                      extra={ <MinusCircleOutlined onClick={() => remove(name)} /> } >
                       <Form.Item
                         {...restField} 
                         label="Name" 
@@ -100,25 +132,28 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                         label="Field Type"
                         name={[name, 'field_type']}
                         required={ true } >
-                        <Select 
-                          style={{ width: '100%' }} >
-                          {
-                            Object.values(customerOptions).map(o => (
-                              <Option key={ o.name } value={ o.name }>{ o.label }</Option>
-                            ))
-                          }
-                          <Option value="triggerAllFields">Trigger All Fields</Option>
+                        <Select style={{ width: '100%' }} >
+                          <OptGroup label={ __('System Options', 'clampdown-child') }>
+                            <Option value="global">{ __('Global', 'clampdown-child') }</Option>
+                          </OptGroup>
+                          <OptGroup label={ __('Customer Options', 'clampdown-child') }>
+                            {
+                              Object.values(customerOptions).map(o => (
+                                <Option key={ o.name } value={ o.name }>{ o.label }</Option>
+                              ))
+                            }
+                          </OptGroup>
                         </Select>
                       </Form.Item>
                       <Form.Item
                         noStyle
                         shouldUpdate={ (prevValues, curValues) => {
-                          return prevValues.product_pricing_custom_price_rules[name]?.field_type != curValues.product_pricing_custom_price_rules[name]?.field_type;
+                          return prevValues.product_pricing_custom_tag_price_rules[name]?.field_type != curValues.product_pricing_custom_tag_price_rules[name]?.field_type;
                         } }>
                         {
                           () => {
                             const _item = find(customerOptions, (item) => { 
-                              return item.name == fields?.product_pricing_custom_price_rules[name]?.field_type }
+                              return item.name == fields?.product_pricing_custom_tag_price_rules[name]?.field_type }
                             );
                             return <Fragment>
                               {
@@ -130,8 +165,8 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                     name={[name, 'field_operator']}
                                     required={ true } >
                                     <Select>
-                                      <Option value="==">Value is equal to</Option>
-                                      <Option value="!=">Value is not equal to</Option>
+                                      <Option value="==">{ __('Value is equal to', 'clampdown-child') }</Option>
+                                      <Option value="!=">{ __('Value is not equal to', 'clampdown-child') }</Option>
                                     </Select>
                                   </Form.Item>
                                   <Form.Item 
@@ -159,17 +194,15 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                         label={ __('Recipe', 'clampdown-child') }
                         name={ [name, 'recipe'] }
                         required={ true } >
-                        <Mentions style={{ borderRadius: 1 }}>
+                        <Mentions split={ '' } style={{ borderRadius: 1 }}>
                           {
-                            map(customerOptions, (o, keyName) => {
-                              return <Mentions.Option value={ `{${ o.name }}` }>
-                                { o.label }
-                              </Mentions.Option>
-                            })
+                            priceTags.length > 0 && 
+                            priceTags.map(item => (
+                              <Mentions.Option value={ item.value }>{ item.label }</Mentions.Option>
+                            )) 
                           }
                         </Mentions>
                       </Form.Item>
-                      <MinusCircleOutlined onClick={() => remove(name)} />
                     </Panel>
                   })
                 }
@@ -183,6 +216,21 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
             </Fragment>
           ) }
         </Form.List>
+
+        <Divider orientation="left">{ __('Total Price', 'clampdown-child') }</Divider>
+        <Form.Item
+          label={ __('Total Price Recipe', 'clampdown-child') } 
+          required={ true }
+          name="product_pricing_total_price_recipe" >
+          <Mentions split={ '' } style={{ borderRadius: 1 }}>
+            {
+              priceTags.length > 0 && 
+              priceTags.map(item => (
+                <Mentions.Option value={ item.value }>{ item.label }</Mentions.Option>
+              )) 
+            }
+          </Mentions>
+        </Form.Item>
       </PageHeader>
     </Form>
   </Fragment> 
