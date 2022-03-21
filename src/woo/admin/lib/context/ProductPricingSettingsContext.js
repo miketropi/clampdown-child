@@ -5,7 +5,8 @@ import { registerCustomerPricingFields } from '../lib';
 const ProductPricingSettingsContext = createContext();
 
 const ProductPricingSettingsProvider = ({ product, children }) => {
-  const [settings, setSettings] = useState({})
+  const [settings, setSettings] = useState({});
+  const [saveDataLoading, setSaveDataLoading] = useState(false);
 
   useEffect(() => {
     const __setSettingsData = async () => {
@@ -18,7 +19,9 @@ const ProductPricingSettingsProvider = ({ product, children }) => {
   }, [])
 
   const saveData = async (data) => {
+    setSaveDataLoading(true);
     const result = await sendProductPricingSettingsToSave(product, data);
+    setSaveDataLoading(false);
     console.log(result);
   }
 
@@ -27,6 +30,7 @@ const ProductPricingSettingsProvider = ({ product, children }) => {
     settings, setSettings,
     customerOptions: registerCustomerPricingFields(),
     saveData,
+    saveDataLoading,
   };
 
   return <ProductPricingSettingsContext.Provider value={ value }>

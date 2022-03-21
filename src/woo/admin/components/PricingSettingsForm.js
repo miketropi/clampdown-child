@@ -9,6 +9,7 @@ import { userProductPricingSettings } from '../lib/context/ProductPricingSetting
 import find from 'lodash/find';
 import map from 'lodash/map';
 import styled from 'styled-components';
+import SwitchCustom from './fields/SwitchCustom';
 
 const { __ } = wp.i18n; 
 const { Option, OptGroup } = Select;
@@ -42,7 +43,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
     return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
   }
   
-  const { product, customerOptions, saveData } = userProductPricingSettings();
+  const { product, customerOptions, saveData, saveDataLoading } = userProductPricingSettings();
   const [priceTags, setPriceTags] = useState([]);
   const [form] = Form.useForm();
 
@@ -62,6 +63,11 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
         newPriceTags.push({ value: `{${ item?.name }}`, label: item?.name })
       })
     }
+
+    /**
+     * System Price tags  
+     */
+    newPriceTags.push({ value: '{MIX(JacketType:Number)}', label: __('MIX(JacketType:Number)') }),
 
     setPriceTags(newPriceTags);
   }, [fields]);
@@ -91,8 +97,8 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
         avatar={ { icon: <SlidersOutlined /> } }
         tags={ <Tag color="blue">{ __('Advanced', 'clampdown-child') }</Tag> }
         extra={[
-          <Button type="primary" htmlType="submit">
-            { __('Update', 'clampdown-child') }
+          <Button type="primary" htmlType="submit" loading={ saveDataLoading }>
+            { saveDataLoading == true ? __('Saving...', 'clampdown-child') : __('Update', 'clampdown-child') }
           </Button>
         ]}
       >
@@ -101,14 +107,15 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
           label={ __('Enable Pricing Mode', 'clampdown-child') } 
           name="enable_pricing_mode"
           valuePropName="checked">
-          <Switch defaultChecked />
+          {/* <Switch defaultChecked /> */}
+          <SwitchCustom />
         </Form.Item>
 
         {/* <Divider orientation="left">{ __('Customer Options', 'clampdown-child') }</Divider>
         <CustomerOptionsListView options={ customerOptions } />
 
         <br /> */}
-        <Divider orientation="left">{ __('Custom Tag Price Rules', 'clampdown-child') }</Divider>
+        <Divider orientation="left">{ __('Custom Tag Price Recipe', 'clampdown-child') }</Divider>
         <Form.List
           name="product_pricing_custom_tag_price_rules" >
           { (_fields, { add, remove }) => (

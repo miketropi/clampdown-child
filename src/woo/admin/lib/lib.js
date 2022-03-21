@@ -9,7 +9,8 @@ export const registerCustomerPricingFields = () => {
         name: 'sides',
         label: 'Sides',
         type: 'select', 
-        options: [0, 1, 2, 4, 6]
+        options: [0, 1, 2, 4, 6],
+        default: 0,
       }
     })(),
     Speed: (() => {
@@ -17,7 +18,8 @@ export const registerCustomerPricingFields = () => {
         name: 'speed',
         label: 'Speed',
         type: 'select', 
-        options: ['33 1/3', '45']
+        options: ['33 1/3', '45'],
+        default: '33 1/3',
       }
     })(),
     JacketType: (() => {
@@ -32,7 +34,8 @@ export const registerCustomerPricingFields = () => {
           'Widespine',
           'Foldover',
           'Disco'
-        ]
+        ],
+        default: 'Standard Jacket',
       }
     })(),
     InnerSleeve: (() => {
@@ -46,7 +49,8 @@ export const registerCustomerPricingFields = () => {
           'Printed',
           'White Poly Lined',
           'Black Poly Lined',
-        ]
+        ],
+        default: 'White',
       }
     })(),
     Insert: (() => {
@@ -60,7 +64,8 @@ export const registerCustomerPricingFields = () => {
           '2 panel',
           '4 panel',
           '6 panel',
-        ]
+        ],
+        default: 'None',
       }
     })(),
     Packaging: (() => {
@@ -71,7 +76,8 @@ export const registerCustomerPricingFields = () => {
         options: [
           'Poly Bags',
           'Shrink Wrap'
-        ]
+        ],
+        default: 'Poly Bags'
       }
     })(),
     DownloadCards: (() => {
@@ -83,7 +89,8 @@ export const registerCustomerPricingFields = () => {
           'None',
           'Simple',
           'Fancy',
-        ]
+        ],
+        default: 'None',
       }
     })(),
     MarketingStickers: (() => {
@@ -95,7 +102,8 @@ export const registerCustomerPricingFields = () => {
           'None',
           'Circle',
           'Square',
-        ]
+        ],
+        default: 'None',
       }
     })(),
     Number: (() => {
@@ -103,7 +111,8 @@ export const registerCustomerPricingFields = () => {
         name: 'number',
         label: 'Number',
         type: 'select',
-        options: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 900, 1000, 1100, 2000]
+        options: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 900, 1000, 1100, 2000],
+        default: 50,
       }
     })(),
     Style: (() => {
@@ -111,7 +120,8 @@ export const registerCustomerPricingFields = () => {
         name: 'style',
         label: 'Style',
         type: 'select',
-        options: ['Standard', 'Colour',	'Deluxe', 'Colour']
+        options: ['Standard', 'Colour',	'Deluxe', 'Colour'],
+        default: 'Standard',
       }
     })(),
     Colour: (() => {
@@ -119,7 +129,8 @@ export const registerCustomerPricingFields = () => {
         name: 'colour',
         label: 'Colour',
         type: 'select',
-        options: ['Black', 'Orange', 'Red']
+        options: ['Black', 'Orange', 'Red'],
+        default: 'Black',
       }
     })(),
     Weight: (() => {
@@ -127,7 +138,8 @@ export const registerCustomerPricingFields = () => {
         name: 'weight',
         label: 'Weight',
         type: 'select',
-        options: ['140g', '180g']
+        options: ['140g', '180g'],
+        default: '140g',
       }
     })(),
   }
