@@ -1,6 +1,23 @@
 /**
  * Lib 
  */
+import disco from '../../../json/disco.json';
+import foldover from '../../../json/foldover.json';
+import gatefoldJacket from '../../../json/gatefold-jacket.json';
+import innerLoadingGatefoldJacket from '../../../json/inner-loading-gatefold-jacket.json';
+import standardJacket from '../../../json/standard-jacket.json';
+import widespine from '../../../json/widespine.json';
+
+export const mixDataJacketTypeNumber = () => {
+  return { 
+    ...disco, 
+    ...foldover, 
+    ...gatefoldJacket, 
+    ...innerLoadingGatefoldJacket, 
+    ...standardJacket, 
+    ...widespine 
+  };
+}
 
 export const registerCustomerPricingFields = () => {
   return {

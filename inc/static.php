@@ -23,7 +23,7 @@ function clampdown_enqueue_scripts() {
   ]);
 }
 
-add_action('wp_enqueue_scripts', 'clampdown_enqueue_scripts', 30);
+add_action('wp_enqueue_scripts', 'clampdown_enqueue_scripts', 40);
 
 function clampdown_css_variables_register() {
   ob_start();
@@ -34,6 +34,7 @@ function clampdown_css_variables_register() {
 
     --theme-heading-font: 'Proxima Nova Rg';
     --theme-body-font: 'Avenir LT Std';
+    --theme-text-size: 17px;
     --theme-heading-color: #414141;
     --theme-body-color: #414141;
     --theme-accents-color: #B5208B;
@@ -43,4 +44,4 @@ function clampdown_css_variables_register() {
   wp_add_inline_style('clampdown-childtheme-style', $css);
 }
 
-add_action('wp_enqueue_scripts', 'clampdown_css_variables_register', 32);
+add_action('wp_enqueue_scripts', 'clampdown_css_variables_register', 42);

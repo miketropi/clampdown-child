@@ -1,20 +1,18 @@
-[
-  {
-    "Gatefold Jacket:50": null,
-    "Gatefold Jacket:100": null,
-    "Gatefold Jacket:150": null,
-    "Gatefold Jacket:200": null,
-    "Gatefold Jacket:250": null,
-    "Gatefold Jacket:300": 6,
-    "Gatefold Jacket:350": 6,
-    "Gatefold Jacket:400": 6,
-    "Gatefold Jacket:450": 6,
-    "Gatefold Jacket:500": 5,
-    "Gatefold Jacket:550": 5,
-    "Gatefold Jacket:600": 5,
-    "Gatefold Jacket:900": 5,
-    "Gatefold Jacket:1000": 4,
-    "Gatefold Jacket:1100": 4,
-    "Gatefold Jacket:2000": null
-  }
-]
+{
+  "Gatefold Jacket:50": null,
+  "Gatefold Jacket:100": null,
+  "Gatefold Jacket:150": null,
+  "Gatefold Jacket:200": null,
+  "Gatefold Jacket:250": null,
+  "Gatefold Jacket:300": 6,
+  "Gatefold Jacket:350": 6,
+  "Gatefold Jacket:400": 6,
+  "Gatefold Jacket:450": 6,
+  "Gatefold Jacket:500": 5,
+  "Gatefold Jacket:550": 5,
+  "Gatefold Jacket:600": 5,
+  "Gatefold Jacket:900": 5,
+  "Gatefold Jacket:1000": 4,
+  "Gatefold Jacket:1100": 4,
+  "Gatefold Jacket:2000": null
+}

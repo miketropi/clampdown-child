@@ -67,7 +67,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
     /**
      * System Price tags  
      */
-    newPriceTags.push({ value: '{MIX(JacketType:Number)}', label: __('MIX(JacketType:Number)') }),
+    newPriceTags.push({ value: '{MIX_JacketType_Number}', label: __('MIX_JacketType_Number') }),
 
     setPriceTags(newPriceTags);
   }, [fields]);
@@ -107,7 +107,6 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
           label={ __('Enable Pricing Mode', 'clampdown-child') } 
           name="enable_pricing_mode"
           valuePropName="checked">
-          {/* <Switch defaultChecked /> */}
           <SwitchCustom />
         </Form.Item>
 
