@@ -7,6 +7,7 @@ import gatefoldJacket from '../../../json/gatefold-jacket.json';
 import innerLoadingGatefoldJacket from '../../../json/inner-loading-gatefold-jacket.json';
 import standardJacket from '../../../json/standard-jacket.json';
 import widespine from '../../../json/widespine.json';
+import map from 'lodash/map';
 
 export const mixDataJacketTypeNumber = () => {
   return { 
@@ -17,6 +18,15 @@ export const mixDataJacketTypeNumber = () => {
     ...standardJacket, 
     ...widespine 
   };
+}
+
+export const mapObject = (object, iteratee) => {
+  const props = Object.keys(object);
+  const result = new Array(props.length);
+  props.forEach((key, index) => {
+    result[key] = iteratee(object[key], key, object);
+  })
+  return result;
 }
 
 export const registerCustomerPricingFields = () => {
@@ -160,4 +170,89 @@ export const registerCustomerPricingFields = () => {
       }
     })(),
   }
+}
+
+export const updateTagVariableViaSettingsRules = ({ _r, _r_total }, opts) => { 
+  // console.log({ _r, _r_total }, opts)
+  if(!_r) return; 
+  let _tagVariables = {};
+  let _fields = { ...opts };
+  let JacketTypeNumber = mixDataJacketTypeNumber();
+
+  /**
+   * Customer field tags
+   */
+  map(_fields, (value, name) => {
+    _tagVariables[`@{${ name }}`] = () => value;
+  })
+
+  /**
+   * System tags
+   * 
+   * @{MIX_JacketType_Number}
+   */
+  _tagVariables['@{MIX_JacketType_Number}'] = () => {
+    let _key = `${ opts?.jacket_type }:${ opts?.number }`;
+    return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+  }
+  
+  /**
+   * Recipe tags
+   */
+  _r.forEach((item, _index) => {
+    let result = 0;
+    let { field_type, name, recipe } = item;
+    let _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
+      return fn();
+    });
+
+    switch(field_type) {
+      case 'global':
+        _tagVariables[`@{${name}}`] = () => {
+          try{
+            let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+            result = eval(evalString);
+          } catch(e) {
+            result = 0;
+          } 
+          return result;
+        }
+        break;
+      default:
+        let { field_operator, field_option  } = item;
+        _tagVariables[`@{${name}}`] = () => {  
+          let operatorCase = {
+            '=='() { return (opts[field_type] == field_option) },
+            '!='() { return (opts[field_type] != field_option) }
+          };
+
+          if(operatorCase[field_operator]() == false) return 0;
+
+          try{
+            let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+            result = eval(evalString);
+          } catch(e) {
+            result = 0;
+          } 
+          return result;
+        }
+        break;
+    }
+  })
+
+  return {
+    tags: _tagVariables,
+    total() {
+      const _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
+        return fn();
+      });
+
+      try {
+        let evalString = _r_total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+        return eval(evalString);
+      } catch (error) {
+        return 0;
+      }
+    }
+  };
 }

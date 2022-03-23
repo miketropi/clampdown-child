@@ -2,20 +2,26 @@ import react, { Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import CustomerPricingForm from './CustomerPricingForm';
+import VariablesPlace from './VariablesSpace';
 
 const TotalPriceContainer = styled.div`
   
 `
+const { __ } = wp.i18n;
 
 export default function ProductPricingApp() {
   const { 
     version, 
     fields, 
     setFields, 
+    variables,
+    setVariables,
+    currentVariable, 
     loading, 
     tagVariables, 
     productPricingSettings, 
     updateTagVariableViaSettingsRules, 
+    onChangeVariablePlace, 
     total, 
     setTotal } = useProductPricing();
 
@@ -24,25 +30,27 @@ export default function ProductPricingApp() {
   }, [])
 
   if(loading == true) {
-    return <Fragment>Loading...</Fragment>
+    return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
   }
 
   return <Fragment>
+    <VariablesPlace onChange={ onChangeVariablePlace } />
     <CustomerPricingForm 
       onChange={ allFields => {
-        setFields(allFields);
+        let _variables = [...variables];
+        _variables[currentVariable] = allFields;
+
         let _obj = updateTagVariableViaSettingsRules({
           _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
           _r_total: productPricingSettings?.product_pricing_total_price_recipe,
         }, allFields);
 
-        // console.log(_obj.tags['@{MIX(JacketType:Number)}']());
-        // console.log(_obj.tags['@{BaseCost}'](), _obj.tags['@{JacketsCost}'](), `Total: ${ _obj.total() }`);
-        setTotal(_obj.total())
+        _variables[currentVariable].__TOTAL__ = _obj.total();
+        setVariables(_variables);
       } } 
-      fields={ fields } />
+      fields={ variables[currentVariable] } />
     <TotalPriceContainer>
-      Total: { total }
+      Total: { `$${ variables[currentVariable].__TOTAL__ }` }
     </TotalPriceContainer>
   </Fragment>
 }

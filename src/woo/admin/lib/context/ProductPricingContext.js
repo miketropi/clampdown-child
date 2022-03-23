@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import { registerCustomerPricingFields, mixDataJacketTypeNumber } from '../lib';
+import { registerCustomerPricingFields, mixDataJacketTypeNumber, updateTagVariableViaSettingsRules } from '../lib';
 import { getProductPricingSettings } from '../api/helpers';
-import map from 'lodash/map';
+
 const ProductPricingContext = createContext();
+const { __ } = wp.i18n;
 
 String.prototype.replaceArray = function(find, replace) {
   var replaceString = this;
@@ -14,119 +15,58 @@ String.prototype.replaceArray = function(find, replace) {
   return replaceString;
 };
 
-function mapObject(object, iteratee) {
-  const props = Object.keys(object);
-  const result = new Array(props.length);
-  props.forEach((key, index) => {
-    result[key] = iteratee(object[key], key, object);
-  })
-  return result;
-}
-
 const ProductPricingProvider = ({ productID, children }) => {
-  const customerPricingFields = registerCustomerPricingFields();
   const [loading, setLoading] = useState(true);
+  const [variables, setVariables] = useState([]);
+  const [currentVariable, setCurrentVariable] = useState(0);
   const [productPricingSettings, setProductPricingSettings] = useState({});
   const [fields, setFields] = useState({});
   const [total, setTotal] = useState(0);
+
+  const customerPricingFields = registerCustomerPricingFields();
+  const getDefaultFields = (settings) => {
+    let _f = {};
+    Object.values(customerPricingFields).forEach(item => {
+      _f[item.name] = item.default;
+    })  
+    
+    let _obj = updateTagVariableViaSettingsRules({
+      _r: settings?.product_pricing_custom_tag_price_rules,
+      _r_total: settings?.product_pricing_total_price_recipe,
+    }, _f);
+
+    _f.__TOTAL__ = _obj?.total() || 0;
+    return _f;
+  }
   const _mixDataJacketTypeNumber = mixDataJacketTypeNumber();
 
   useEffect(async () => {
-    const getDefaulFields = () => {
-      let __fields = { ...fields };
-      Object.values(customerPricingFields).forEach(item => {
-        __fields[item.name] = item.default;
-      })  
-      return __fields;
-    }
-    setFields(getDefaulFields());
-
     const pricingSettings = await getProductPricingSettings(productID);
     setProductPricingSettings(pricingSettings?.settings);
+
+    let _variables = [...variables];
+    _variables[currentVariable] = getDefaultFields(pricingSettings?.settings);
+    setVariables(_variables);
+    setFields(getDefaultFields());
 
     setLoading(false);
   }, [])
 
-  const updateTagVariableViaSettingsRules = ({ _r, _r_total }, opts) => {
-    if(!_r) return; 
-    let _tagVariables = {};
-    let _fields = opts;
-    let JacketTypeNumber = { ..._mixDataJacketTypeNumber };
+  const onChangeVariablePlace = (num) => {
+    let _variables = [...variables];
 
-    /**
-     * Customer field tags
-     */
-    map(_fields, (value, name) => {
-      _tagVariables[`@{${ name }}`] = () => value;
-    })
-
-    /**
-     * System tags
-     */
-    _tagVariables['@{MIX_JacketType_Number}'] = () => {
-      let _key = `${ opts?.jacket_type }:${ opts?.number }`;
-      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    if(_variables[num]) {
+      // switch
+      console.log('switch variable');
+      setCurrentVariable(num);
+    } else {
+      // add new
+      if(confirm(__('Add variable', 'clampdown-child'))) {
+        _variables[num] = getDefaultFields(productPricingSettings);
+        setVariables(_variables);
+        setCurrentVariable(num);
+      }
     }
-    
-    /**
-     * Recipe tags
-     */
-    _r.forEach((item, _index) => {
-      let result = 0;
-      let { field_type, name, recipe } = item;
-      let _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
-        return fn();
-      });
-
-      switch(field_type) {
-        case 'global':
-          _tagVariables[`@{${name}}`] = () => {
-            try{
-              let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-              result = eval(evalString);
-            } catch(e) {
-              result = 0;
-            } 
-            return result;
-          }
-          break;
-        default:
-          let { field_operator, field_option  } = item;
-          _tagVariables[`@{${name}}`] = () => {  
-            let operatorCase = {
-              '=='() { return (opts[field_type] == field_option) },
-              '!='() { return (opts[field_type] != field_option) }
-            };
-
-            if(operatorCase[field_operator]() == false) return 0;
-
-            try{
-              let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-              result = eval(evalString);
-            } catch(e) {
-              result = 0;
-            } 
-            return result;
-          }
-          break;
-      }
-    })
-
-    return {
-      tags: _tagVariables,
-      total() {
-        const _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
-          return fn();
-        });
-
-        try {
-          let evalString = _r_total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-          return eval(evalString);
-        } catch (error) {
-          return 0;
-        }
-      }
-    };
   }
 
   const value = {
@@ -138,9 +78,13 @@ const ProductPricingProvider = ({ productID, children }) => {
     updateTagVariableViaSettingsRules,
     total, setTotal,
     _mixDataJacketTypeNumber,
+    variables, setVariables,
+    currentVariable, setCurrentVariable,
+    onChangeVariablePlace,
   }
 
   return <ProductPricingContext.Provider value={ value }>
+    {/* { JSON.stringify(variables) } */}
     { children }
   </ProductPricingContext.Provider>
 }
