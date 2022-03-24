@@ -35,7 +35,14 @@ function clampdown_child_woo_admin_enqueue_scripts() {
 add_action('admin_enqueue_scripts', 'clampdown_child_woo_admin_enqueue_scripts', 30);
 
 function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null) {
+  $default = [
+    "enable_pricing_mode" => "false", 
+    "product_pricing_custom_tag_price_rules" => [], 
+    "product_pricing_total_price_recipe" => ""];
+
   $pricingSettings = get_post_meta((int) $id, 'product_pricing_custom_settings', true);
+  $pricingSettings = $pricingSettings ? $pricingSettings : $default;
+
   return empty($name) 
     ? $pricingSettings 
     : (isset($pricingSettings[$name]) ? $pricingSettings[$name] : null);
