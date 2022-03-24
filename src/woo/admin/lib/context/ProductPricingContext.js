@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { registerCustomerPricingFields, mixDataJacketTypeNumber, updateTagVariableViaSettingsRules } from '../lib';
 import { getProductPricingSettings } from '../api/helpers';
+import { Modal } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 const ProductPricingContext = createContext();
 const { __ } = wp.i18n;
@@ -52,20 +54,45 @@ const ProductPricingProvider = ({ productID, children }) => {
     setLoading(false);
   }, [])
 
+  useEffect(() => {
+    let _total = 0;
+    let _variables = [...variables];
+
+    _variables.forEach(item => {
+      _total += item?.__TOTAL__ || 0;
+    })
+
+    setTotal(_total.toFixed(2));
+  }, [variables])
+
   const onChangeVariablePlace = (num) => {
     let _variables = [...variables];
 
     if(_variables[num]) {
       // switch
-      console.log('switch variable');
       setCurrentVariable(num);
     } else {
       // add new
-      if(confirm(__('Add variable', 'clampdown-child'))) {
-        _variables[num] = getDefaultFields(productPricingSettings);
-        setVariables(_variables);
-        setCurrentVariable(num);
-      }
+      // if(confirm(__('Add variable', 'clampdown-child'))) {
+      //   _variables[num] = getDefaultFields(productPricingSettings);
+      //   setVariables(_variables);
+      //   setCurrentVariable(num);
+      // }
+
+      Modal.confirm({
+        title: 'Confirm',
+        icon: <InfoCircleOutlined />,
+        content: __('Add variant item?', 'clampdown-child'),
+        okText: __('OK', 'clampdown-child'),
+        cancelText: __('Cancel', 'clampdown-child'),
+        cancelButtonProps: { style: { background: 'none', color: 'black', border: 'none', boxShadow: 'none' } },
+        okButtonProps: { style: { border: 'none', boxShadow: 'none' } },
+        onOk: () => {
+          _variables[num] = getDefaultFields(productPricingSettings);
+          setVariables(_variables);
+          setCurrentVariable(num);
+        }
+      });
     }
   }
 

@@ -3,9 +3,16 @@ import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import CustomerPricingForm from './CustomerPricingForm';
 import VariablesPlace from './VariablesSpace';
+import ButtonAddToCart from './ButtonAddToCart';
 
-const TotalPriceContainer = styled.div`
-  
+const VariantPriceContainer = styled.div`
+  padding: 1em 0;
+  border: solid #eee;
+  border-width: 1px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1em;
 `
 const { __ } = wp.i18n;
 
@@ -49,8 +56,10 @@ export default function ProductPricingApp() {
         setVariables(_variables);
       } } 
       fields={ variables[currentVariable] } />
-    <TotalPriceContainer>
-      Total: { `$${ variables[currentVariable].__TOTAL__ }` }
-    </TotalPriceContainer>
+    <VariantPriceContainer>
+      <span>{ __('Variant Price:', 'clampdown-child') }</span> 
+      <span>{ `$${ variables[currentVariable].__TOTAL__ }` }</span>
+    </VariantPriceContainer>
+    <ButtonAddToCart text={ __(`Add To Cart ($${ total })`, 'clampdown-child') } />
   </Fragment>
 }
