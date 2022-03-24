@@ -80,14 +80,14 @@ const ProductPricingProvider = ({ productID, children }) => {
       // }
 
       Modal.confirm({
-        title: 'Confirm',
+        title: __('Confirm', 'clampdown-child'),
         icon: <InfoCircleOutlined />,
         content: __('Add variant item?', 'clampdown-child'),
         okText: __('OK', 'clampdown-child'),
         cancelText: __('Cancel', 'clampdown-child'),
         cancelButtonProps: { style: { background: 'none', color: 'black', border: 'none', boxShadow: 'none' } },
         okButtonProps: { style: { border: 'none', boxShadow: 'none' } },
-        onOk: () => {
+        onOk: () => { 
           _variables[num] = getDefaultFields(productPricingSettings);
           setVariables(_variables);
           setCurrentVariable(num);
