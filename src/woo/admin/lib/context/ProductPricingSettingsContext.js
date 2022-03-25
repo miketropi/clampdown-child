@@ -1,6 +1,6 @@
 import react, { useContext, createContext, useState, useEffect } from 'react';
 import { getProductPricingSettings, sendProductPricingSettingsToSave } from '../api/helpers';
-import { registerCustomerPricingFields } from '../lib';
+import { registerGeneralCustomerPricingFields, registerCustomerPricingFields } from '../lib';
 
 const ProductPricingSettingsContext = createContext();
 
@@ -28,6 +28,7 @@ const ProductPricingSettingsProvider = ({ product, children }) => {
   const value = { 
     product,
     settings, setSettings,
+    generalCustomerOptions: registerGeneralCustomerPricingFields(),
     customerOptions: registerCustomerPricingFields(),
     saveData,
     saveDataLoading,

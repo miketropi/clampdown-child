@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { Form, Input, Select} from "antd";
+import React, { Fragment, useState, useEffect } from 'react';
+import { Form, Select} from 'antd';
+import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import map from 'lodash/map';
 
+const { __ } = wp.i18n;
 const { Option } = Select;
 
-const CustomerPricingFormContainer = styled.div``
 const FormInnerContainer = styled.div`
   display: flex;
   flex-wrap: wrap; 
@@ -17,30 +17,25 @@ const FormInnerContainer = styled.div`
   }
 `
 
-export default function CustomerPricingForm({ onChange, fields }) {
-  const { customerPricingFields, variables } = useProductPricing();
+export default function CustomerGeneralPricingForm({ onChange, fields }) { 
+  const { generalCustomerPricingFields } = useProductPricing();
   const [form] = Form.useForm();
 
   useEffect(() => {
     form.setFieldsValue(fields)
   }, [fields])
 
-  const onFinish = (values) => {
-    console.log(values);
-  }
-  
-  return <CustomerPricingFormContainer>
-    {/* { JSON.stringify(variables) } */}
-    <Form
+  return <Fragment>
+    {/* { JSON.stringify(fields) } */}
+    <Form 
       form={ form }
       layout={ 'vertical' }
-      name={ 'customer_pricing_data' }
-      onFinish={ onFinish }
+      name={ 'customer_general_pricing_data' }
       onValuesChange={ (changedValues, allValues) => { onChange(allValues)} }>
       <FormInnerContainer>
         {
-          Object.keys(customerPricingFields).length > 0 && 
-          map(customerPricingFields, (item, key) => {
+          Object.keys(generalCustomerPricingFields).length > 0 && 
+          map(generalCustomerPricingFields, (item, key) => {
             return <Form.Item 
               label={ item.label }
               name={ item.name } 
@@ -56,6 +51,5 @@ export default function CustomerPricingForm({ onChange, fields }) {
         }
       </FormInnerContainer>
     </Form>
-  </CustomerPricingFormContainer>
+  </Fragment>
 }
-

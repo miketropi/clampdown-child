@@ -1,6 +1,7 @@
 import react, { Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
+import CustomerGeneralPricingForm from './CustomerGeneralPricingForm';
 import CustomerPricingForm from './CustomerPricingForm';
 import VariablesPlace from './VariablesSpace';
 import ButtonAddToCart from './ButtonAddToCart';
@@ -18,19 +19,14 @@ const { __ } = wp.i18n;
 
 export default function ProductPricingApp() {
   const { 
-    version, 
-    fields, 
-    setFields, 
-    variables,
-    setVariables,
+    generalOptions, setGeneralOptions,
+    variables, setVariables,
     currentVariable, 
     loading, 
-    tagVariables, 
     productPricingSettings, 
     updateTagVariableViaSettingsRules, 
     onChangeVariablePlace, 
-    total, 
-    setTotal } = useProductPricing();
+    total } = useProductPricing();
 
   useEffect(() => {
 
@@ -41,6 +37,10 @@ export default function ProductPricingApp() {
   }
 
   return <Fragment>
+    <CustomerGeneralPricingForm onChange={ (allFields) => { 
+        setGeneralOptions(allFields);
+      } }
+      fields={ generalOptions }/>
     <VariablesPlace onChange={ onChangeVariablePlace } />
     <CustomerPricingForm 
       onChange={ allFields => {
@@ -50,7 +50,7 @@ export default function ProductPricingApp() {
         let _obj = updateTagVariableViaSettingsRules({
           _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
           _r_total: productPricingSettings?.product_pricing_total_price_recipe,
-        }, allFields);
+        }, { ...generalOptions, ...allFields });
 
         _variables[currentVariable].__TOTAL__ = _obj.total();
         setVariables(_variables);

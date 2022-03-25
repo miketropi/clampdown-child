@@ -43,7 +43,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
     return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
   }
   
-  const { product, customerOptions, saveData, saveDataLoading } = userProductPricingSettings();
+  const { product, customerOptions, generalCustomerOptions, saveData, saveDataLoading,  } = userProductPricingSettings();
   const [priceTags, setPriceTags] = useState([]);
   const [form] = Form.useForm();
 
@@ -52,11 +52,16 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
   }, [fields])
 
   useEffect(() => {
-    let _priceTags = [...priceTags];
-    let newPriceTags = map(customerOptions, (o, keyName) => {
-      return { value: `{${ o.name }}`, label: o.label, keyName }
-    });
-
+    /**
+     * Opt tags
+     */
+    let _priceTags = map(customerOptions, (o, keyName) => ({ value: `{${ o.name }}`, label: o.label, keyName }));
+    let _globalPriceTags = map(generalCustomerOptions, (o, keyName) => ({ value: `{${ o.name }}`, label: o.label, keyName }));
+    let newPriceTags = [..._priceTags, ..._globalPriceTags];
+    
+    /**
+     * Rule tags
+     */
     if(fields?.product_pricing_custom_tag_price_rules?.length > 0) {
       fields.product_pricing_custom_tag_price_rules.forEach(item => {
         if(!item?.name) return; 
@@ -68,7 +73,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
      * System Price tags  
      */
     newPriceTags.push({ value: '{MIX_JacketType_Number}', label: __('MIX_JacketType_Number') }),
-
+    
     setPriceTags(newPriceTags);
   }, [fields]);
 

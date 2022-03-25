@@ -29,7 +29,7 @@ export const mapObject = (object, iteratee) => {
   return result;
 }
 
-export const registerCustomerPricingFields = () => {
+export const registerGeneralCustomerPricingFields = () => {
   return {
     Sides: (() => {
       return {
@@ -37,7 +37,7 @@ export const registerCustomerPricingFields = () => {
         label: 'Sides',
         type: 'select', 
         options: [0, 1, 2, 4, 6],
-        default: 0,
+        default: 2,
       }
     })(),
     Speed: (() => {
@@ -80,21 +80,6 @@ export const registerCustomerPricingFields = () => {
         default: 'White',
       }
     })(),
-    Insert: (() => {
-      return {
-        name: 'insert',
-        label: 'Insert',
-        type: 'select',
-        options: [
-          'None',
-          '1 panel',
-          '2 panel',
-          '4 panel',
-          '6 panel',
-        ],
-        default: 'None',
-      }
-    })(),
     Packaging: (() => {
       return {
         name: 'packaging',
@@ -133,13 +118,18 @@ export const registerCustomerPricingFields = () => {
         default: 'None',
       }
     })(),
+  }
+}
+
+export const registerCustomerPricingFields = () => {
+  return {
     Number: (() => {
       return {
         name: 'number',
         label: 'Number',
         type: 'select',
         options: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 900, 1000, 1100, 2000],
-        default: 50,
+        default: 300,
       }
     })(),
     Style: (() => {
