@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Form, Select} from 'antd';
+import { Form, Select } from 'antd';
 import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import map from 'lodash/map';

@@ -36,6 +36,11 @@ export default function ProductPricingApp() {
     return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
   }
 
+  const AddToCartClickHandle = (e) => {
+    e.preventDefault();
+    console.log(generalOptions, variables)
+  }
+
   return <Fragment>
     <CustomerGeneralPricingForm onChange={ (allFields) => { 
         setGeneralOptions(allFields);
@@ -60,6 +65,8 @@ export default function ProductPricingApp() {
       <span>{ __('Variant Price:', 'clampdown-child') }</span> 
       <span>{ `$${ variables[currentVariable].__TOTAL__ }` }</span>
     </VariantPriceContainer>
-    <ButtonAddToCart text={ __(`Add To Cart ($${ total })`, 'clampdown-child') } />
+    <ButtonAddToCart 
+      text={ __(`Add To Cart ($${ total })`, 'clampdown-child') }
+      onClick={ AddToCartClickHandle } />
   </Fragment>
 }
