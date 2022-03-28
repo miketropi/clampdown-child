@@ -37,6 +37,25 @@ add_action('admin_enqueue_scripts', 'clampdown_child_woo_admin_enqueue_scripts',
 function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null) {
   $default = [
     "enable_pricing_mode" => "false", 
+    "general_default_opts" => [
+      "size" => '12" Pricing',
+      "sides" => 2,
+      "speed" => "33 1/3",
+      "jacket_type" => "Standard Jacket",
+      "inner_sleeve" => "White",
+      "insert" => "None",
+      "packaging" => "Poly Bags",
+      "download_cards" => "None",
+      "marketing_stickers" => "None",
+      "tests" => "Yes",
+      "labels" => "Yes"
+    ],
+    "variant_default_opts" => [
+      "number" => 300,
+      "style" => "Standard",
+      "colour" => "Black",
+      "weight" => "140g",
+    ],
     "product_pricing_custom_tag_price_rules" => [], 
     "product_pricing_total_price_recipe" => ""];
 

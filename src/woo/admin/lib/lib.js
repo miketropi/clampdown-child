@@ -31,6 +31,15 @@ export const mapObject = (object, iteratee) => {
 
 export const registerGeneralCustomerPricingFields = () => {
   return {
+    Size: (() => {
+      return {
+        name: 'size',
+        label: 'Size',
+        type: 'select', 
+        options: ['12" Pricing', '7" Pricing'],
+        default: '12" Pricing',
+      }
+    })(),
     Sides: (() => {
       return {
         name: 'sides',
@@ -80,6 +89,21 @@ export const registerGeneralCustomerPricingFields = () => {
         default: 'White',
       }
     })(),
+    Insert: (() => {
+      return {
+        name: 'insert',
+        label: 'Insert',
+        type: 'select',
+        options: [
+          'None',
+          '1 panel',
+          '2 panel',
+          '4 panel',
+          '6 panel',
+        ],
+        default: 'None',
+      }
+    })(),
     Packaging: (() => {
       return {
         name: 'packaging',
@@ -116,6 +140,22 @@ export const registerGeneralCustomerPricingFields = () => {
           'Square',
         ],
         default: 'None',
+      }
+    })(),
+    Tests: (() => {
+      return {
+        name: 'tests',
+        label: 'Tests?',
+        type: 'hidden',
+        default: 'Yes',
+      }
+    })(),
+    Labels: (() => {
+      return {
+        name: 'labels',
+        label: 'Labels',
+        type: 'hidden',
+        default: 'Yes',
       }
     })(),
   }

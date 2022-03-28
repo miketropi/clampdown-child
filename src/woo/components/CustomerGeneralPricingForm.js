@@ -3,6 +3,7 @@ import { Form, Select } from 'antd';
 import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import map from 'lodash/map';
+import DynamicField from '../admin/components/fields/DynamicField';
 
 const { __ } = wp.i18n;
 const { Option } = Select;
@@ -36,16 +37,19 @@ export default function CustomerGeneralPricingForm({ onChange, fields }) {
         {
           Object.keys(generalCustomerPricingFields).length > 0 && 
           map(generalCustomerPricingFields, (item, key) => {
+            const { name, label, type } = item;
+            const attrs = {};
+            const more = {};
+            if(item.options) {
+              more.options = item.options;
+            }
+
             return <Form.Item 
-              label={ item.label }
-              name={ item.name } 
-              key={ key }>
-              <Select>
-                {
-                  item.options.length > 0 && 
-                  map(item.options, (o, index) => <Option value={ o } key={ index }>{ o }</Option>)
-                }
-              </Select>
+              label={ label }
+              name={ name } 
+              key={ key }
+              hidden={ (type == 'hidden' ? true : false) } >
+              <DynamicField _type={ type } _attrs={ attrs } _more={ more } />
             </Form.Item>
           })
         }

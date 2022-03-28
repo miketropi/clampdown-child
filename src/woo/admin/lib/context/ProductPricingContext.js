@@ -28,11 +28,7 @@ const ProductPricingProvider = ({ productID, children }) => {
   const customerPricingFields = registerCustomerPricingFields();
   const generalCustomerPricingFields = registerGeneralCustomerPricingFields();
   const getDefaultFields = (fields, fn) => {
-    let _f = {};
-    Object.values(fields).forEach(item => {
-      _f[item.name] = item.default;
-    })  
-
+    let _f = fields;
     fn ? (_f = {..._f, ...fn.call('', _f)}) : '';
     return _f;
   }
@@ -41,25 +37,24 @@ const ProductPricingProvider = ({ productID, children }) => {
   useEffect(async () => {
     const pricingSettings = await getProductPricingSettings(productID);
     setProductPricingSettings(pricingSettings?.settings);
-
+    // console.log(pricingSettings);
     /**
      * General default value
      */
     let _generalOptions = { ...generalOptions };
-    _generalOptions = getDefaultFields(generalCustomerPricingFields);
+    _generalOptions = getDefaultFields(pricingSettings?.settings?.general_default_opts);
     setGeneralOptions(_generalOptions)
 
     /**
      * Variant default value
      */
     let _variables = [...variables];
-    _variables[currentVariable] = getDefaultFields(customerPricingFields, (_f) => {
+    _variables[currentVariable] = getDefaultFields(pricingSettings?.settings?.variant_default_opts, (_f) => {
       let _obj = updateTagVariableViaSettingsRules({
         _r: pricingSettings?.settings?.product_pricing_custom_tag_price_rules,
         _r_total: pricingSettings?.settings?.product_pricing_total_price_recipe,
       }, { ..._generalOptions, ..._f });
   
-      // _f.__TOTAL__ = _obj?.total() || 0;
       return { __TOTAL__: _obj?.total() || 0 }
     });
     setVariables(_variables);
@@ -126,7 +121,7 @@ const ProductPricingProvider = ({ productID, children }) => {
         cancelButtonProps: { style: { background: 'none', color: 'black', border: 'none', boxShadow: 'none' } },
         okButtonProps: { style: { border: 'none', boxShadow: 'none' } },
         onOk: () => { 
-          _variables[num] = getDefaultFields(customerPricingFields, (_f) => {
+          _variables[num] = getDefaultFields(productPricingSettings?.variant_default_opts, (_f) => {
             let _obj = updateTagVariableViaSettingsRules({
               _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
               _r_total: productPricingSettings?.product_pricing_total_price_recipe,
