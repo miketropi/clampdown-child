@@ -168,7 +168,7 @@ export const registerCustomerPricingFields = () => {
         name: 'number',
         label: 'Number',
         type: 'select',
-        options: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 900, 1000, 1100, 2000],
+        options: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 900, 1000, 1100, 1200, 2000],
         default: 300,
       }
     })(),
@@ -202,8 +202,15 @@ export const registerCustomerPricingFields = () => {
   }
 }
 
-export const updateTagVariableViaSettingsRules = ({ _r, _r_total }, opts) => { 
+export const updateTagVariableViaSettingsRules = (settings, opts, variables = null) => {
+  // console.log(variables_count);
   // console.log({ _r, _r_total }, opts)
+  const variant_rules = settings?.product_pricing_custom_tag_price_rules || [];
+  const total_rules = settings?.product_pricing_custom_tag_price_total_rules || [];
+  const _each_variant_total = settings?.product_pricing_total_price_foreach_variant;
+  const _total = settings?.product_pricing_total_price;
+  const _r =( variables == null ? variant_rules : total_rules);
+  // console.log(variables, settings);
   if(!_r) return; 
   let _tagVariables = {};
   let _fields = { ...opts };
@@ -216,69 +223,120 @@ export const updateTagVariableViaSettingsRules = ({ _r, _r_total }, opts) => {
     _tagVariables[`@{${ name }}`] = () => value;
   })
 
-  /**
-   * System tags
-   * 
-   * @{MIX_JacketType_Number}
-   */
-  _tagVariables['@{MIX_JacketType_Number}'] = () => {
-    let _key = `${ opts?.jacket_type }:${ opts?.number }`;
-    return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+  if(variables == null) {
+    /**
+       * each variant
+       * 
+       * @{MIX_JacketType_Number}
+       */
+    _tagVariables['@{MIX_JacketType_Number}'] = () => {
+      let _key = `${ opts?.jacket_type }:${ opts?.number }`;
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
+  } else {
+    /**
+     * Total
+     * 
+     * - @{Variants_Count_Number}
+     * - @{TOTAL_Variant_Number_Units}
+     * - @{TOTAL_ALL_Variants_Price}
+     * - @{MIX_JacketType_TOTAL_Variant_Number_Units}
+     */
+
+    _tagVariables['@{Variants_Count_Number}'] = () => { 
+      return variables.length; 
+    }
+
+    _tagVariables['@{TOTAL_Variant_Number_Units}'] = () => {
+      let total = 0;
+      variables.map(v => { total += parseInt(v.number) });
+      return total;
+    }
+
+    _tagVariables['@{TOTAL_ALL_Variants_Price}'] = () => { 
+      let total = 0;
+      variables.map(v => { total += v.__TOTAL__; }); 
+      return total;
+    }
+
+    _tagVariables['@{MIX_JacketType_TOTAL_Variant_Number_Units}'] = () => {
+      let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
+      let _key = `${ opts?.jacket_type }:${ TotalNumberUnits }`;
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
   }
   
   /**
    * Recipe tags
    */
-  _r.forEach((item, _index) => {
-    let result = 0;
-    let { field_type, name, recipe } = item;
-    let _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
-      return fn();
-    });
-
-    switch(field_type) {
-      case 'global':
-        _tagVariables[`@{${name}}`] = () => {
-          try{
-            let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-            result = eval(evalString);
-          } catch(e) {
-            result = 0;
-          } 
-          return result;
-        }
-        break;
-      default:
-        let { field_operator, field_option  } = item;
-        _tagVariables[`@{${name}}`] = () => {  
-          let operatorCase = {
-            '=='() { return (opts[field_type] == field_option) },
-            '!='() { return (opts[field_type] != field_option) }
-          };
-
-          if(operatorCase[field_operator]() == false) return 0;
-
-          try{
-            let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-            result = eval(evalString);
-          } catch(e) {
-            result = 0;
-          } 
-          return result;
-        }
-        break;
-    }
-  })
+  if(_r.length > 0) {
+    _r.forEach((item, _index) => {
+      let result = 0;
+      let { field_type, name, recipe } = item;
+      let _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
+        return fn();
+      });
+  
+      switch(field_type) {
+        case 'global':
+          _tagVariables[`@{${name}}`] = () => {
+            try{
+              let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+              result = eval(evalString);
+            } catch(e) {
+              result = 0;
+            } 
+            return result;
+          }
+          break;
+        default:
+          let { field_operator, field_option  } = item;
+          _tagVariables[`@{${name}}`] = () => {  
+            let operatorCase = {
+              '=='() { return (opts[field_type] == field_option) },
+              '!='() { return (opts[field_type] != field_option) }
+            };
+  
+            if(operatorCase[field_operator]() == false) return 0;
+  
+            try{
+              let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+              result = eval(evalString);
+            } catch(e) {
+              result = 0;
+            } 
+            return result;
+          }
+          break;
+      }
+    })
+  }
 
   return {
     tags: _tagVariables,
-    total() {
+    eachVariantTotal() {
+
       const _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
         return fn();
       });
 
       try {
-        let evalString = _r_total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+        let evalString = _each_variant_total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+        return eval(evalString);
+      } catch (error) {
+        return 0;
+      }
+    }, 
+    total() {
+
+      const _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
+        return fn();
+      });
+
+      console.log(_tagVariablesWithValue);
+
+      try {
+        let evalString = _total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
         return eval(evalString);
       } catch (error) {
         return 0;

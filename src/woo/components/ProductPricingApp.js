@@ -46,27 +46,28 @@ export default function ProductPricingApp() {
         setGeneralOptions(allFields);
       } }
       fields={ generalOptions }/>
+    <hr />
+    <br />
     <VariablesPlace onChange={ onChangeVariablePlace } />
     <CustomerPricingForm 
       onChange={ allFields => {
         let _variables = [...variables];
         _variables[currentVariable] = allFields;
 
-        let _obj = updateTagVariableViaSettingsRules({
-          _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
-          _r_total: productPricingSettings?.product_pricing_total_price_recipe,
-        }, { ...generalOptions, ...allFields });
+        let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions, ...allFields });
+        _variables[currentVariable].__TOTAL__ = _obj.eachVariantTotal();
 
-        _variables[currentVariable].__TOTAL__ = _obj.total();
         setVariables(_variables);
       } } 
       fields={ variables[currentVariable] } />
-    <VariantPriceContainer>
+    {/* <VariantPriceContainer>
       <span>{ __('Variant Price:', 'clampdown-child') }</span> 
       <span>{ `$${ variables[currentVariable].__TOTAL__ }` }</span>
-    </VariantPriceContainer>
+    </VariantPriceContainer> */}
+    <hr />
+    <br />
     <ButtonAddToCart 
-      text={ __(`Add To Cart ($${ total })`, 'clampdown-child') }
+      text={ __(`Request Quote ($${ total })`, 'clampdown-child') }
       onClick={ AddToCartClickHandle } />
   </Fragment>
 }

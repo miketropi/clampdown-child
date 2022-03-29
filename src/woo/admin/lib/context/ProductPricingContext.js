@@ -50,15 +50,14 @@ const ProductPricingProvider = ({ productID, children }) => {
      */
     let _variables = [...variables];
     _variables[currentVariable] = getDefaultFields(pricingSettings?.settings?.variant_default_opts, (_f) => {
-      let _obj = updateTagVariableViaSettingsRules({
-        _r: pricingSettings?.settings?.product_pricing_custom_tag_price_rules,
-        _r_total: pricingSettings?.settings?.product_pricing_total_price_recipe,
-      }, { ..._generalOptions, ..._f });
-  
-      return { __TOTAL__: _obj?.total() || 0 }
+      // let _obj = updateTagVariableViaSettingsRules({
+      //   _r: pricingSettings?.settings?.product_pricing_custom_tag_price_rules,
+      //   _r_total: pricingSettings?.settings?.product_pricing_total_price_recipe,
+      // }, { ..._generalOptions, ..._f });
+      let _obj = updateTagVariableViaSettingsRules(pricingSettings?.settings, { ..._generalOptions, ..._f });
+      return { __TOTAL__: _obj?.eachVariantTotal() || 0 }
     });
-    setVariables(_variables);
-
+    setVariables(_variables); 
     setLoading(false);
   }, [])
 
@@ -75,12 +74,13 @@ const ProductPricingProvider = ({ productID, children }) => {
     _variables.forEach((fields, i) => {
       if(!fields) return;
       
-      let _obj = updateTagVariableViaSettingsRules({
-        _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
-        _r_total: productPricingSettings?.product_pricing_total_price_recipe,
-      }, { ...generalOptions, ...fields });
+      // let _obj = updateTagVariableViaSettingsRules({
+      //   _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
+      //   _r_total: productPricingSettings?.product_pricing_total_price_recipe,
+      // }, { ...generalOptions, ...fields });
+      let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions, ...fields });
       
-      fields.__TOTAL__ = _obj.total();
+      fields.__TOTAL__ = _obj.eachVariantTotal();
       _variables[i] = fields;
     })
 
@@ -95,14 +95,19 @@ const ProductPricingProvider = ({ productID, children }) => {
   }, [generalOptions])
 
   useEffect(() => {
-    let _total = 0;
-    let _variables = [...variables];
+    // let _total = 0;
+    // let _variables = [...variables];
 
-    _variables.forEach(item => {
-      _total += item?.__TOTAL__ || 0;
-    })
+    // _variables.forEach(item => {
+    //   _total += item?.__TOTAL__ || 0;
+    // })
+    
 
-    setTotal(_total.toFixed(2));
+    let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions }, variables);
+    console.log(_obj)
+    let total = _obj?.total() || 0;
+
+    setTotal(total.toFixed(2));
   }, [variables])
 
   const onChangeVariablePlace = (num) => {
@@ -122,13 +127,14 @@ const ProductPricingProvider = ({ productID, children }) => {
         okButtonProps: { style: { border: 'none', boxShadow: 'none' } },
         onOk: () => { 
           _variables[num] = getDefaultFields(productPricingSettings?.variant_default_opts, (_f) => {
-            let _obj = updateTagVariableViaSettingsRules({
-              _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
-              _r_total: productPricingSettings?.product_pricing_total_price_recipe,
-            }, { ...generalOptions, ..._f });
+            // let _obj = updateTagVariableViaSettingsRules({
+            //   _r: productPricingSettings?.product_pricing_custom_tag_price_rules,
+            //   _r_total: productPricingSettings?.product_pricing_total_price_recipe,
+            // }, { ...generalOptions, ..._f });
+            let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions, ..._f });
             
             // _f.__TOTAL__ = _obj?.total() || 0;
-            return { __TOTAL__: _obj?.total() || 0 }
+            return { __TOTAL__: _obj?.eachVariantTotal() || 0 }
           });
           setVariables(_variables);
           setCurrentVariable(num);

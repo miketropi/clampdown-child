@@ -57,7 +57,9 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
       "weight" => "140g",
     ],
     "product_pricing_custom_tag_price_rules" => [], 
-    "product_pricing_total_price_recipe" => ""];
+    "product_pricing_total_price_foreach_variant" => "",
+    "product_pricing_custom_tag_price_total_rules" => [],
+    "product_pricing_total_price" => "@{TOTAL_ALL_Variants_Price}"];
 
   $pricingSettings = get_post_meta((int) $id, 'product_pricing_custom_settings', true);
   $pricingSettings = $pricingSettings ? $pricingSettings : $default;
