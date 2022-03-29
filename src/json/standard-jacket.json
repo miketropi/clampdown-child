@@ -1,7 +1,7 @@
 {
   "Standard Jacket:50": 4.15,
   "Standard Jacket:100": 3.65,
-  "Standard Jacket:150": 2.9749999999999996,
+  "Standard Jacket:150": 2.975,
   "Standard Jacket:200": 2.3,
   "Standard Jacket:250": 2.11,
   "Standard Jacket:300": 1.92,
@@ -14,5 +14,6 @@
   "Standard Jacket:900": 1.75,
   "Standard Jacket:1000": 1.4,
   "Standard Jacket:1100": 1.4,
+  "Standard Jacket:1200": 1.4,
   "Standard Jacket:2000": 1.2
 }

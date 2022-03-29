@@ -5863,7 +5863,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('{\"Disco:50\":37.5,\"Disco:100\":75,\"Disco:150\":112.5,\"Disco:200\":150,\"Disco:250\":187.5,\"Disco:300\":225,\"Disco:350\":262.5,\"Disco:400\":300,\"Disco:450\":337.5,\"Disco:500\":375,\"Disco:550\":412.5,\"Disco:600\":450,\"Disco:900\":675,\"Disco:1000\":750,\"Disco:1100\":825,\"Disco:2000\":1500}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/disco.json?");
+eval("module.exports = JSON.parse('{\"Disco:50\":37.5,\"Disco:100\":75,\"Disco:150\":112.5,\"Disco:200\":150,\"Disco:250\":187.5,\"Disco:300\":225,\"Disco:350\":262.5,\"Disco:400\":300,\"Disco:450\":337.5,\"Disco:500\":375,\"Disco:550\":412.5,\"Disco:600\":450,\"Disco:900\":675,\"Disco:1000\":750,\"Disco:1100\":825,\"Disco:1200\":825,\"Disco:2000\":1500}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/disco.json?");
 
 /***/ }),
 
@@ -5874,7 +5874,7 @@ eval("module.exports = JSON.parse('{\"Disco:50\":37.5,\"Disco:100\":75,\"Disco:1
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('{\"Foldover:50\":1,\"Foldover:100\":1,\"Foldover:150\":1,\"Foldover:200\":1,\"Foldover:250\":1,\"Foldover:300\":1,\"Foldover:350\":1,\"Foldover:400\":1,\"Foldover:450\":1,\"Foldover:500\":1,\"Foldover:550\":1,\"Foldover:600\":1,\"Foldover:900\":1,\"Foldover:1000\":1,\"Foldover:1100\":null,\"Foldover:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/foldover.json?");
+eval("module.exports = JSON.parse('{\"Foldover:50\":1,\"Foldover:100\":1,\"Foldover:150\":1,\"Foldover:200\":1,\"Foldover:250\":1,\"Foldover:300\":1,\"Foldover:350\":1,\"Foldover:400\":1,\"Foldover:450\":1,\"Foldover:500\":1,\"Foldover:550\":1,\"Foldover:600\":1,\"Foldover:900\":1,\"Foldover:1000\":1,\"Foldover:1100\":null,\"Foldover:1200\":null,\"Foldover:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/foldover.json?");
 
 /***/ }),
 
@@ -5885,7 +5885,7 @@ eval("module.exports = JSON.parse('{\"Foldover:50\":1,\"Foldover:100\":1,\"Foldo
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('{\"Gatefold Jacket:50\":null,\"Gatefold Jacket:100\":null,\"Gatefold Jacket:150\":null,\"Gatefold Jacket:200\":null,\"Gatefold Jacket:250\":null,\"Gatefold Jacket:300\":6,\"Gatefold Jacket:350\":6,\"Gatefold Jacket:400\":6,\"Gatefold Jacket:450\":6,\"Gatefold Jacket:500\":5,\"Gatefold Jacket:550\":5,\"Gatefold Jacket:600\":5,\"Gatefold Jacket:900\":5,\"Gatefold Jacket:1000\":4,\"Gatefold Jacket:1100\":4,\"Gatefold Jacket:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/gatefold-jacket.json?");
+eval("module.exports = JSON.parse('{\"Gatefold Jacket:50\":null,\"Gatefold Jacket:100\":null,\"Gatefold Jacket:150\":null,\"Gatefold Jacket:200\":null,\"Gatefold Jacket:250\":null,\"Gatefold Jacket:300\":6,\"Gatefold Jacket:350\":6,\"Gatefold Jacket:400\":6,\"Gatefold Jacket:450\":6,\"Gatefold Jacket:500\":5,\"Gatefold Jacket:550\":5,\"Gatefold Jacket:600\":5,\"Gatefold Jacket:900\":5,\"Gatefold Jacket:1000\":4,\"Gatefold Jacket:1100\":4,\"Gatefold Jacket:1200\":4,\"Gatefold Jacket:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/gatefold-jacket.json?");
 
 /***/ }),
 
@@ -5896,7 +5896,7 @@ eval("module.exports = JSON.parse('{\"Gatefold Jacket:50\":null,\"Gatefold Jacke
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('{\"Inner Loading Gatefold Jacket:50\":12,\"Inner Loading Gatefold Jacket:100\":8,\"Inner Loading Gatefold Jacket:150\":null,\"Inner Loading Gatefold Jacket:200\":6.65,\"Inner Loading Gatefold Jacket:250\":null,\"Inner Loading Gatefold Jacket:300\":6,\"Inner Loading Gatefold Jacket:350\":null,\"Inner Loading Gatefold Jacket:400\":null,\"Inner Loading Gatefold Jacket:450\":null,\"Inner Loading Gatefold Jacket:500\":5.25,\"Inner Loading Gatefold Jacket:550\":null,\"Inner Loading Gatefold Jacket:600\":5.25,\"Inner Loading Gatefold Jacket:900\":5.25,\"Inner Loading Gatefold Jacket:1000\":4.7,\"Inner Loading Gatefold Jacket:1100\":4.7,\"Inner Loading Gatefold Jacket:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/inner-loading-gatefold-jacket.json?");
+eval("module.exports = JSON.parse('{\"Inner Loading Gatefold Jacket:50\":12,\"Inner Loading Gatefold Jacket:100\":8,\"Inner Loading Gatefold Jacket:150\":null,\"Inner Loading Gatefold Jacket:200\":6.65,\"Inner Loading Gatefold Jacket:250\":null,\"Inner Loading Gatefold Jacket:300\":6,\"Inner Loading Gatefold Jacket:350\":null,\"Inner Loading Gatefold Jacket:400\":null,\"Inner Loading Gatefold Jacket:450\":null,\"Inner Loading Gatefold Jacket:500\":5.25,\"Inner Loading Gatefold Jacket:550\":null,\"Inner Loading Gatefold Jacket:600\":5.25,\"Inner Loading Gatefold Jacket:900\":5.25,\"Inner Loading Gatefold Jacket:1000\":4.7,\"Inner Loading Gatefold Jacket:1100\":4.7,\"Inner Loading Gatefold Jacket:1200\":4.7,\"Inner Loading Gatefold Jacket:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/inner-loading-gatefold-jacket.json?");
 
 /***/ }),
 
@@ -5907,7 +5907,7 @@ eval("module.exports = JSON.parse('{\"Inner Loading Gatefold Jacket:50\":12,\"In
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('{\"Standard Jacket:50\":4.15,\"Standard Jacket:100\":3.65,\"Standard Jacket:150\":2.9749999999999996,\"Standard Jacket:200\":2.3,\"Standard Jacket:250\":2.11,\"Standard Jacket:300\":1.92,\"Standard Jacket:350\":1.96,\"Standard Jacket:400\":1.95,\"Standard Jacket:450\":1.8,\"Standard Jacket:500\":1.69,\"Standard Jacket:550\":1.69,\"Standard Jacket:600\":1.69,\"Standard Jacket:900\":1.75,\"Standard Jacket:1000\":1.4,\"Standard Jacket:1100\":1.4,\"Standard Jacket:2000\":1.2}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/standard-jacket.json?");
+eval("module.exports = JSON.parse('{\"Standard Jacket:50\":4.15,\"Standard Jacket:100\":3.65,\"Standard Jacket:150\":2.975,\"Standard Jacket:200\":2.3,\"Standard Jacket:250\":2.11,\"Standard Jacket:300\":1.92,\"Standard Jacket:350\":1.96,\"Standard Jacket:400\":1.95,\"Standard Jacket:450\":1.8,\"Standard Jacket:500\":1.69,\"Standard Jacket:550\":1.69,\"Standard Jacket:600\":1.69,\"Standard Jacket:900\":1.75,\"Standard Jacket:1000\":1.4,\"Standard Jacket:1100\":1.4,\"Standard Jacket:1200\":1.4,\"Standard Jacket:2000\":1.2}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/standard-jacket.json?");
 
 /***/ }),
 
@@ -5918,7 +5918,7 @@ eval("module.exports = JSON.parse('{\"Standard Jacket:50\":4.15,\"Standard Jacke
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('{\"Widespine:50\":8.62,\"Widespine:100\":6.99,\"Widespine:150\":6.99,\"Widespine:200\":4.14,\"Widespine:250\":4.14,\"Widespine:300\":3.36,\"Widespine:350\":3.36,\"Widespine:400\":3.15,\"Widespine:450\":3.15,\"Widespine:500\":2.9,\"Widespine:550\":2.9,\"Widespine:600\":2.9,\"Widespine:900\":2.75,\"Widespine:1000\":2.37,\"Widespine:1100\":2.37,\"Widespine:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/widespine.json?");
+eval("module.exports = JSON.parse('{\"Widespine:50\":8.62,\"Widespine:100\":6.99,\"Widespine:150\":6.99,\"Widespine:200\":4.14,\"Widespine:250\":4.14,\"Widespine:300\":3.36,\"Widespine:350\":3.36,\"Widespine:400\":3.15,\"Widespine:450\":3.15,\"Widespine:500\":2.9,\"Widespine:550\":2.9,\"Widespine:600\":2.9,\"Widespine:900\":2.75,\"Widespine:1000\":2.37,\"Widespine:1100\":2.37,\"Widespine:1200\":2.37,\"Widespine:2000\":null}');\n\n//# sourceURL=webpack://clampdown-child/./src/json/widespine.json?");
 
 /***/ })
 
