@@ -396,7 +396,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                             label={ __('Formulas', 'clampdown-child') }
                             name={ [name, 'recipe'] }
                             required={ true } >
-                            <Mentions split={ '' } style={{ borderRadius: 1 }}>
+                            <Mentions rows={ 2 } split={ '' } style={{ borderRadius: 1 }}>
                               {
                                 map(generalCustomerOptions, (item, key) => {
                                   const { label, name } = item;

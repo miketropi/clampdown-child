@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { useProductPricing } from "../admin/lib/context/ProductPricingContext";
 import { Tooltip } from 'antd';
 import { PlusOutlined } from '@ant-design/icons'
+import { __ } from '@wordpress/i18n';
 
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 
 const VariablesContainer = styled.div`
   margin-bottom: 2em;

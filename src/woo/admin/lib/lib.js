@@ -220,6 +220,11 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
    * Customer field tags
    */
   map(_fields, (value, name) => {
+    let fieldNumber = ['sides', 'number'];
+    if(fieldNumber.includes(name)) {
+      value = parseInt(value);
+    }
+
     _tagVariables[`@{${ name }}`] = () => value;
   })
 
@@ -282,6 +287,9 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
           _tagVariables[`@{${name}}`] = () => {
             try{
               let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+              if(name === 'Records') {
+                console.log(evalString);
+              }
               result = eval(evalString);
             } catch(e) {
               result = 0;

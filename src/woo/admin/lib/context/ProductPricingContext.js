@@ -3,9 +3,10 @@ import { registerGeneralCustomerPricingFields, registerCustomerPricingFields, mi
 import { getProductPricingSettings } from '../api/helpers';
 import { Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { __ } from '@wordpress/i18n';
 
 const ProductPricingContext = createContext();
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 
 String.prototype.replaceArray = function(find, replace) {
   var replaceString = this;
@@ -15,7 +16,7 @@ String.prototype.replaceArray = function(find, replace) {
     replaceString = replaceString.replace(regex, replace[i]);
   }
   return replaceString;
-};
+}; 
 
 const ProductPricingProvider = ({ productID, children }) => {
   const [loading, setLoading] = useState(true);

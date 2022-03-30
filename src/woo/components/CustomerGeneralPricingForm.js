@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import map from 'lodash/map';
 import DynamicField from '../admin/components/fields/DynamicField';
+import { __ } from '@wordpress/i18n';
 
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 const { Option } = Select;
 
 const FormInnerContainer = styled.div`

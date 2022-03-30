@@ -5,6 +5,7 @@ import CustomerGeneralPricingForm from './CustomerGeneralPricingForm';
 import CustomerPricingForm from './CustomerPricingForm';
 import VariablesPlace from './VariablesSpace';
 import ButtonAddToCart from './ButtonAddToCart';
+import { __ } from '@wordpress/i18n';
 
 const VariantPriceContainer = styled.div`
   padding: 1em 0;
@@ -15,7 +16,7 @@ const VariantPriceContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 1em;
 `
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 
 export default function ProductPricingApp() {
   const { 

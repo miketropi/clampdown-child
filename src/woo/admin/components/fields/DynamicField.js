@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Select, Input } from 'antd';
 import map from 'lodash/map';
+import { __ } from '@wordpress/i18n';
 
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 const { Option } = Select;
 
 export default function DynamicField(props) {
