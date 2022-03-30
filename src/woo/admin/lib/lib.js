@@ -177,8 +177,8 @@ export const registerCustomerPricingFields = () => {
         name: 'style',
         label: 'Style',
         type: 'select',
-        options: ['Standard', 'Colour',	'Deluxe', 'Colour'],
-        default: 'Standard',
+        options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+        default: 'Standard Black',
       }
     })(),
     Colour: (() => {
