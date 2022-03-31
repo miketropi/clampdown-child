@@ -110,10 +110,11 @@ export const registerGeneralCustomerPricingFields = () => {
         label: 'Packaging',
         type: 'select',
         options: [
+          'None', 
           'Poly Bags',
           'Shrink Wrap'
         ],
-        default: 'Poly Bags'
+        default: 'None'
       }
     })(),
     DownloadCards: (() => {
@@ -188,6 +189,12 @@ export const registerCustomerPricingFields = () => {
         type: 'select',
         options: ['Black', 'Orange', 'Red'],
         default: 'Black',
+        // conditional: [
+        //   {
+        //     field: 'style',
+        //     values: ['Colour']
+        //   }
+        // ]
       }
     })(),
     Weight: (() => {
@@ -199,18 +206,154 @@ export const registerCustomerPricingFields = () => {
         default: '140g',
       }
     })(),
+
+    /**
+     * Extra fields 
+     */
+    Divider1: (() => {
+      return {
+        name: 'divider1',
+        label: 'Variant options extra for #Sides 2 & 6',
+        type: 'divider',
+        conditional: [
+          {
+            field: 'sides',
+            values: [4, 6]
+          }
+        ]
+      }
+    })(),
+    Style2: (() => {
+      return {
+        name: 'style2',
+        label: 'Style',
+        type: 'select',
+        options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+        default: 'Standard Black',
+        conditional: [
+          {
+            field: 'sides',
+            values: [4, 6]
+          }
+        ]
+      }
+    })(),
+    Colour2: (() => {
+      return {
+        name: 'colour2',
+        label: 'Colour',
+        type: 'select',
+        options: ['Black', 'Orange', 'Red'],
+        default: 'Black',
+        conditional: [
+          {
+            field: 'sides',
+            values: [4, 6]
+          }
+        ]
+      }
+    })(),
+    Weight2: (() => {
+      return {
+        name: 'weight2',
+        label: 'Weight',
+        type: 'select',
+        options: ['140g', '180g'],
+        default: '140g',
+        conditional: [
+          {
+            field: 'sides',
+            values: [4, 6]
+          }
+        ]
+      }
+    })(),
+
+    /**
+     * Extra fields 
+     */
+    Divider2: (() => {
+      return {
+        name: 'divider2',
+        label: 'Variant options extra for #Sides 6',
+        type: 'divider',
+        conditional: [
+          {
+            field: 'sides',
+            values: [6]
+          }
+        ]
+      }
+    })(),
+    Style3: (() => {
+      return {
+        name: 'style3',
+        label: 'Style',
+        type: 'select',
+        options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+        default: 'Standard Black',
+        conditional: [
+          {
+            field: 'sides',
+            values: [6]
+          }
+        ]
+      }
+    })(),
+    Colour3: (() => {
+      return {
+        name: 'colour3',
+        label: 'Colour',
+        type: 'select',
+        options: ['Black', 'Orange', 'Red'],
+        default: 'Black',
+        conditional: [
+          {
+            field: 'sides',
+            values: [6]
+          }
+        ]
+      }
+    })(),
+    Weight3: (() => {
+      return {
+        name: 'weight3',
+        label: 'Weight',
+        type: 'select',
+        options: ['140g', '180g'],
+        default: '140g',
+        conditional: [
+          {
+            field: 'sides',
+            values: [6]
+          }
+        ]
+      }
+    })(),
   }
 }
 
+export const isConditional = (conditional, fields) => {
+  let pass = true;
+
+  conditional?.map((item, _index) => {
+    if(! item.values.includes(fields[item.field])) {
+      if(pass == true) {
+        pass = false;
+      }
+    }
+  })
+
+  return pass;
+}
+
 export const updateTagVariableViaSettingsRules = (settings, opts, variables = null) => {
-  // console.log(variables_count);
-  // console.log({ _r, _r_total }, opts)
   const variant_rules = settings?.product_pricing_custom_tag_price_rules || [];
   const total_rules = settings?.product_pricing_custom_tag_price_total_rules || [];
   const _each_variant_total = settings?.product_pricing_total_price_foreach_variant;
   const _total = settings?.product_pricing_total_price;
   const _r =( variables == null ? variant_rules : total_rules);
-  // console.log(variables, settings);
+
   if(!_r) return; 
   let _tagVariables = {};
   let _fields = { ...opts };

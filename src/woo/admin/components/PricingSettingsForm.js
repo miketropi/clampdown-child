@@ -151,6 +151,10 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                 const attrs = {};
                 const more = {};
 
+                if(type === 'divider') {
+                  return <Divider orientation="left" key={ name }>{ label }</Divider>
+                }
+
                 if(item.options) {
                   more.options = item.options;
                 }
@@ -293,7 +297,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
               label={ __('Total Price For Each Vatiant', 'clampdown-child') } 
               required={ true }
               name="product_pricing_total_price_foreach_variant" >
-              <Mentions split={ '' } style={{ borderRadius: 1 }}>
+              <Mentions rows={ 5 } split={ '' } style={{ borderRadius: 1 }}>
                 {
                   priceTags.length > 0 && 
                   priceTags.map(item => (

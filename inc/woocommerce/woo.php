@@ -44,7 +44,7 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
       "jacket_type" => "Standard Jacket",
       "inner_sleeve" => "White",
       "insert" => "None",
-      "packaging" => "Poly Bags",
+      "packaging" => "None",
       "download_cards" => "None",
       "marketing_stickers" => "None",
       "tests" => "Yes",

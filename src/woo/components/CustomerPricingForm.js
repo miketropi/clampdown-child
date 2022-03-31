@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Form, Input, Select} from "antd";
+import { Form, Input, Select, Divider } from "antd";
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import map from 'lodash/map';
 import DynamicField from "../admin/components/fields/DynamicField";
+import { isConditional } from "../admin/lib/lib";
 
 const { Option } = Select;
 
@@ -19,7 +20,7 @@ const FormInnerContainer = styled.div`
 `
 
 export default function CustomerPricingForm({ onChange, fields }) {
-  const { customerPricingFields, variables } = useProductPricing();
+  const { generalOptions, customerPricingFields, variables } = useProductPricing();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function CustomerPricingForm({ onChange, fields }) {
   }
   
   return <CustomerPricingFormContainer>
-    {/* { JSON.stringify(variables) } */}
+    {/* { JSON.stringify(fields) } */}
     <Form
       form={ form }
       layout={ 'vertical' }
@@ -42,18 +43,24 @@ export default function CustomerPricingForm({ onChange, fields }) {
         {
           Object.keys(customerPricingFields).length > 0 && 
           map(customerPricingFields, (item, key) => {
-            const { name, label, type } = item;
+            const { name, label, type, conditional } = item;
             const attrs = {};
             const more = {};
+            const _show = (typeof conditional === 'undefined') ? true : isConditional(conditional, {...generalOptions, ...fields});           
+
             if(item.options) {
               more.options = item.options;
+            }
+
+            if(type === 'divider') {
+              return <Divider orientation="left" key={ name } style={{ display: _show ? '' : 'none' }}></Divider>
             }
 
             return <Form.Item 
               label={ label }
               name={ name } 
               key={ key }
-              hidden={ (type == 'hidden' ? true : false) } >
+              hidden={ ((type == 'hidden' || !_show) ? true : false) } >
               <DynamicField _type={ type } _attrs={ attrs } _more={ more } />
             </Form.Item>
           })
