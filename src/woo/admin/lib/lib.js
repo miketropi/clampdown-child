@@ -213,7 +213,7 @@ export const registerCustomerPricingFields = () => {
     Divider1: (() => {
       return {
         name: 'divider1',
-        label: 'Variant options extra for #Sides 2 & 6',
+        label: 'Variant options extra for #Sides 4 & 6',
         type: 'divider',
         conditional: [
           {
