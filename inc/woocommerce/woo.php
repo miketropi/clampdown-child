@@ -45,7 +45,7 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
       "inner_sleeve" => "White",
       "insert" => "None",
       "packaging" => "None",
-      "download_cards" => "No",
+      "download_cards" => "None",
       "marketing_stickers" => "None",
       "tests" => "Yes",
       "labels" => "Yes"

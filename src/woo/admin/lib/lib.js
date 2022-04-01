@@ -135,13 +135,13 @@ export const registerGeneralCustomerPricingFields = () => {
         label: 'Download Cards',
         type: 'select',
         options: [
-          'No',
-          'Yes',
-          // 'None',
-          // 'Simple',
-          // 'Fancy',
+          // 'No',
+          // 'Yes',
+          'None',
+          'Simple',
+          'Fancy',
         ],
-        default: 'No',
+        default: 'None',
       }
     })(),
     MarketingStickers: (() => {
@@ -446,7 +446,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
 
     _tagVariables['@{MIX_DownloadCards_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
-      let _labelKey = opts?.download_cards == 'Yes' ? 'Download Cards' : '__Download_Cards_No';
+      let _labelKey = opts?.download_cards == 'None' ? '__Download_Cards_No' : 'Download Cards';
 
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
