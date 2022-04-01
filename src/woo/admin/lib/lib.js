@@ -7,6 +7,11 @@ import gatefoldJacket from '../../../json/gatefold-jacket.json';
 import innerLoadingGatefoldJacket from '../../../json/inner-loading-gatefold-jacket.json';
 import standardJacket from '../../../json/standard-jacket.json';
 import widespine from '../../../json/widespine.json';
+import printedInnerSleeves from '../../../json/printed-inner-sleeves.json';
+import polyLinedInnerSleeves from '../../../json/poly-lined-inner-sleeves.json';
+import labels from '../../../json/labels.json';
+import downloadCards from '../../../json/download-cards.json';
+
 import map from 'lodash/map';
 
 export const mixDataJacketTypeNumber = () => {
@@ -16,7 +21,12 @@ export const mixDataJacketTypeNumber = () => {
     ...gatefoldJacket, 
     ...innerLoadingGatefoldJacket, 
     ...standardJacket, 
-    ...widespine 
+    ...widespine,
+
+    ...printedInnerSleeves,
+    ...polyLinedInnerSleeves,
+    ...labels,
+    ...downloadCards,
   };
 }
 
@@ -64,6 +74,7 @@ export const registerGeneralCustomerPricingFields = () => {
         label: 'Jacket Type',
         type: 'select',
         options: [
+          'No',
           'Standard Jacket',
           'Gatefold Jacket',
           'Inner Loading Gatefold Jacket',
@@ -81,10 +92,11 @@ export const registerGeneralCustomerPricingFields = () => {
         type: 'select',
         options: [
           'White',
-          'Black',
-          'Printed',
-          'White Poly Lined',
-          'Black Poly Lined',
+          // 'Black',
+          'Printed Inner Sleeves',
+          'Poly Lined Inner Sleeves',
+          // 'White Poly Lined',
+          // 'Black Poly Lined',
         ],
         default: 'White',
       }
@@ -123,11 +135,13 @@ export const registerGeneralCustomerPricingFields = () => {
         label: 'Download Cards',
         type: 'select',
         options: [
-          'None',
-          'Simple',
-          'Fancy',
+          'No',
+          'Yes',
+          // 'None',
+          // 'Simple',
+          // 'Fancy',
         ],
-        default: 'None',
+        default: 'No',
       }
     })(),
     MarketingStickers: (() => {
@@ -389,6 +403,9 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
      * - @{TOTAL_Variant_Number_Units}
      * - @{TOTAL_ALL_Variants_Price}
      * - @{MIX_JacketType_TOTAL_Variant_Number_Units}
+     * - @{MIX_InnerSleeve_TOTAL_Variant_Number_Units}
+     * - @{MIX_Labels_TOTAL_Variant_Number_Units}
+     * - @{MIX_DownloadCards_TOTAL_Variant_Number_Units}
      */
 
     _tagVariables['@{Variants_Count_Number}'] = () => { 
@@ -412,6 +429,28 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
       let _key = `${ opts?.jacket_type }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
+
+    _tagVariables['@{MIX_InnerSleeve_TOTAL_Variant_Number_Units}'] = () => {
+      let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
+      let _key = `${ opts?.inner_sleeve }:${ TotalNumberUnits }`;
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
+
+    _tagVariables['@{MIX_Labels_TOTAL_Variant_Number_Units}'] = () => {
+      let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
+      let _labelKey = opts?.labels == 'Yes' ? 'Labels' : '__Labels_No';
+
+      let _key = `${ _labelKey }:${ TotalNumberUnits }`;
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
+
+    _tagVariables['@{MIX_DownloadCards_TOTAL_Variant_Number_Units}'] = () => {
+      let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
+      let _labelKey = opts?.download_cards == 'Yes' ? 'Download Cards' : '__Download_Cards_No';
+
+      let _key = `${ _labelKey }:${ TotalNumberUnits }`;
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
   }
   
   /**
@@ -430,9 +469,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
           _tagVariables[`@{${name}}`] = () => {
             try{
               let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-              if(name === 'Records') {
-                console.log(evalString);
-              }
+              
               result = eval(evalString);
             } catch(e) {
               result = 0;
@@ -452,6 +489,9 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
   
             try{
               let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
+              if(name === 'InnerSleeveCost') {
+                console.log(evalString);
+              }
               result = eval(evalString);
             } catch(e) {
               result = 0;
