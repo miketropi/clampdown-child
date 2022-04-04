@@ -2,9 +2,8 @@
  * Product Pricing Settings Form 
  */
 import react, { Fragment, useState, useEffect } from 'react'
-import { Form, Button, PageHeader, Switch, Tag, Divider, Input, Select, Space, Mentions, Collapse, Tabs } from 'antd';
+import { Form, Button, PageHeader, Tag, Divider, Input, Select, Mentions, Collapse, Tabs } from 'antd';
 import { SlidersOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import CustomerOptionsListView from './CustomerOptionsListView';
 import { userProductPricingSettings } from '../lib/context/ProductPricingSettingsContext';
 import find from 'lodash/find';
 import map from 'lodash/map';
@@ -16,29 +15,6 @@ const { __ } = wp.i18n;
 const { Option, OptGroup } = Select;
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
-
-const RuleItemContainer = styled.fieldset`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center; 
-  padding: 2em;
-  margin-bottom: 2em;
-  border: solid 1px #eee;
-
-  legend {
-    width: auto;
-    padding: 0 1em;
-    margin: 0;
-    color: black;
-    border-bottom: 0;
-    font-size: 1em;
-    font-weight: bold;
-  }
-
-  > * {
-    width: 100%
-  }
-`
 
 export default function ProductPricingSettingsForm({ onChange, fields }) {
   if(Object.keys(fields).length == 0) {
@@ -315,7 +291,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                 <Fragment>
                   <Collapse>
                     {
-                      _fields.map(({ key, name, ...restField }) => {
+                      _fields.map(({ key, name, ...restField }) => { 
                         return <Panel 
                           key={ key } 
                           header={ fields.product_pricing_custom_tag_price_total_rules[name]?.name } 
@@ -427,7 +403,13 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                         </Panel>
                       })
                     }
-                  </Collapse>
+                  </Collapse> 
+                  {/* <Form.Item 
+                    style={{ marginTop: '2em' }}>
+                    <Button type="dashed" onClick={() => add('', 3)} block icon={<PlusOutlined />}>
+                      { __('Add rule by Index', 'clampdown-child') }
+                    </Button>
+                  </Form.Item> */}
                   <Form.Item 
                     style={{ marginTop: '2em' }}>
                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>

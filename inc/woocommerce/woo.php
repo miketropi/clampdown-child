@@ -69,29 +69,48 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
     : (isset($pricingSettings[$name]) ? $pricingSettings[$name] : null);
 }
 
-function clamdown_child_woo_is_product_pricing_mode_handle() {
+// function clamdown_child_woo_is_product_pricing_mode_handle() {
+//   if(is_product() == true) {
+//     global $post; 
+//     $product = wc_get_product($post);
+//     $enable_pricing_mode = clampdown_child_woo_get_product_pricing_settings($product->get_id(), 'enable_pricing_mode');
+
+//     if($enable_pricing_mode == 'true' || $enable_pricing_mode == true) {
+//       remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+//       remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+
+//       add_action('woocommerce_single_product_summary', 'clampdown_child_woo_product_pricing_custom_form', 32);
+//     }
+//   }
+// } 
+
+// add_action('wp_head', 'clamdown_child_woo_is_product_pricing_mode_handle');
+
+function clampdown_child_woo_product_pricing_custom_form($product_id = 0) {
+  ?>
+  <div id="PRODUCT_PRICING_MODE_APP" data-product-id="<?php echo $product_id ?>">
+    <!-- Content render by React -->
+  </div> <!-- #PRODUCT_PRICING_MODE_APP -->
+  <?php 
+}
+
+add_action('clampdown-child/woo/custom-product-single-content', 'clampdown_child_woo_product_pricing_custom_form');
+
+function clamdown_child_woo_product_single_content() {
   if(is_product() == true) {
-    global $post; 
+    global $post;
     $product = wc_get_product($post);
     $enable_pricing_mode = clampdown_child_woo_get_product_pricing_settings($product->get_id(), 'enable_pricing_mode');
 
     if($enable_pricing_mode == 'true' || $enable_pricing_mode == true) {
-      remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
-      remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
-
-      add_action('woocommerce_single_product_summary', 'clampdown_child_woo_product_pricing_custom_form', 32);
+      /**
+       * Hook clampdown-child/woo/custom-product-single-content
+       * 
+       * @see clampdown_child_woo_product_pricing_custom_form - 20
+       */
+      do_action('clampdown-child/woo/custom-product-single-content', $product->get_id());
+    } else {
+      load_template(CLAMPDOWN_DIR . '/templates/woo/product-single-content.php', false);
     }
   }
-} 
-
-add_action('wp_head', 'clamdown_child_woo_is_product_pricing_mode_handle');
-
-function clampdown_child_woo_product_pricing_custom_form() {
-  global $post; 
-  $product = wc_get_product($post);
-  ?>
-  <div id="PRODUCT_PRICING_MODE_APP" data-product-id="<?php echo $product->get_id() ?>">
-    <!-- Content render by React -->
-  </div> <!-- #PRODUCT_PRICING_MODE_APP -->
-  <?php 
 }
