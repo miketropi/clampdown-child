@@ -479,10 +479,13 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
           break;
         default:
           let { field_operator, field_option  } = item;
+          
           _tagVariables[`@{${name}}`] = () => {  
             let operatorCase = {
               '=='() { return (opts[field_type] == field_option) },
-              '!='() { return (opts[field_type] != field_option) }
+              '!='() { return (opts[field_type] != field_option) },
+              'in'() { return field_option?.split(',').includes(opts[field_type]) },
+              'notIn'() { return !field_option?.split(',').includes(opts[field_type]) },
             };
   
             if(operatorCase[field_operator]() == false) return 0;

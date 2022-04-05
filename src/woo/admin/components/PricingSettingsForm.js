@@ -199,7 +199,8 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                   <Collapse>
                     {
                       _fields.map(({ key, name, ...restField }) => {
-                        let headerText = fields?.product_pricing_custom_tag_price_rules[name]?.name || '';
+                        let ruleItem = fields?.product_pricing_custom_tag_price_rules[name];
+                        let headerText = ruleItem?.name || '';
                         return <Panel 
                           key={ key } 
                           header={ `${ name }. ${ headerText }` } 
@@ -261,6 +262,8 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                         <Select>
                                           <Option value="==">{ __('Value is equal to', 'clampdown-child') }</Option>
                                           <Option value="!=">{ __('Value is not equal to', 'clampdown-child') }</Option>
+                                          <Option value="in">{ __('In', 'clampdown-child') }</Option>
+                                          <Option value="notIn">{ __('Not In', 'clampdown-child') }</Option>  
                                         </Select>
                                       </Form.Item>
                                       <Form.Item 
@@ -271,7 +274,15 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                         {
                                           (() => {
                                             if(_item != null && _item?.options) {
-                                              return <Select style={{ width: '100%' }}>
+
+                                              if(['in', 'notIn'].includes(ruleItem.field_operator)) {
+                                                return <Input 
+                                                  placeholder={ _item?.options.join(',') }
+                                                  style={{ borderRadius: '1px' }} />
+                                              }
+
+                                              return <Select 
+                                                style={{ width: '100%' }}>
                                                 {
                                                   _item.options.map(o => <Option key={ o } value={ o }>{ o }</Option>)
                                                 }
