@@ -55,6 +55,14 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
       "style" => "Standard Black",
       "colour" => "Black",
       "weight" => "140g",
+
+      "style2" => "Standard Black",
+      "colour2" => "Black",
+      "weight2" => "140g",
+
+      "style3" => "Standard Black",
+      "colour3" => "Black",
+      "weight3" => "140g",
     ],
     "product_pricing_custom_tag_price_rules" => [], 
     "product_pricing_total_price_foreach_variant" => "",

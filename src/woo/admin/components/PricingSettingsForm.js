@@ -2,14 +2,15 @@
  * Product Pricing Settings Form 
  */
 import react, { Fragment, useState, useEffect } from 'react'
-import { Form, Button, PageHeader, Tag, Divider, Input, Select, Mentions, Collapse, Tabs } from 'antd';
-import { SlidersOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Form, Button, PageHeader, Tag, Divider, Input, Select, Mentions, Collapse, Tabs, Modal } from 'antd';
+import { SlidersOutlined, MinusCircleOutlined, PlusOutlined, UploadOutlined, DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { userProductPricingSettings } from '../lib/context/ProductPricingSettingsContext';
 import find from 'lodash/find';
 import map from 'lodash/map';
 import styled from 'styled-components';
 import SwitchCustom from './fields/SwitchCustom';
 import DynamicField from './fields/DynamicField';
+import ActionRuleItem from './ActionRuleItem';
 
 const { __ } = wp.i18n; 
 const { Option, OptGroup } = Select;
@@ -21,9 +22,17 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
     return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
   }
   
-  const { product, customerOptions, generalCustomerOptions, saveData, saveDataLoading } = userProductPricingSettings();
+  const { 
+    product, 
+    customerOptions, 
+    generalCustomerOptions, 
+    saveData, 
+    saveDataLoading,
+    setSettings } = userProductPricingSettings();
   const [priceTags, setPriceTags] = useState([]);
   const [form] = Form.useForm();
+  const [dataImport, setDataImport] = useState('');
+  const [modalImportVisible, setModalImportVisible] = useState(false);
 
   useEffect(() => {
     form.setFieldsValue(fields)
@@ -65,8 +74,38 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
     console.log(errorInfo);
   }
 
+  const onExport = () => {
+    Modal.confirm({
+      title: 'Export Settings',
+      icon: <UploadOutlined />,
+      content: <Input.TextArea value={ JSON.stringify(fields) } style={{ height: 300 }} />,
+      okText: 'OK',
+      cancelText: 'Cancel',
+    })
+  }
+
+  const onImport = (e) => {
+    let json = JSON.parse(dataImport);
+    form.setFieldsValue(json);
+    setSettings(json);
+    setModalImportVisible(false);
+  }
+
   return <Fragment>
     {/* { JSON.stringify(fields.product_pricing_custom_tag_price_total_rules) } */}
+    <Modal
+      title="Import Settings"
+      visible={ modalImportVisible }
+      onCancel={ e => setModalImportVisible(false) }
+      onOk={ onImport }
+    >
+      <Input.TextArea 
+        value={ dataImport } 
+        onChange={ e => { 
+          setDataImport(e.target.value)
+        } } 
+        style={{ height: 300 }} />
+    </Modal>
     <Form
       name="product_pricing_settings"
       form={ form }
@@ -82,6 +121,12 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
         avatar={ { icon: <SlidersOutlined /> } }
         tags={ <Tag color="blue">{ __('Advanced', 'clampdown-child') }</Tag> }
         extra={[
+          <Button htmlType="button" onClick={ onExport } icon={ <UploadOutlined /> }>
+            Export
+          </Button>,
+          <Button htmlType="button" onClick={ () => setModalImportVisible(true) } icon={ <DownloadOutlined /> }>
+            Import
+          </Button>,
           <Button type="primary" htmlType="submit" loading={ saveDataLoading }>
             { saveDataLoading == true ? __('Saving...', 'clampdown-child') : __('Update', 'clampdown-child') }
           </Button>
@@ -154,10 +199,13 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                   <Collapse>
                     {
                       _fields.map(({ key, name, ...restField }) => {
+                        let headerText = fields?.product_pricing_custom_tag_price_rules[name]?.name || '';
                         return <Panel 
                           key={ key } 
-                          header={ fields.product_pricing_custom_tag_price_rules[name]?.name } 
-                          extra={ <MinusCircleOutlined onClick={() => remove(name)} /> } >
+                          header={ `${ name }. ${ headerText }` } 
+                          extra={ <ActionRuleItem index={ key } name={ name } actions={ { add, remove } } /> } 
+                          // extra={ <MinusCircleOutlined onClick={() => remove(name)} /> } 
+                          >
                           <Form.Item
                             {...restField} 
                             label="Name" 
@@ -292,10 +340,13 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                   <Collapse>
                     {
                       _fields.map(({ key, name, ...restField }) => { 
+                        let headerText = fields?.product_pricing_custom_tag_price_total_rules[name]?.name || '';
                         return <Panel 
                           key={ key } 
-                          header={ fields.product_pricing_custom_tag_price_total_rules[name]?.name } 
-                          extra={ <MinusCircleOutlined onClick={() => remove(name)} /> } >
+                          header={ `${ name }. ${ headerText }` } 
+                          extra={ <ActionRuleItem index={ key } name={ name } actions={ { add, remove } } /> }
+                          // extra={ <MinusCircleOutlined onClick={() => remove(name)} /> } 
+                          >
                           <Form.Item
                             {...restField} 
                             label="Name" 
