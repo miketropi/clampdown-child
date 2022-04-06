@@ -13,6 +13,7 @@ function clampdown_child_woo_enqueue_scripts() {
 
   wp_localize_script('clamdown-child-woo-script', 'CLAMPDOWN_PHP_WOO_DATA', [
     'ajax_url' => admin_url('admin-ajax.php'),
+    'user_logged_id' => get_current_user_id(),
     'lang' => []
   ]);
 }
@@ -77,22 +78,24 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
     : (isset($pricingSettings[$name]) ? $pricingSettings[$name] : null);
 }
 
-// function clamdown_child_woo_is_product_pricing_mode_handle() {
-//   if(is_product() == true) {
-//     global $post; 
-//     $product = wc_get_product($post);
-//     $enable_pricing_mode = clampdown_child_woo_get_product_pricing_settings($product->get_id(), 'enable_pricing_mode');
+/*
+function clamdown_child_woo_is_product_pricing_mode_handle() {
+  if(is_product() == true) {
+    global $post; 
+    $product = wc_get_product($post);
+    $enable_pricing_mode = clampdown_child_woo_get_product_pricing_settings($product->get_id(), 'enable_pricing_mode');
 
-//     if($enable_pricing_mode == 'true' || $enable_pricing_mode == true) {
-//       remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
-//       remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+    if($enable_pricing_mode == 'true' || $enable_pricing_mode == true) {
+      remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+      remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
 
-//       add_action('woocommerce_single_product_summary', 'clampdown_child_woo_product_pricing_custom_form', 32);
-//     }
-//   }
-// } 
+      add_action('woocommerce_single_product_summary', 'clampdown_child_woo_product_pricing_custom_form', 32);
+    }
+  }
+} 
 
-// add_action('wp_head', 'clamdown_child_woo_is_product_pricing_mode_handle');
+add_action('wp_head', 'clamdown_child_woo_is_product_pricing_mode_handle');
+*/
 
 function clampdown_child_woo_product_pricing_custom_form($product_id = 0) {
   ?>
