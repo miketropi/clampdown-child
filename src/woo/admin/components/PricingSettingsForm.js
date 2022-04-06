@@ -436,7 +436,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                             }
                                           })()
                                         }
-                                      </Form.Item >
+                                      </Form.Item>
                                     </Fragment>
                                   }
                                 </Fragment>
@@ -467,6 +467,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                               <Mentions.Option value={ '{MIX_InnerSleeve_TOTAL_Variant_Number_Units}' }>{ 'MIX_InnerSleeve_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_Labels_TOTAL_Variant_Number_Units}' }>{ 'MIX_Labels_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_DownloadCards_TOTAL_Variant_Number_Units}' }>{ 'MIX_DownloadCards_TOTAL_Variant_Number_Units' }</Mentions.Option>
+                              <Mentions.Option value={ '{MIX_Inserts_TOTAL_Variant_Number_Units}' }>{ 'MIX_Inserts_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{TOTAL_ALL_Variants_Price}' }>{ 'TOTAL_ALL_Variants_Price' }</Mentions.Option>
                               <Mentions.Option value={ '{Variants_Count_Number}' }>{ 'Variants_Count_Number' }</Mentions.Option>
                               <Mentions.Option value={ '{TOTAL_Variant_Number_Units}' }>{ 'TOTAL_Variant_Number_Units' }</Mentions.Option>
@@ -476,12 +477,6 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                       })
                     }
                   </Collapse> 
-                  {/* <Form.Item 
-                    style={{ marginTop: '2em' }}>
-                    <Button type="dashed" onClick={() => add('', 3)} block icon={<PlusOutlined />}>
-                      { __('Add rule by Index', 'clampdown-child') }
-                    </Button>
-                  </Form.Item> */}
                   <Form.Item 
                     style={{ marginTop: '2em' }}>
                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
@@ -516,6 +511,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                   <Mentions.Option value={ '{MIX_InnerSleeve_TOTAL_Variant_Number_Units}' }>{ 'MIX_InnerSleeve_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{MIX_Labels_TOTAL_Variant_Number_Units}' }>{ 'MIX_Labels_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{MIX_DownloadCards_TOTAL_Variant_Number_Units}' }>{ 'MIX_DownloadCards_TOTAL_Variant_Number_Units' }</Mentions.Option>
+                  <Mentions.Option value={ '{MIX_Inserts_TOTAL_Variant_Number_Units}' }>{ 'MIX_Inserts_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{TOTAL_ALL_Variants_Price}' }>{ 'TOTAL_ALL_Variants_Price' }</Mentions.Option>
                   <Mentions.Option value={ '{Variants_Count_Number}' }>{ 'Variants_Count_Number' }</Mentions.Option>
                   <Mentions.Option value={ '{TOTAL_Variant_Number_Units}' }>{ 'TOTAL_Variant_Number_Units' }</Mentions.Option>

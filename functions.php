@@ -26,6 +26,11 @@
     require(CLAMPDOWN_DIR . '/inc/woocommerce/woo.php');
     require(CLAMPDOWN_DIR . '/inc/woocommerce/woo-ajax.php');
     require(CLAMPDOWN_DIR . '/inc/woocommerce/product-meta-field.php');
+
+    /**
+     * Request Quote 
+     */
+    require(CLAMPDOWN_DIR . '/inc/woocommerce/request-quote.php');
   }
 }
 

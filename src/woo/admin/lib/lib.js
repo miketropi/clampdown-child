@@ -11,10 +11,16 @@ import printedInnerSleeves from '../../../json/printed-inner-sleeves.json';
 import polyLinedInnerSleeves from '../../../json/poly-lined-inner-sleeves.json';
 import labels from '../../../json/labels.json';
 import downloadCards from '../../../json/download-cards.json';
+import printedInserts from '../../../json/printed-inserts.json';
+import panel4Inserts from '../../../json/4-panel-inserts.json';
+import panel6Inserts from '../../../json/6-panel-inserts.json';
+import printed40InnerSleeves from '../../../json/printed-4-0-inner-sleeves.json';
+import whitePolyLinedInnerSleeves from '../../../json/white-poly-lined-inner-sleeves.json'
 
 import map from 'lodash/map';
 
 export const mixDataJacketTypeNumber = () => {
+
   return { 
     ...disco, 
     ...foldover, 
@@ -27,6 +33,13 @@ export const mixDataJacketTypeNumber = () => {
     ...polyLinedInnerSleeves,
     ...labels,
     ...downloadCards,
+
+    ...printedInserts,
+    ...panel4Inserts,
+    ...panel6Inserts,
+
+    ...printed40InnerSleeves,
+    ...whitePolyLinedInnerSleeves,
   };
 }
 
@@ -91,14 +104,20 @@ export const registerGeneralCustomerPricingFields = () => {
         label: 'Inner Sleeve',
         type: 'select',
         options: [
-          'White',
+          // 'White',
           // 'Black',
-          'Printed Inner Sleeves',
-          'Poly Lined Inner Sleeves',
+          // 'Printed Inner Sleeves',
+          // 'Poly Lined Inner Sleeves',
           // 'White Poly Lined',
           // 'Black Poly Lined',
+
+          'White Paper',
+          'Black Paper',
+          'Printed 4/0',
+          'White Poly Lined',
+          'Black Poly Lined',
         ],
-        default: 'White',
+        default: 'White Paper',
       }
     })(),
     Insert: (() => {
@@ -107,13 +126,12 @@ export const registerGeneralCustomerPricingFields = () => {
         label: 'Insert',
         type: 'select',
         options: [
-          'None',
-          '1 panel',
-          '2 panel',
+          'No',
+          'Printed',
           '4 panel',
           '6 panel',
         ],
-        default: 'None',
+        default: 'No',
       }
     })(),
     Packaging: (() => {
@@ -406,6 +424,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
      * - @{MIX_InnerSleeve_TOTAL_Variant_Number_Units}
      * - @{MIX_Labels_TOTAL_Variant_Number_Units}
      * - @{MIX_DownloadCards_TOTAL_Variant_Number_Units}
+     * - @{MIX_Inserts_TOTAL_Variant_Number_Units}
      */
 
     _tagVariables['@{Variants_Count_Number}'] = () => { 
@@ -432,7 +451,9 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
 
     _tagVariables['@{MIX_InnerSleeve_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
-      let _key = `${ opts?.inner_sleeve }:${ TotalNumberUnits }`;
+      let _labelKey = `${ opts?.inner_sleeve } Inner Sleeves`;
+
+      let _key = `${ _labelKey }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
 
@@ -447,6 +468,14 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{MIX_DownloadCards_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.download_cards == 'None' ? '__Download_Cards_No' : 'Download Cards';
+
+      let _key = `${ _labelKey }:${ TotalNumberUnits }`;
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
+
+    _tagVariables['@{MIX_Inserts_TOTAL_Variant_Number_Units}'] = () => {
+      let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
+      let _labelKey = opts?.insert == 'No' ? '__Insert_No' : `${ opts?.insert } Inserts`;
 
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
