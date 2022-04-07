@@ -31,3 +31,16 @@
     echo ob_get_clean();
   }
 }
+
+function clampdown_child_woo_request_quote_acf_op_init() {
+  if( !function_exists('acf_add_options_sub_page') ) return;
+
+  $child = acf_add_options_sub_page([
+    'page_title' => __('Request Quote Settings', 'clampdown-child'),
+    'menu_title' => __('Settings', 'clampdown-child'),
+    'parent_slug' => 'woo-request-quote',
+    'menu_slug' => 'request-quote-options'
+  ]);
+}
+
+add_action('acf/init', 'clampdown_child_woo_request_quote_acf_op_init');

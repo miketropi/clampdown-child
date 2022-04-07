@@ -16,7 +16,7 @@ import 'antd/dist/antd.css';
     if(!App) return;
 
     reactDOM.render(
-      <ProductPricingProvider productID={ App.dataset.productId }>
+      <ProductPricingProvider productID={ App.dataset.productId } wp_nonce={ App.dataset.wp_nonce }>
         <ProductPricingApp />
       </ProductPricingProvider>, App);
   } 

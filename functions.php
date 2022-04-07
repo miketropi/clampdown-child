@@ -30,7 +30,7 @@
     /**
      * Request Quote 
      */
-    require(CLAMPDOWN_DIR . '/inc/woocommerce/request-quote.php');
+    // require(CLAMPDOWN_DIR . '/inc/woocommerce/request-quote.php');
   }
 }
 

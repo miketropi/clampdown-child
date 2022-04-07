@@ -18,7 +18,7 @@ String.prototype.replaceArray = function(find, replace) {
   return replaceString;
 }; 
 
-const ProductPricingProvider = ({ productID, children }) => {
+const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
   const [loading, setLoading] = useState(true);
   const [generalOptions, setGeneralOptions] = useState({})
   const [variables, setVariables] = useState([]);
@@ -122,6 +122,7 @@ const ProductPricingProvider = ({ productID, children }) => {
 
   const value = {
     version: '1.0.0',
+    productID, wp_nonce, 
     generalCustomerPricingFields,
     customerPricingFields,
     loading, setLoading,

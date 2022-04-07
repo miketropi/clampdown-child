@@ -13,6 +13,7 @@ function clampdown_child_woo_enqueue_scripts() {
 
   wp_localize_script('clamdown-child-woo-script', 'CLAMPDOWN_PHP_WOO_DATA', [
     'ajax_url' => admin_url('admin-ajax.php'),
+    'site_url' => get_site_url(),
     'user_logged_id' => get_current_user_id(),
     'lang' => []
   ]);
@@ -98,8 +99,9 @@ add_action('wp_head', 'clamdown_child_woo_is_product_pricing_mode_handle');
 */
 
 function clampdown_child_woo_product_pricing_custom_form($product_id = 0) {
+  $wpnonce = wp_create_nonce( 'add-request-quote-' . $product_id );
   ?>
-  <div id="PRODUCT_PRICING_MODE_APP" data-product-id="<?php echo $product_id ?>">
+  <div id="PRODUCT_PRICING_MODE_APP" data-product-id="<?php echo $product_id ?>" data-wp_nonce="<?php echo $wpnonce ?>">
     <!-- Content render by React -->
   </div> <!-- #PRODUCT_PRICING_MODE_APP -->
   <?php 
@@ -112,8 +114,8 @@ function clamdown_child_woo_product_single_content() {
     global $post;
     $product = wc_get_product($post);
     $enable_pricing_mode = clampdown_child_woo_get_product_pricing_settings($product->get_id(), 'enable_pricing_mode');
-
-    if($enable_pricing_mode == 'true' || $enable_pricing_mode == true) {
+    
+    if($enable_pricing_mode === 'true' || $enable_pricing_mode === true) {
       /**
        * Hook clampdown-child/woo/custom-product-single-content
        * 
@@ -125,3 +127,12 @@ function clamdown_child_woo_product_single_content() {
     }
   }
 }
+
+/**
+ * ywraq custom hook
+ * 
+ */
+add_filter('ywraq_add_item', function($raq, $product_raq) {
+  // wp_send_json([$raq, $product_raq]);
+  return $raq;
+}, 20, 2);

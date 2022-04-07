@@ -7,19 +7,9 @@ import VariablesPlace from './VariablesSpace';
 import ButtonAddToCart from './ButtonAddToCart';
 import { __ } from '@wordpress/i18n';
 
-const VariantPriceContainer = styled.div`
-  padding: 1em 0;
-  border: solid #eee;
-  border-width: 1px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 1em;
-`
-// const { __ } = wp.i18n;
-
 export default function ProductPricingApp() {
   const { 
+    productID, wp_nonce, 
     generalOptions, setGeneralOptions,
     variables, setVariables,
     currentVariable, 
@@ -29,17 +19,34 @@ export default function ProductPricingApp() {
     onChangeVariablePlace, 
     total } = useProductPricing();
 
-  useEffect(() => {
-
-  }, [])
-
   if(loading == true) {
     return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
   }
 
-  const AddToCartClickHandle = (e) => {
+  const AddToCartClickHandle = async (e) => {
     e.preventDefault();
-    console.log(generalOptions, variables)
+    // console.log(generalOptions, variables)
+    
+    const result = await jQuery.ajax({
+      type: 'POST',
+      url: `${ CLAMPDOWN_PHP_WOO_DATA.site_url }/?wc-ajax=yith_ywraq_action`,
+      data: {
+        'quantity': 1,
+        'context': 'frontend',
+        'action': 'yith_ywraq_action',
+        'ywraq_action': 'add_item',
+        'product_id': parseInt(productID),
+        wp_nonce,
+        'yith-add-to-cart': parseInt(productID),
+        pricing_data: { ...generalOptions, ...variables },
+        pricing_total: total,
+      },
+      error: (e) => {
+        console.log(e)
+      }
+    });
+
+    console.log(result);
   }
 
   return <Fragment>
@@ -61,10 +68,6 @@ export default function ProductPricingApp() {
         setVariables(_variables);
       } } 
       fields={ variables[currentVariable] } />
-    {/* <VariantPriceContainer>
-      <span>{ __('Variant Price:', 'clampdown-child') }</span> 
-      <span>{ `$${ variables[currentVariable].__TOTAL__ }` }</span>
-    </VariantPriceContainer> */}
     <hr />
     <br />
     <ButtonAddToCart 
