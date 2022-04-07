@@ -128,8 +128,8 @@ export const registerGeneralCustomerPricingFields = () => {
         options: [
           'No',
           'Printed',
-          '4 panel',
-          '6 panel',
+          '4 Panel',
+          '6 Panel',
         ],
         default: 'No',
       }
@@ -476,8 +476,8 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{MIX_Inserts_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.insert == 'No' ? '__Insert_No' : `${ opts?.insert } Inserts`;
-
-      let _key = `${ _labelKey }:${ TotalNumberUnits }`;
+      let _key = `${ _labelKey }:${ TotalNumberUnits }`;  
+      console.log(_key, JacketTypeNumber[_key]);
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
   }
