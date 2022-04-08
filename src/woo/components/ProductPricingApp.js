@@ -38,7 +38,7 @@ export default function ProductPricingApp() {
         'product_id': parseInt(productID),
         wp_nonce,
         'yith-add-to-cart': parseInt(productID),
-        pricing_data: { ...generalOptions, ...variables },
+        pricing_data: { ...generalOptions, variables: [...variables] },
         pricing_total: total,
       },
       error: (e) => {

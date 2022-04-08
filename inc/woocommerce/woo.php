@@ -101,7 +101,10 @@ add_action('wp_head', 'clamdown_child_woo_is_product_pricing_mode_handle');
 function clampdown_child_woo_product_pricing_custom_form($product_id = 0) {
   $wpnonce = wp_create_nonce( 'add-request-quote-' . $product_id );
   ?>
-  <div id="PRODUCT_PRICING_MODE_APP" data-product-id="<?php echo $product_id ?>" data-wp_nonce="<?php echo $wpnonce ?>">
+  <div 
+    id="PRODUCT_PRICING_MODE_APP" 
+    data-product-id="<?php echo $product_id ?>" 
+    data-wp_nonce="<?php echo $wpnonce ?>" >
     <!-- Content render by React -->
   </div> <!-- #PRODUCT_PRICING_MODE_APP -->
   <?php 
@@ -128,11 +131,63 @@ function clamdown_child_woo_product_single_content() {
   }
 }
 
-/**
- * ywraq custom hook
- * 
- */
-add_filter('ywraq_add_item', function($raq, $product_raq) {
-  // wp_send_json([$raq, $product_raq]);
-  return $raq;
-}, 20, 2);
+{
+  /**
+   * ywraq custom hook
+   * 
+   */
+
+  function clampdown_child_woo_add_pricing_data_to_raq_item($raq, $product_raq) {
+    if(isset($product_raq['pricing_data']) && isset($product_raq['pricing_total'])) {
+      $raq['pricing_data'] = $product_raq['pricing_data'];
+      $raq['pricing_total'] = $product_raq['pricing_total'];
+    }
+    return $raq; 
+  }
+
+  add_filter('ywraq_add_item', 'clampdown_child_woo_add_pricing_data_to_raq_item', 20, 2); 
+
+  function clampdown_child_woo_render_request_quote_pricing_data_item($raq) {
+    if(!isset($raq['pricing_data']) && !isset($raq['pricing_total'])) return;
+
+    set_query_var('pricing_data', $raq['pricing_data']);
+    set_query_var('pricing_total_price', $raq['pricing_total']);
+    load_template(CLAMPDOWN_DIR . '/templates/woo/request-quote-pricing-data.php', false);
+  }
+
+  add_action('clampdown_child/request_quote/custom_name_item_after', 'clampdown_child_woo_render_request_quote_pricing_data_item', 20);
+
+  function clampdown_child_woo_render_raq_variants_by_sides($variants = [], $sides = 0) {
+    if(count($variants) == 0) return;
+    // var_dump($variants);
+    foreach($variants as $index => $item) {
+      echo '<ul class="variant-item">';
+      ?>
+      <li class="product-pricing-data-list__item"><strong>#<?php echo $index + 1; ?></strong></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Number:', 'clampdown-child') ?></span> <?php echo $item['number'] ?></li>
+      <li class="product-pricing-data-list__item __divider"><hr /></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $item['style'] ?></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $item['colour'] ?></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $item['weight'] ?></li>
+      <?php
+      if(in_array($sides, [4, 6, '4', '6'])) {
+      ?>
+      <li class="product-pricing-data-list__item __divider"><hr /></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $item['style2'] ?></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $item['colour2'] ?></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $item['weight2'] ?></li>
+      <?php
+      }
+
+      if(in_array($sides, [6, '6'])) {
+      ?>
+      <li class="product-pricing-data-list__item __divider"><hr /></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $item['style3'] ?></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $item['colour3'] ?></li>
+      <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $item['weight3'] ?></li>
+      <?php
+      }
+      echo '</ul>';
+    }
+  }
+}

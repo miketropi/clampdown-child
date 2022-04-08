@@ -507,7 +507,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
           }
           break;
         default:
-          let { field_operator, field_option  } = item;
+          let { field_operator, field_option } = item;
           
           _tagVariables[`@{${name}}`] = () => {  
             let operatorCase = {
