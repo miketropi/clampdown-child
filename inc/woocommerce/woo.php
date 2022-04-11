@@ -147,11 +147,13 @@ function clamdown_child_woo_product_single_content() {
 
   add_filter('ywraq_add_item', 'clampdown_child_woo_add_pricing_data_to_raq_item', 20, 2); 
 
-  function clampdown_child_woo_render_request_quote_pricing_data_item($raq) {
+  function clampdown_child_woo_render_request_quote_pricing_data_item($raq, $show_more = true) {
     if(!isset($raq['pricing_data']) && !isset($raq['pricing_total'])) return;
 
     set_query_var('pricing_data', $raq['pricing_data']);
     set_query_var('pricing_total_price', $raq['pricing_total']);
+    set_query_var('show_more', $show_more);
+
     load_template(CLAMPDOWN_DIR . '/templates/woo/request-quote-pricing-data.php', false);
   }
 
@@ -190,4 +192,49 @@ function clamdown_child_woo_product_single_content() {
       echo '</ul>';
     }
   }
+
+  function clampdown_child_woo_add_custom_meta_pricing_after_created_order($order_id, $post_data, $raq) {
+    if(isset($raq['raq_content']) && count($raq['raq_content']) > 0) {
+      $raq_content = $raq['raq_content'];
+      $pricing_products = [];
+
+      foreach($raq_content as $key => $item) {
+        if(isset($item['pricing_total']) && isset($item['pricing_data'])) {
+          $item['__key'] = $key;
+          array_push($pricing_products, $item);
+        }
+      }
+
+      /**
+       * Has pricing product
+       */
+      if(count($pricing_products) > 0)
+        update_post_meta($order_id, '_pricing_order_data', $pricing_products);
+    }
+
+    return $order_id;
+  }
+  
+  add_action('ywraq_after_create_order', 'clampdown_child_woo_add_custom_meta_pricing_after_created_order', 20, 3);
+
+  function clampdown_child_woo_find_pricing_item($pid, $pricing_order_data) {
+    $found_key = array_search($pid, array_column($pricing_order_data, 'product_id'));
+    return isset($pricing_order_data[$found_key]) ? $pricing_order_data[$found_key] : false;
+  }
+
+  function clampdown_child_woo_pricing_data_after_order_itemmeta($item_id, $item, $product) {
+    $product_id = $product->get_id();
+    $order_id = get_the_ID();
+    if(!$order_id) return;
+
+    $pricing_order_data = get_post_meta($order_id, '_pricing_order_data', true);
+    if(empty($pricing_order_data) || count($pricing_order_data) == 0) return; 
+    
+    $pricing_data = clampdown_child_woo_find_pricing_item($product_id, $pricing_order_data);
+    if($pricing_data == false) return;
+
+    clampdown_child_woo_render_request_quote_pricing_data_item($pricing_data, $show_more = false);
+  }
+
+  add_action('woocommerce_after_order_itemmeta', 'clampdown_child_woo_pricing_data_after_order_itemmeta', 20, 3);
 }

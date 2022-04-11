@@ -11,6 +11,7 @@ const AddToCartContainer = styled(Button)`
   color: white !important;
   padding: 1.5em;
   line-height: 0;
+  height: auto;
 
   &:hover {
     background: black;
@@ -18,11 +19,12 @@ const AddToCartContainer = styled(Button)`
   }
 `
 
-export default function ButtonAddToCart({ text, onClick }) {
+export default function ButtonAddToCart({ text, onClick, ...args }) {
   return <AddToCartContainer 
     style={{ width: '100%' }}
     size={ 'large' }
-    onClick={ onClick }>
+    onClick={ onClick }
+    { ...args } >
     { text }
   </AddToCartContainer>
 }

@@ -1,7 +1,83 @@
 /*!********************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/scss/woo.backend.scss ***!
   \********************************************************************************************************************/
-
+.product-pricing-data-list {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: solid 1px #d3d3d3;
+}
+.product-pricing-data-list ul {
+  margin: 0;
+  padding: 0;
+}
+.product-pricing-data-list__header, .product-pricing-data-list__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em 0;
+  padding: 1em;
+  background: black;
+  color: white;
+}
+.product-pricing-data-list__ul {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.product-pricing-data-list__ul.__show-more-style {
+  max-height: 210px;
+  overflow: hidden;
+}
+.product-pricing-data-list__ul.__show-more-style:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: #020024;
+  background: -moz-linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, white 100%);
+  background: -webkit-linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, white 100%);
+  background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, white 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#ffffff",GradientType=1);
+}
+.product-pricing-data-list__ul.__show-more-style.__show-full {
+  max-height: initial;
+}
+.product-pricing-data-list__ul.__show-more-style.__show-full:after {
+  display: none;
+}
+.product-pricing-data-list__item {
+  list-style: none;
+  padding: 4px 0;
+}
+.product-pricing-data-list__item span {
+  display: inline-block;
+  width: 180px;
+}
+.product-pricing-data-list ul.variant-item {
+  margin-top: 1em;
+  padding: 1em 2em;
+  border-left: solid 3px #DDD;
+  background: #FAFAFA;
+}
+.product-pricing-data-list ul.variant-item:hover {
+  border-left-color: black;
+}
+.product-pricing-data-list .__show-more-data-list {
+  display: block;
+  text-align: center;
+  color: black;
+  border-bottom: solid 1px black;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+.product-pricing-data-list .__show-more-data-list:hover {
+  border-bottom-width: 2px;
+}
 /*!**************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/antd/dist/antd.css ***!
   \**************************************************************************************************************************/
