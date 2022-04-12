@@ -237,4 +237,40 @@ function clamdown_child_woo_product_single_content() {
   }
 
   add_action('woocommerce_after_order_itemmeta', 'clampdown_child_woo_pricing_data_after_order_itemmeta', 20, 3);
+
+  /**
+   * Override price subtotal product pricing order
+   * 
+   */
+  function clampdown_child_woo_custom_raq_cart_to_order_args($args, $cart_item_key, $values, $new_cart) {
+    // wp_send_json([$args, $cart_item_key, $values, $new_cart]);
+    /**
+     * Checl pricing product data
+     * 
+     */
+    if(isset($values['pricing_total'])) {
+      $pricing_total = $values['pricing_total'];
+      $qty = (int) $values['quantity'];
+      $args['totals']['subtotal'] = floatval($pricing_total);
+      $args['totals']['total'] = number_format(floatval($pricing_total) * $qty, 2);
+    }
+    
+    return $args;
+  }
+
+  add_filter('ywraq_cart_to_order_args', 'clampdown_child_woo_custom_raq_cart_to_order_args', 20, 4);
+
+  function clampdown_child_woo_more_info_product_pricing_order_item($item_id, $item, $order) {
+    $order_id = $order->get_id();
+    $pricing_order_data = get_post_meta($order_id, '_pricing_order_data', true);
+    $product_id = $item['product_id'];
+    if(empty($pricing_order_data) || count($pricing_order_data) == 0) return; 
+
+    $pricing_data = clampdown_child_woo_find_pricing_item($product_id, $pricing_order_data);
+    if($pricing_data == false) return;
+
+    clampdown_child_woo_render_request_quote_pricing_data_item($pricing_data, $show_more = true);
+  }
+
+  add_action('woocommerce_order_item_meta_end', 'clampdown_child_woo_more_info_product_pricing_order_item', 20, 3);
 }
