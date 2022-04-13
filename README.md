@@ -18,3 +18,5 @@ $ npm run build
 #### Plugins requirement 
 - Elementor 
 - WooCommence
+- YITH WooCommerce Request a Quote (Plugin & licese key on trello)
+- YITH WooCommerce Deposits and Down Payments (Plugin & licese key on trello)
