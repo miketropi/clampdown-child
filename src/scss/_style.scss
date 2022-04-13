@@ -39,3 +39,43 @@ input.ant-input {
   padding: 0 6vw;
   margin: 0 auto;
 }
+
+.woocommerce .woocommerce-cart-form .shop_table_responsive {
+  border: solid black;
+  border-width: 0 1px 0 1px;
+
+  thead {
+    border-top: solid 1px black;
+  }
+
+  td.product-name {
+
+    > a {
+      color: black;
+      border-bottom: solid 1px black;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      display: inline-block;
+    }
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
+  input[name=coupon_code] {
+    height: 48.5px;
+  }
+}
+
+.cart_totals {
+
+  .shop_table {
+    border: solid;
+    border-width: 0 1px 0 1px;
+  }
+}
+
+a.remove:hover {
+  background-color: black;
+}
