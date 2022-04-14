@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 
 export default function ProductPricingSettings(props) {
   const { settings, setSettings, customerOptions } = userProductPricingSettings();
-
+  
   return <Fragment>
     <ProductPricingSettingsForm 
       onChange={ (newFields) => {

@@ -68,7 +68,14 @@ export const registerGeneralCustomerPricingFields = () => {
         name: 'sides',
         label: 'Sides',
         type: 'select', 
-        options: [0, 1, 2, 4, 6],
+        // options: [0, 1, 2, 4, 6],
+        options: [
+          { label: 'Zero Side', value: 0 },
+          { label: 'One Side', value: 1 },
+          { label: 'Two Sides', value: 2 },
+          { label: 'Four Sides', value: 4 },
+          { label: 'Six Sides', value: 6 },
+        ],
         default: 2,
       }
     })(),
@@ -77,7 +84,11 @@ export const registerGeneralCustomerPricingFields = () => {
         name: 'speed',
         label: 'Speed',
         type: 'select', 
-        options: ['33 1/3', '45'],
+        // options: ['33 1/3', '45'],
+        options: [
+          { label: '33 1/3', value: '33 1/3' },
+          { label: '45 RPM', value: '45' },
+        ],
         default: '33 1/3',
       }
     })(),

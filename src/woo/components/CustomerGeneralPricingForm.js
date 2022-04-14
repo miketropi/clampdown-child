@@ -10,13 +10,7 @@ import { __ } from '@wordpress/i18n';
 const { Option } = Select;
 
 const FormInnerContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: space-between;
-
-  > * {
-    width: calc(50% - 15px)
-  }
+  
 `
 
 export default function CustomerGeneralPricingForm({ onChange, fields }) { 

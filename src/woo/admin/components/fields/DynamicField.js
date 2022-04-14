@@ -1,10 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Select, Input } from 'antd';
-import map from 'lodash/map';
 import { __ } from '@wordpress/i18n';
 
-// const { __ } = wp.i18n;
 const { Option } = Select;
 
 export default function DynamicField(props) {
@@ -13,11 +10,17 @@ export default function DynamicField(props) {
 
   switch(_type) {
     case 'select':
+
       output = <Select { ...props } { ..._attrs }>
         {
           _more.options &&
           _more.options.map((o, _index) => {
-            return <Option value={ o } key={ _index }>{ o }</Option>
+            if(typeof(o) === 'object') {
+              const { label, value } = o;
+              return <Option value={ value } key={ _index }>{ label }</Option>
+            } else {
+              return <Option value={ o } key={ _index }>{ o }</Option>
+            }
           })
         }
       </Select>

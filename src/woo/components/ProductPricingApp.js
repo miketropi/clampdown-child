@@ -1,11 +1,12 @@
 import react, { Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Alert, Button } from 'antd';
+import { Alert, Button, Row, Col } from 'antd';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
 import CustomerGeneralPricingForm from './CustomerGeneralPricingForm';
 import CustomerPricingForm from './CustomerPricingForm';
 import VariablesPlace from './VariablesSpace';
 import ButtonAddToCart from './ButtonAddToCart';
+import PreviewImage from './PreviewImage';
 import { __ } from '@wordpress/i18n';
 
 export default function ProductPricingApp() {
@@ -80,48 +81,51 @@ export default function ProductPricingApp() {
   }
 
   return <Fragment>
-    <CustomerGeneralPricingForm onChange={ (allFields) => { 
-        setGeneralOptions(allFields);
-      } }
-      fields={ generalOptions }/>
-    <hr />
-    <br />
-    <VariablesPlace onChange={ onChangeVariablePlace } />
-    <CustomerPricingForm 
-      onChange={ allFields => {
-        let _variables = [...variables];
-        _variables[currentVariable] = allFields;
+    <Row gutter={40}>
+      <Col md={16}>
+        <PreviewImage />
+        <VariablesPlace onChange={ onChangeVariablePlace } />
+        <CustomerPricingForm 
+          onChange={ allFields => {
+            let _variables = [...variables];
+            _variables[currentVariable] = allFields;
 
-        let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions, ...allFields });
-        _variables[currentVariable].__TOTAL__ = _obj.eachVariantTotal();
+            let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions, ...allFields });
+            _variables[currentVariable].__TOTAL__ = _obj.eachVariantTotal();
 
-        setVariables(_variables);
-      } } 
-      fields={ variables[currentVariable] } />
-    <hr />
-    <br />
-    {
-      (sendRequestMessage.message != '') && 
-      <Fragment>
-        <Alert
-          message={ __('Request a Quote', 'clampdown-child') }
-          description={ sendRequestMessage.message }
-          type={ sendRequestMessage.type }
-          action={ sendRequestMessage.action }
-          showIcon
-          closable
-          onClose={ () => {
-            let newSendRequestMessage = { ...sendRequestMessage };
-            newSendRequestMessage.message = '';
-            setSendRequestMessage(newSendRequestMessage);
-          } }
-        />
-        <br />
-      </Fragment>
-    }
-    <ButtonAddToCart  
-      text={ __(`Request Quote ($${ total })`, 'clampdown-child') }
-      loading={ sendRequest }
-      onClick={ AddToCartClickHandle } />
+            setVariables(_variables);
+          } } 
+          fields={ variables[currentVariable] } />
+      </Col>
+      <Col md={8}>
+        <CustomerGeneralPricingForm 
+          onChange={ (allFields) => { setGeneralOptions(allFields); } } 
+          fields={ generalOptions }/>
+
+        {
+          (sendRequestMessage.message != '') && 
+          <Fragment>
+            <Alert
+              message={ __('Request a Quote', 'clampdown-child') }
+              description={ sendRequestMessage.message }
+              type={ sendRequestMessage.type }
+              action={ sendRequestMessage.action }
+              showIcon
+              closable
+              onClose={ () => {
+                let newSendRequestMessage = { ...sendRequestMessage };
+                newSendRequestMessage.message = '';
+                setSendRequestMessage(newSendRequestMessage);
+              } }
+            />
+            <br />
+          </Fragment>
+        }
+        <ButtonAddToCart  
+          text={ __(`Request Quote ($${ total })`, 'clampdown-child') }
+          loading={ sendRequest }
+          onClick={ AddToCartClickHandle } />
+      </Col>
+    </Row>
   </Fragment>
 }

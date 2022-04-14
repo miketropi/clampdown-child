@@ -37,6 +37,10 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
 
   useEffect(async () => {
     const pricingSettings = await getProductPricingSettings(productID);
+    // console.log('__', pricingSettings);
+    if(pricingSettings?.settings?.general_default_opts?.sides) {
+      pricingSettings.settings.general_default_opts.sides = parseInt(pricingSettings.settings.general_default_opts.sides);
+    }
     setProductPricingSettings(pricingSettings?.settings);
     // console.log(pricingSettings);
     /**

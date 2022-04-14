@@ -12,6 +12,11 @@ const ProductPricingSettingsProvider = ({ product, children }) => {
     const __setSettingsData = async () => {
       const result = await getProductPricingSettings(product);
       const settings = result?.settings;
+
+      if(settings?.general_default_opts?.sides) {
+        settings.general_default_opts.sides = parseInt(settings.general_default_opts.sides);
+      }
+
       setSettings({ ...settings })
     }
     

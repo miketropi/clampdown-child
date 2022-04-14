@@ -284,7 +284,14 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                               return <Select 
                                                 style={{ width: '100%' }}>
                                                 {
-                                                  _item.options.map(o => <Option key={ o } value={ o }>{ o }</Option>)
+                                                  _item.options.map(o => {
+                                                    if(typeof(o) === 'object') {
+                                                      let { label, value } = o;
+                                                      return <Option key={ value } value={ value }>{ label }</Option>
+                                                    } else {
+                                                      return <Option key={ o } value={ o }>{ o }</Option>
+                                                    }
+                                                  })
                                                 }
                                               </Select>
                                             } else {
@@ -428,7 +435,14 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
 
                                               return <Select style={{ width: '100%' }}>
                                                 {
-                                                  _item.options.map((o, _index) => <Option key={ _index } value={ o }>{ o }</Option>)
+                                                  _item.options.map((o, _index) => {
+                                                    if(typeof(o) === 'object') {
+                                                      let { label, value } = o;
+                                                      return <Option key={ value } value={ value }>{ label }</Option>
+                                                    } else {
+                                                      return <Option key={ o } value={ o }>{ o }</Option>
+                                                    }
+                                                  })
                                                 }
                                               </Select>
                                             } else {
