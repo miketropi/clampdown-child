@@ -103,7 +103,11 @@ export default function ProductPricingApp() {
           onChange={ (allFields) => { setGeneralOptions(allFields); } } 
           fields={ generalOptions }/>
 
-        <QuoteSummary />
+        {
+          productPricingSettings?.product_pricing_summary_fields &&
+          productPricingSettings?.product_pricing_summary_fields?.length > 0 && 
+          <QuoteSummary />
+        }
 
         {
           (sendRequestMessage.message != '') && 
@@ -124,7 +128,7 @@ export default function ProductPricingApp() {
             <br />
           </Fragment>
         }
-        
+
         <ButtonAddToCart  
           text={ __(`Request Quote ($${ total })`, 'clampdown-child') }
           loading={ sendRequest }
