@@ -438,6 +438,10 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
      * - @{MIX_Inserts_TOTAL_Variant_Number_Units}
      */
 
+    _tagVariables['@{sides_label}'] = () => {
+      return 0;
+    }
+
     _tagVariables['@{Variants_Count_Number}'] = () => { 
       return variables.length; 
     }
@@ -488,7 +492,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.insert == 'No' ? '__Insert_No' : `${ opts?.insert } Inserts`;
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;  
-      console.log(_key, JacketTypeNumber[_key]);
+      // console.log(_key, JacketTypeNumber[_key]);
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
   }
@@ -567,7 +571,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
         return fn();
       });
 
-      console.log(_tagVariablesWithValue);
+      // console.log(_tagVariablesWithValue);
 
       try {
         let evalString = _total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));

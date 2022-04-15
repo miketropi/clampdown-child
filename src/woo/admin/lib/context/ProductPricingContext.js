@@ -20,6 +20,7 @@ String.prototype.replaceArray = function(find, replace) {
 
 const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
   const [loading, setLoading] = useState(true);
+  // const [allSettings, setAllSettings] = useState({});
   const [generalOptions, setGeneralOptions] = useState({})
   const [variables, setVariables] = useState([]);
   const [currentVariable, setCurrentVariable] = useState(0);
@@ -37,10 +38,16 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
 
   useEffect(async () => {
     const pricingSettings = await getProductPricingSettings(productID);
-    // console.log('__', pricingSettings);
     if(pricingSettings?.settings?.general_default_opts?.sides) {
       pricingSettings.settings.general_default_opts.sides = parseInt(pricingSettings.settings.general_default_opts.sides);
     }
+    // console.log('__', pricingSettings?.settings);
+
+    /**
+     * Set all Settings 
+     */
+    // setAllSettings(pricingSettings?.settings);
+
     setProductPricingSettings(pricingSettings?.settings);
     // console.log(pricingSettings);
     /**
@@ -127,6 +134,7 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
   const value = {
     version: '1.0.0',
     productID, wp_nonce, 
+    // allSettings,
     generalCustomerPricingFields,
     customerPricingFields,
     loading, setLoading,

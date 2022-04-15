@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Form, Select } from 'antd';
 import styled from 'styled-components';
 import { useProductPricing } from '../admin/lib/context/ProductPricingContext';
@@ -6,9 +6,7 @@ import map from 'lodash/map';
 import DynamicField from '../admin/components/fields/DynamicField';
 import { __ } from '@wordpress/i18n';
 
-// const { __ } = wp.i18n;
 const { Option } = Select;
-
 const FormInnerContainer = styled.div`
   
 `
@@ -35,12 +33,13 @@ export default function CustomerGeneralPricingForm({ onChange, fields }) {
             const { name, label, type } = item;
             const attrs = {};
             const more = {};
+
             if(item.options) {
               more.options = item.options;
             }
 
             return <Form.Item 
-              label={ label }
+              // label={ label }
               name={ name } 
               key={ key }
               hidden={ (type == 'hidden' ? true : false) } >

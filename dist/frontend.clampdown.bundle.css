@@ -360,3 +360,25 @@ table.shop_table.shop_table_responsive.my_account_quotes.my_account_orders tbody
 .product-pricing-data-list .__show-more-data-list:hover {
   border-bottom-width: 2px;
 }
+
+/**
+ * Frontend pricing form - START
+ */
+#PRODUCT_PRICING_MODE_APP .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-width: 0 0 1px 0;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  border-color: #eee;
+}
+#PRODUCT_PRICING_MODE_APP .ant-select-selection-item {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#PRODUCT_PRICING_MODE_APP .ant-select-arrow {
+  right: 0;
+}
+
+/**
+ * Frontend pricing form - END
+ */

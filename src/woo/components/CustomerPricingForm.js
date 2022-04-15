@@ -57,7 +57,7 @@ export default function CustomerPricingForm({ onChange, fields }) {
             }
 
             return <Form.Item 
-              label={ label }
+              // label={ label }
               name={ name } 
               key={ key }
               hidden={ ((type == 'hidden' || !_show) ? true : false) } >

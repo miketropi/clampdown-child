@@ -7,6 +7,7 @@ import CustomerPricingForm from './CustomerPricingForm';
 import VariablesPlace from './VariablesSpace';
 import ButtonAddToCart from './ButtonAddToCart';
 import PreviewImage from './PreviewImage';
+import QuoteSummary from './QuoteSummary';
 import { __ } from '@wordpress/i18n';
 
 export default function ProductPricingApp() {
@@ -102,6 +103,8 @@ export default function ProductPricingApp() {
           onChange={ (allFields) => { setGeneralOptions(allFields); } } 
           fields={ generalOptions }/>
 
+        <QuoteSummary />
+
         {
           (sendRequestMessage.message != '') && 
           <Fragment>
@@ -121,6 +124,7 @@ export default function ProductPricingApp() {
             <br />
           </Fragment>
         }
+        
         <ButtonAddToCart  
           text={ __(`Request Quote ($${ total })`, 'clampdown-child') }
           loading={ sendRequest }

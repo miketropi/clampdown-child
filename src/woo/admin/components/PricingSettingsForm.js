@@ -11,6 +11,8 @@ import styled from 'styled-components';
 import SwitchCustom from './fields/SwitchCustom';
 import DynamicField from './fields/DynamicField';
 import ActionRuleItem from './ActionRuleItem';
+import SummaryFields from './SummaryFields';
+import { MentionsGeneralOptions } from '../lib/mentionsOptions';
 
 const { __ } = wp.i18n; 
 const { Option, OptGroup } = Select;
@@ -477,6 +479,7 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                   }
                                 })
                               }
+                              
                               <Mentions.Option value={ '{MIX_JacketType_TOTAL_Variant_Number_Units}' }>{ 'MIX_JacketType_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_InnerSleeve_TOTAL_Variant_Number_Units}' }>{ 'MIX_InnerSleeve_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_Labels_TOTAL_Variant_Number_Units}' }>{ 'MIX_Labels_TOTAL_Variant_Number_Units' }</Mentions.Option>
@@ -521,16 +524,24 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                       }
                     })
                   }
-                  <Mentions.Option value={ '{MIX_JacketType_TOTAL_Variant_Number_Units}' }>{ 'MIX_JacketType_TOTAL_Variant_Number_Units' }</Mentions.Option>
+                  {
+                    map(MentionsGeneralOptions, (label, value) => {
+                      return <Mentions.Option value={ value } key={ value }>{ label }</Mentions.Option>
+                    })
+                  }
+                  {/* <Mentions.Option value={ '{MIX_JacketType_TOTAL_Variant_Number_Units}' }>{ 'MIX_JacketType_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{MIX_InnerSleeve_TOTAL_Variant_Number_Units}' }>{ 'MIX_InnerSleeve_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{MIX_Labels_TOTAL_Variant_Number_Units}' }>{ 'MIX_Labels_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{MIX_DownloadCards_TOTAL_Variant_Number_Units}' }>{ 'MIX_DownloadCards_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{MIX_Inserts_TOTAL_Variant_Number_Units}' }>{ 'MIX_Inserts_TOTAL_Variant_Number_Units' }</Mentions.Option>
                   <Mentions.Option value={ '{TOTAL_ALL_Variants_Price}' }>{ 'TOTAL_ALL_Variants_Price' }</Mentions.Option>
                   <Mentions.Option value={ '{Variants_Count_Number}' }>{ 'Variants_Count_Number' }</Mentions.Option>
-                  <Mentions.Option value={ '{TOTAL_Variant_Number_Units}' }>{ 'TOTAL_Variant_Number_Units' }</Mentions.Option>
+                  <Mentions.Option value={ '{TOTAL_Variant_Number_Units}' }>{ 'TOTAL_Variant_Number_Units' }</Mentions.Option> */}
                 </Mentions>
               </Form.Item>
+          </TabPane>
+          <TabPane tab={ __('Quote Summary', 'clampdown-child') } key="quote_summary" forceRender={ true }>
+            <SummaryFields fields={ fields } />
           </TabPane>
         </Tabs>
       </PageHeader>
