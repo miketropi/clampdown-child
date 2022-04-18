@@ -33,13 +33,12 @@ export default function CustomerGeneralPricingForm({ onChange, fields }) {
             const { name, label, type } = item;
             const attrs = {};
             const more = {};
-
+            
             if(item.options) {
               more.options = item.options;
             }
 
             return <Form.Item 
-              // label={ label }
               name={ name } 
               key={ key }
               hidden={ (type == 'hidden' ? true : false) } >

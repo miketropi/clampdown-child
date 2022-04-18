@@ -439,7 +439,16 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
      */
 
     _tagVariables['@{sides_label}'] = () => {
-      return 0;
+      let _valueMap = {
+        0: 'Zero Side',
+        1: 'One Side',
+        2: 'Two Sides',
+        4: 'Four Sides',
+        6: 'Six Sides',
+      };
+      
+      let output = (_valueMap[opts?.sides] ? _valueMap[opts?.sides] : '#No');
+      return output;
     }
 
     _tagVariables['@{Variants_Count_Number}'] = () => { 

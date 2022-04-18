@@ -7,10 +7,8 @@ const { Option } = Select;
 export default function DynamicField(props) {
   const { _type, _attrs, _more } = props;
   let output = null;
-
   switch(_type) {
     case 'select':
-
       output = <Select { ...props } { ..._attrs }>
         {
           _more.options &&
@@ -25,11 +23,9 @@ export default function DynamicField(props) {
         }
       </Select>
       break;
-    
     default: 
       output = <Input { ...props } { ..._attrs } style={{ borderRadius: '1px' }}/>
       break;
   }
-
   return output;
 }

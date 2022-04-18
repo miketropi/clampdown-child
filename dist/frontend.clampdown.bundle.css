@@ -78,6 +78,10 @@ a.remove:hover {
   max-width: 100%;
 }
 
+#PRODUCT_PRICING_MODE_APP {
+  margin-bottom: 10vw;
+}
+
 .main-header {
   padding: 1.5em 0;
 }

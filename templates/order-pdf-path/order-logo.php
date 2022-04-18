@@ -1,0 +1,1 @@
+<img src="<?php echo apply_filters( 'ywraq_pdf_log_src', $logo ); //phpcs:ignore ?>" style="max-width: 100%;" />

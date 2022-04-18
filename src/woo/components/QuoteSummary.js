@@ -16,6 +16,8 @@ const QuoteSummaryContainer = styled.div`
     color: black;
     text-transform: uppercase;
     font-weight: bold;
+    border-bottom: 1px solid black;
+    padding-bottom: .5em;
   }
 
   .quote-summary-list {
@@ -25,12 +27,30 @@ const QuoteSummaryContainer = styled.div`
     &__item {
       list-style: none;
       font-weight: 600;
+      padding: .2em 0; 
+      line-height: normal;
 
       label {
         font-size: 1em;
         font-weight: bold;
       }
     }
+  }
+
+  .total-price {
+    border-top: 1px solid black;
+    font-weight: bold;
+    margin-top: .5em;
+    margin-bottom: .2em;
+    padding-top: .5em;
+    font-size: 1.5em;
+    line-height: normal;
+  }
+
+  small {
+    line-height: normal;
+    font-weight: 600;
+    display: inline-block;
   }
 `
 
@@ -45,7 +65,7 @@ String.prototype.replaceArray = function(find, replace) {
 }; 
 
 export default () => {
-  const { productPricingSettings, generalOptions, variables } = useProductPricing();
+  const { productPricingSettings, generalOptions, variables, total } = useProductPricing();
   const _replaceValue = (string) => {
     let obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions }, variables);
     let tagValues = reduce(obj?.tags, (result, _fn, key) => {
@@ -53,13 +73,13 @@ export default () => {
       return result;
     }, {});
     
-    let result = '#NAN';
+    let result = '#No';
     let evalString = string.replaceArray(Object.keys(tagValues), Object.values(tagValues));
-    
+    console.log(string, evalString)
     try {
       result = eval(evalString);
     } catch (e) {
-      result = '#NAN';
+      result = evalString;
     }
 
     return result;
@@ -80,5 +100,7 @@ export default () => {
         })
       }
     </ul>
+    <div className="total-price">{ total }<span style={{ color: '#d5208b' }}>$</span></div>
+    <small>{ __('Estimates are in CAD and excludes tax and shipping.', 'clampdown-child') }</small>
   </QuoteSummaryContainer>
 }
