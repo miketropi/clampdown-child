@@ -274,3 +274,39 @@ function clamdown_child_woo_product_single_content() {
 
   add_action('woocommerce_order_item_meta_end', 'clampdown_child_woo_more_info_product_pricing_order_item', 20, 3);
 }
+
+function clampdown_child_woo_raq_pdf_info_pricing($product_id = 0, $order_id = 0) {
+  if($order_id == 0 || $product_id == 0) return;
+
+  $pricing_order_data = get_post_meta($order_id, '_pricing_order_data', true);
+  if(empty($pricing_order_data) || count($pricing_order_data) == 0) return; 
+  
+  $pricing_data = clampdown_child_woo_find_pricing_item($product_id, $pricing_order_data);
+  if($pricing_data == false) return;
+
+  set_query_var('pricing_data', $pricing_data['pricing_data']);
+  load_template(CLAMPDOWN_DIR . '/templates/order-pdf-path/info-pricing.php', false);
+}
+
+add_action('request_quote_pdf_after_tr_item', 'clampdown_child_woo_raq_pdf_info_pricing', 20, 2);
+
+function clampdown_child_woo_raq_pdf_footer($order_id) {
+  ?>
+  <div class="raq-pdf-tc">
+    <h4><?php _e('Terms & Conditions') ?></h4>
+    <p>- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum porta eros eu imperdiet.</p>
+    <p>- Pellentesque lobortis sagittis velit, non finibus dolor congue a.</p>
+    <p>- Donec interdum posuere auctor. </p>
+  </div>
+  <div class="raq-pdf-footer">
+    <div class="f-logo">
+      <img src="<?php echo CLAMPDOWN_DIR . '/images/footer-logo.png'; ?>" width="100px" />
+    </div>
+    <div class="f-text">
+      Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+    </div>
+  </div>
+  <?php 
+}
+
+add_action('yith_ywraq_quote_template_footer', 'clampdown_child_woo_raq_pdf_footer', 20);

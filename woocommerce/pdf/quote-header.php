@@ -31,15 +31,12 @@ if ( ! $logo_attachment_id && $logo_url ) {
 }
 
 $logo = $logo_attachment_id ? get_attached_file( $logo_attachment_id ) : $logo_url;
-
-
 $image_type        = wp_check_filetype( $logo );
 $mime_type         = array( 'image/jpeg', 'image/png' );
 $logo              = apply_filters( 'ywraq_pdf_logo', ( isset( $image_type['type'] ) && in_array( $image_type['type'], $mime_type, true ) ) ? $logo : '' );
 $user_name         = $order->get_meta( 'ywraq_customer_name' );
 $user_email        = $order->get_meta( 'ywraq_customer_email' ); //phpcs:ignore
 $formatted_address = $order->get_formatted_billing_address();
-
 $billing_phone   = $order->get_meta( 'ywraq_billing_phone' );
 $billing_name    = $order->get_meta( '_billing_first_name' );
 $billing_surname = $order->get_meta( '_billing_last_name' );
@@ -47,9 +44,7 @@ $billing_phone   = $order->get_meta( 'ywraq_billing_phone' );
 $billing_phone   = empty( $billing_phone ) ? $order->get_meta( '_billing_phone' ) : $billing_phone;
 $billing_vat     = $order->get_meta( 'ywraq_billing_vat' );
 
-
 $exdata = $order->get_meta( '_ywcm_request_expire' );
-
 $expiration_data = '';
 
 if ( function_exists( 'wc_format_datetime' ) ) {
@@ -90,5 +85,10 @@ if ( function_exists( 'wc_format_datetime' ) ) {
   </div> <!-- .order-info-container -->
 
 </div> <!-- .heading-info -->
+
+<div class="billing-shipping-container">
+	<?php require( CLAMPDOWN_DIR . '/templates/order-pdf-path/billing-info.php'); ?>
+	<?php require( CLAMPDOWN_DIR . '/templates/order-pdf-path/shipping-info.php'); ?>
+</div>
 
 <div class="clear"></div>

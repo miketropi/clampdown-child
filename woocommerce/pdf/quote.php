@@ -17,7 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 	<style type="text/css">
@@ -29,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			width: 100%;
 			float: left;
 			max-width: 300px;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
 		}
 
 		.right {
@@ -297,6 +296,87 @@ if ( ! defined( 'ABSPATH' ) ) {
     .quote-title {
       padding: 30px 0 0 30px;
     }
+
+		.billing-shipping-container {
+			/* font-weight: 600; */
+			margin-bottom: 50px;
+		}
+		
+		.shipping-info-container {
+			float: right;
+		}
+
+		.billing-info-container {
+			float: left;
+		}
+
+		.billing-shipping-container .info-title {
+			border-bottom: 2px solid black;
+			margin-bottom: 10px;
+			padding-bottom: 10px;
+		}
+
+		.info-list .info-item {
+			padding: 2px 0;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.info-list .info-item label {
+
+		}
+
+		.__order-info-table thead tr th,
+		.__order-info-table tbody tr td {
+			padding: 10px;
+			margin: 0;
+			border: none;
+		}
+
+		.__order-info-table tbody tr:nth-child(even) td {
+			background-color: #e5f5fd;
+		}
+
+		.__order-info-table thead tr th {
+			color: white;
+		}
+
+		.text-right {
+			text-align: right;
+		}
+
+		.raq-pdf-footer {
+			border-top: solid 2px black;
+			padding: 10px 0;
+		}
+
+		.f-logo {
+			float: left;
+			width: 30%;
+		}
+
+		.f-text {
+			float: right;
+			text-align: right;
+			width: 70%;
+			font-size: 12px;
+		}
+
+		.raq-pdf-tc {
+			width: 80%;
+			margin-bottom: 20px;
+		}
+
+		.raq-pdf-tc h4 {
+			border-bottom: solid 2px black;
+		}
+
+		.raq-pdf-tc p {
+			font-size: 12px;
+			margin-bottom: 2px;
+			line-height: normal;
+			padding: 0;
+		}
 	</style>
 	<?php
 
