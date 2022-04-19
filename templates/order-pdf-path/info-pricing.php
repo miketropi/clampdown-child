@@ -89,11 +89,13 @@ extract($pricing_data);
   <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $item['style2']; ?></td>
   <td></td><td></td><td></td>
 </tr>
-<td></td>
+<tr>
+  <td></td>
   <td>↳ <?php _e('Colour:', 'clampdown-child') ?> <?php echo $item['colour2']; ?></td>
   <td></td><td></td><td></td>
 </tr>
-<td></td>
+<tr>
+  <td></td>
   <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $item['weight2']; ?></td>
   <td></td><td></td><td></td>
 </tr>
@@ -105,11 +107,13 @@ extract($pricing_data);
   <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $item['style3']; ?></td>
   <td></td><td></td><td></td>
 </tr>
-<td></td>
+<tr>
+  <td></td>
   <td>↳ <?php _e('Colour:', 'clampdown-child') ?> <?php echo $item['colour3']; ?></td>
   <td></td><td></td><td></td>
 </tr>
-<td></td>
+<tr>
+  <td></td>
   <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $item['weight3']; ?></td>
   <td></td><td></td><td></td>
 </tr>
