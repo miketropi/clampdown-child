@@ -86,17 +86,17 @@ extract($pricing_data);
 <?php if(in_array($sides, [4, 6, '4', '6'])) { ?>
 <tr>
   <td></td>
-  <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $item['style2']; ?></td>
+  <td>↳ <?php _e('Style 2:', 'clampdown-child') ?> <?php echo $item['style2']; ?></td>
   <td></td><td></td><td></td>
 </tr>
 <tr>
   <td></td>
-  <td>↳ <?php _e('Colour:', 'clampdown-child') ?> <?php echo $item['colour2']; ?></td>
+  <td>↳ <?php _e('Colour 2:', 'clampdown-child') ?> <?php echo $item['colour2']; ?></td>
   <td></td><td></td><td></td>
 </tr>
 <tr>
   <td></td>
-  <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $item['weight2']; ?></td>
+  <td>↳ <?php _e('Weight 2:', 'clampdown-child') ?> <?php echo $item['weight2']; ?></td>
   <td></td><td></td><td></td>
 </tr>
 <?php } ?>
@@ -104,17 +104,17 @@ extract($pricing_data);
 <?php if(in_array($sides, [6, '6'])) { ?>
 <tr>
   <td></td>
-  <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $item['style3']; ?></td>
+  <td>↳ <?php _e('Style 3:', 'clampdown-child') ?> <?php echo $item['style3']; ?></td>
   <td></td><td></td><td></td>
 </tr>
 <tr>
   <td></td>
-  <td>↳ <?php _e('Colour:', 'clampdown-child') ?> <?php echo $item['colour3']; ?></td>
+  <td>↳ <?php _e('Colour 3:', 'clampdown-child') ?> <?php echo $item['colour3']; ?></td>
   <td></td><td></td><td></td>
 </tr>
 <tr>
   <td></td>
-  <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $item['weight3']; ?></td>
+  <td>↳ <?php _e('Weight 3:', 'clampdown-child') ?> <?php echo $item['weight3']; ?></td>
   <td></td><td></td><td></td>
 </tr>
 <?php } ?>

@@ -15,12 +15,13 @@ import printedInserts from '../../../json/printed-inserts.json';
 import panel4Inserts from '../../../json/4-panel-inserts.json';
 import panel6Inserts from '../../../json/6-panel-inserts.json';
 import printed40InnerSleeves from '../../../json/printed-4-0-inner-sleeves.json';
-import whitePolyLinedInnerSleeves from '../../../json/white-poly-lined-inner-sleeves.json'
+import whitePolyLinedInnerSleeves from '../../../json/white-poly-lined-inner-sleeves.json';
+import { generalFields } from './generalCustomerPricingFields';
+import { variantFields } from './variantFields';
 
 import map from 'lodash/map';
 
 export const mixDataJacketTypeNumber = () => {
-
   return { 
     ...disco, 
     ...foldover, 
@@ -53,332 +54,15 @@ export const mapObject = (object, iteratee) => {
 }
 
 export const registerGeneralCustomerPricingFields = () => {
-  return {
-    Size: (() => {
-      return {
-        name: 'size',
-        label: 'Size',
-        type: 'select', 
-        options: ['12" Pricing', '7" Pricing'],
-        default: '12" Pricing',
-      }
-    })(),
-    Sides: (() => {
-      return {
-        name: 'sides',
-        label: 'Sides',
-        type: 'select', 
-        // options: [0, 1, 2, 4, 6],
-        options: [
-          { label: 'Zero Side', value: 0 },
-          { label: 'One Side', value: 1 },
-          { label: 'Two Sides', value: 2 },
-          { label: 'Four Sides', value: 4 },
-          { label: 'Six Sides', value: 6 },
-        ],
-        default: 2,
-      }
-    })(),
-    Speed: (() => {
-      return {
-        name: 'speed',
-        label: 'Speed',
-        type: 'select', 
-        // options: ['33 1/3', '45'],
-        options: [
-          { label: '33 1/3', value: '33 1/3' },
-          { label: '45 RPM', value: '45' },
-        ],
-        default: '33 1/3',
-      }
-    })(),
-    JacketType: (() => {
-      return {
-        name: 'jacket_type',
-        label: 'Jacket Type',
-        type: 'select',
-        options: [
-          'No',
-          'Standard Jacket',
-          'Gatefold Jacket',
-          'Inner Loading Gatefold Jacket',
-          'Widespine',
-          'Foldover',
-          'Disco'
-        ],
-        default: 'Standard Jacket',
-      }
-    })(),
-    InnerSleeve: (() => {
-      return {
-        name: 'inner_sleeve',
-        label: 'Inner Sleeve',
-        type: 'select',
-        options: [
-          // 'White',
-          // 'Black',
-          // 'Printed Inner Sleeves',
-          // 'Poly Lined Inner Sleeves',
-          // 'White Poly Lined',
-          // 'Black Poly Lined',
-
-          'White Paper',
-          'Black Paper',
-          'Printed 4/0',
-          'White Poly Lined',
-          'Black Poly Lined',
-        ],
-        default: 'White Paper',
-      }
-    })(),
-    Insert: (() => {
-      return {
-        name: 'insert',
-        label: 'Insert',
-        type: 'select',
-        options: [
-          'No',
-          'Printed',
-          '4 Panel',
-          '6 Panel',
-        ],
-        default: 'No',
-      }
-    })(),
-    Packaging: (() => {
-      return {
-        name: 'packaging',
-        label: 'Packaging',
-        type: 'select',
-        options: [
-          'None', 
-          'Poly Bags',
-          'Shrink Wrap'
-        ],
-        default: 'None'
-      }
-    })(),
-    DownloadCards: (() => {
-      return {
-        name: 'download_cards',
-        label: 'Download Cards',
-        type: 'select',
-        options: [
-          // 'No',
-          // 'Yes',
-          'None',
-          'Simple',
-          'Fancy',
-        ],
-        default: 'None',
-      }
-    })(),
-    MarketingStickers: (() => {
-      return {
-        name: 'marketing_stickers',
-        label: 'Marketing Stickers',
-        type: 'select',
-        options: [
-          'None',
-          'Circle',
-          'Square',
-        ],
-        default: 'None',
-      }
-    })(),
-    Tests: (() => {
-      return {
-        name: 'tests',
-        label: 'Tests?',
-        type: 'hidden',
-        default: 'Yes',
-      }
-    })(),
-    Labels: (() => {
-      return {
-        name: 'labels',
-        label: 'Labels',
-        type: 'hidden',
-        default: 'Yes',
-      }
-    })(),
-  }
+  return generalFields;
 }
 
 export const registerCustomerPricingFields = () => {
-  return {
-    Number: (() => {
-      return {
-        name: 'number',
-        label: 'Number',
-        type: 'select',
-        options: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 900, 1000, 1100, 1200, 2000],
-        default: 300,
-      }
-    })(),
-    Style: (() => {
-      return {
-        name: 'style',
-        label: 'Style',
-        type: 'select',
-        options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
-        default: 'Standard Black',
-      }
-    })(),
-    Colour: (() => {
-      return {
-        name: 'colour',
-        label: 'Colour',
-        type: 'select',
-        options: ['Black', 'Orange', 'Red'],
-        default: 'Black',
-        // conditional: [
-        //   {
-        //     field: 'style',
-        //     values: ['Colour']
-        //   }
-        // ]
-      }
-    })(),
-    Weight: (() => {
-      return {
-        name: 'weight',
-        label: 'Weight',
-        type: 'select',
-        options: ['140g', '180g'],
-        default: '140g',
-      }
-    })(),
-
-    /**
-     * Extra fields 
-     */
-    Divider1: (() => {
-      return {
-        name: 'divider1',
-        label: 'Variant options extra for #Sides 4 & 6',
-        type: 'divider',
-        conditional: [
-          {
-            field: 'sides',
-            values: [4, 6]
-          }
-        ]
-      }
-    })(),
-    Style2: (() => {
-      return {
-        name: 'style2',
-        label: 'Style',
-        type: 'select',
-        options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
-        default: 'Standard Black',
-        conditional: [
-          {
-            field: 'sides',
-            values: [4, 6]
-          }
-        ]
-      }
-    })(),
-    Colour2: (() => {
-      return {
-        name: 'colour2',
-        label: 'Colour',
-        type: 'select',
-        options: ['Black', 'Orange', 'Red'],
-        default: 'Black',
-        conditional: [
-          {
-            field: 'sides',
-            values: [4, 6]
-          }
-        ]
-      }
-    })(),
-    Weight2: (() => {
-      return {
-        name: 'weight2',
-        label: 'Weight',
-        type: 'select',
-        options: ['140g', '180g'],
-        default: '140g',
-        conditional: [
-          {
-            field: 'sides',
-            values: [4, 6]
-          }
-        ]
-      }
-    })(),
-
-    /**
-     * Extra fields 
-     */
-    Divider2: (() => {
-      return {
-        name: 'divider2',
-        label: 'Variant options extra for #Sides 6',
-        type: 'divider',
-        conditional: [
-          {
-            field: 'sides',
-            values: [6]
-          }
-        ]
-      }
-    })(),
-    Style3: (() => {
-      return {
-        name: 'style3',
-        label: 'Style',
-        type: 'select',
-        options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
-        default: 'Standard Black',
-        conditional: [
-          {
-            field: 'sides',
-            values: [6]
-          }
-        ]
-      }
-    })(),
-    Colour3: (() => {
-      return {
-        name: 'colour3',
-        label: 'Colour',
-        type: 'select',
-        options: ['Black', 'Orange', 'Red'],
-        default: 'Black',
-        conditional: [
-          {
-            field: 'sides',
-            values: [6]
-          }
-        ]
-      }
-    })(),
-    Weight3: (() => {
-      return {
-        name: 'weight3',
-        label: 'Weight',
-        type: 'select',
-        options: ['140g', '180g'],
-        default: '140g',
-        conditional: [
-          {
-            field: 'sides',
-            values: [6]
-          }
-        ]
-      }
-    })(),
-  }
+  return variantFields;
 }
 
 export const isConditional = (conditional, fields) => {
   let pass = true;
-
   conditional?.map((item, _index) => {
     if(! item.values.includes(fields[item.field])) {
       if(pass == true) {
@@ -386,7 +70,6 @@ export const isConditional = (conditional, fields) => {
       }
     }
   })
-
   return pass;
 }
 
