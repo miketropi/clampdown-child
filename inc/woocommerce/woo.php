@@ -40,7 +40,7 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
   $default = [
     "enable_pricing_mode" => "false", 
     "general_default_opts" => [
-      "size" => '12" Pricing',
+      "size" => '12',
       "sides" => 2,
       "speed" => "33 1/3",
       "jacket_type" => "Standard Jacket",
@@ -50,7 +50,8 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
       "download_cards" => "None",
       "marketing_stickers" => "None",
       "tests" => "Yes",
-      "labels" => "Yes"
+      "labels" => "Yes",
+      "center_hole" => "Big",
     ],
     "variant_default_opts" => [
       "number" => 300,

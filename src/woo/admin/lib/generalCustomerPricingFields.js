@@ -4,8 +4,12 @@ const generalFields = {
       name: 'size',
       label: 'Size',
       type: 'select', 
-      options: ['12" Pricing', '7" Pricing'],
-      default: '12" Pricing',
+      // options: ['12" Pricing', '7" Pricing'],
+      options: [
+        { label: '12" Pricing', value: '12' },
+        { label: '7" Pricing', value: '7' },
+      ],
+      default: '12',
     }
   })(),
   Sides: (() => {
@@ -38,6 +42,7 @@ const generalFields = {
     }
   })(),
   JacketType: (() => {
+
     return {
       name: 'jacket_type',
       label: 'Jacket Type',
@@ -138,6 +143,21 @@ const generalFields = {
       label: 'Labels',
       type: 'hidden',
       default: 'Yes',
+    }
+  })(),
+  CenterHole: (() => {
+    return {
+      name: 'center_hole',
+      label: 'Center Hole',
+      type: 'select',
+      options: [
+        'Big',
+        'Little',
+      ],
+      default: 'Big',
+      conditional: [ 
+        { field: 'size', values: ['7'] }
+      ]
     }
   })(),
 };

@@ -18,30 +18,60 @@ import printed40InnerSleeves from '../../../json/printed-4-0-inner-sleeves.json'
 import whitePolyLinedInnerSleeves from '../../../json/white-poly-lined-inner-sleeves.json';
 import { generalFields } from './generalCustomerPricingFields';
 import { variantFields } from './variantFields';
+import * as _7inch from '../../../json/7inch/7inch-data';
 
 import map from 'lodash/map';
 
-export const mixDataJacketTypeNumber = () => {
-  return { 
-    ...disco, 
-    ...foldover, 
-    ...gatefoldJacket, 
-    ...innerLoadingGatefoldJacket, 
-    ...standardJacket, 
-    ...widespine,
+export const mixDataJacketTypeNumber = (size = '12') => {
+  const mixDataBySize = {
+    '12': { 
+      ...disco, 
+      ...foldover, 
+      ...gatefoldJacket, 
+      ...innerLoadingGatefoldJacket, 
+      ...standardJacket, 
+      ...widespine,
+  
+      ...printedInnerSleeves,
+      ...polyLinedInnerSleeves,
+      ...labels,
+      ...downloadCards,
+  
+      ...printedInserts,
+      ...panel4Inserts,
+      ...panel6Inserts,
+  
+      ...printed40InnerSleeves,
+      ...whitePolyLinedInnerSleeves,
+    },
+    '7': (() => {
+      let { standardJackets, 
+        foldoverJackets, 
+        wideSpineJackets, 
+        printedInnerSleeves, 
+        fullColourLabels, 
+        oneColourLabels, 
+        plainWhiteLabels, 
+        printedInserts, 
+        Panel4Inserts, 
+        downloadCards } = _7inch;
 
-    ...printedInnerSleeves,
-    ...polyLinedInnerSleeves,
-    ...labels,
-    ...downloadCards,
-
-    ...printedInserts,
-    ...panel4Inserts,
-    ...panel6Inserts,
-
-    ...printed40InnerSleeves,
-    ...whitePolyLinedInnerSleeves,
+        return {
+          ...standardJackets, 
+          ...foldoverJackets, 
+          ...wideSpineJackets, 
+          ...printedInnerSleeves, 
+          ...fullColourLabels, 
+          ...oneColourLabels, 
+          ...plainWhiteLabels, 
+          ...printedInserts, 
+          ...Panel4Inserts, 
+          ...downloadCards
+        }
+    })(),
   };
+  console.log(mixDataBySize);
+  return mixDataBySize[size];
 }
 
 export const mapObject = (object, iteratee) => {
@@ -159,7 +189,6 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{MIX_InnerSleeve_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = `${ opts?.inner_sleeve } Inner Sleeves`;
-
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
@@ -167,7 +196,6 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{MIX_Labels_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.labels == 'Yes' ? 'Labels' : '__Labels_No';
-
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
@@ -175,7 +203,6 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{MIX_DownloadCards_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.download_cards == 'None' ? '__Download_Cards_No' : 'Download Cards';
-
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
@@ -204,8 +231,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
         case 'global':
           _tagVariables[`@{${name}}`] = () => {
             try{
-              let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
-              
+              let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));             
               result = eval(evalString);
             } catch(e) {
               result = 0;
@@ -245,7 +271,6 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
   return {
     tags: _tagVariables,
     eachVariantTotal() {
-
       const _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
         return fn();
       });
@@ -258,7 +283,6 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
       }
     }, 
     total() {
-
       const _tagVariablesWithValue = mapObject(_tagVariables, (fn) => {
         return fn();
       });
