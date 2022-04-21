@@ -14,8 +14,9 @@ export default function DynamicField(props) {
           _more.options &&
           _more.options.map((o, _index) => {
             if(typeof(o) === 'object') {
-              const { label, value } = o;
-              return <Option value={ value } key={ _index }>{ label }</Option>
+              const { label, value, disable } = o;
+              // console.log(o);
+              return <Option value={ value } key={ _index } disabled={ disable }>{ label }</Option>
             } else {
               return <Option value={ o } key={ _index }>{ o }</Option>
             }

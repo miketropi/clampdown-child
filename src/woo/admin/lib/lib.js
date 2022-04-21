@@ -22,7 +22,8 @@ import * as _7inch from '../../../json/7inch/7inch-data';
 
 import map from 'lodash/map';
 
-export const mixDataJacketTypeNumber = (size = '12') => {
+export const mixDataJacketTypeNumber = (size = '12') => { 
+  console.log('mixDataJacketTypeNumber: ', size);
   const mixDataBySize = {
     '12': { 
       ...disco, 
@@ -70,7 +71,7 @@ export const mixDataJacketTypeNumber = (size = '12') => {
         }
     })(),
   };
-  console.log(mixDataBySize);
+
   return mixDataBySize[size];
 }
 
@@ -113,7 +114,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
   if(!_r) return; 
   let _tagVariables = {};
   let _fields = { ...opts };
-  let JacketTypeNumber = mixDataJacketTypeNumber();
+  let JacketTypeNumber = mixDataJacketTypeNumber(opts?.size);
 
   /**
    * Customer field tags
@@ -211,7 +212,6 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.insert == 'No' ? '__Insert_No' : `${ opts?.insert } Inserts`;
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;  
-      // console.log(_key, JacketTypeNumber[_key]);
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
   }
@@ -255,7 +255,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
             try{
               let evalString = recipe.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
               if(name === 'InnerSleeveCost') {
-                console.log(evalString);
+                // console.log(evalString);
               }
               result = eval(evalString);
             } catch(e) {

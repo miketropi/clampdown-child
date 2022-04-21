@@ -20,33 +20,27 @@ String.prototype.replaceArray = function(find, replace) {
 
 const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
   const [loading, setLoading] = useState(true);
-  // const [allSettings, setAllSettings] = useState({});
   const [generalOptions, setGeneralOptions] = useState({})
   const [variables, setVariables] = useState([]);
   const [currentVariable, setCurrentVariable] = useState(0);
   const [productPricingSettings, setProductPricingSettings] = useState({});
   const [total, setTotal] = useState(0);
-
   const customerPricingFields = registerCustomerPricingFields();
   const generalCustomerPricingFields = registerGeneralCustomerPricingFields();
+
   const getDefaultFields = (fields, fn) => {
     let _f = fields;
     fn ? (_f = {..._f, ...fn.call('', _f)}) : '';
     return _f;
   }
-  const _mixDataJacketTypeNumber = mixDataJacketTypeNumber();
 
   useEffect(async () => {
     const pricingSettings = await getProductPricingSettings(productID);
+
     if(pricingSettings?.settings?.general_default_opts?.sides) {
       pricingSettings.settings.general_default_opts.sides = parseInt(pricingSettings.settings.general_default_opts.sides);
     }
     // console.log('__', pricingSettings?.settings);
-
-    /**
-     * Set all Settings 
-     */
-    // setAllSettings(pricingSettings?.settings);
 
     setProductPricingSettings(pricingSettings?.settings);
     // console.log(pricingSettings);
@@ -141,7 +135,6 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
     productPricingSettings, setProductPricingSettings,
     updateTagVariableViaSettingsRules,
     total, setTotal,
-    _mixDataJacketTypeNumber,
     generalOptions, setGeneralOptions,
     variables, setVariables,
     currentVariable, setCurrentVariable,

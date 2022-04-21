@@ -10,6 +10,9 @@ const generalFields = {
         { label: '7" Pricing', value: '7' },
       ],
       default: '12',
+      extra: {
+        hiddenFrontend: true,
+      }
     }
   })(),
   Sides: (() => {
@@ -39,6 +42,9 @@ const generalFields = {
         { label: '45 RPM', value: '45' },
       ],
       default: '33 1/3',
+      conditional: [ 
+        { field: 'size', values: ['12'] }
+      ]
     }
   })(),
   JacketType: (() => {
@@ -54,7 +60,9 @@ const generalFields = {
         'Inner Loading Gatefold Jacket',
         'Widespine',
         'Foldover',
-        'Disco'
+        'Disco',
+        'Local Gatefold',
+        'PicDiscSleeves',
       ],
       default: 'Standard Jacket',
     }

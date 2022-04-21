@@ -11,8 +11,19 @@ const FormInnerContainer = styled.div`
   
 `
 
+const SizeTitleStyle = styled.h2`
+  font-weight: bold;
+  font-size: 2.4em;
+  color: black;
+
+  small {
+    font-size: .6em;
+    color: #d5208b;
+  }
+`
+
 export default function CustomerGeneralPricingForm({ onChange, fields }) { 
-  const { generalCustomerPricingFields, generalOptions } = useProductPricing();
+  const { generalCustomerPricingFields, generalOptions, currentVariable } = useProductPricing();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -26,17 +37,31 @@ export default function CustomerGeneralPricingForm({ onChange, fields }) {
       layout={ 'vertical' }
       name={ 'customer_general_pricing_data' }
       onValuesChange={ (changedValues, allValues) => { onChange(allValues) } }>
+      <SizeTitleStyle>{ fields?.size }" VINYL <small> VARIANT #{ currentVariable + 1 }</small></SizeTitleStyle>
       <FormInnerContainer>
         {
           Object.keys(generalCustomerPricingFields).length > 0 && 
           map(generalCustomerPricingFields, (item, key) => {
-            const { name, label, type, conditional } = item;
+            const { name, label, type, conditional, extra } = item;
             const attrs = {};
             const more = {};
-            const _show = (typeof conditional === 'undefined') ? true : isConditional(conditional, { ...generalOptions, ...fields });      
+            let _show = (typeof conditional === 'undefined') ? true : isConditional(conditional, { ...generalOptions, ...fields });      
 
             if(item.options) {
+              if(fields?.size == '7') {
+                item.options.map(item => {
+                  if([0, 4, 6].includes(item.value)) {
+                    item.disable = true;
+                  }
+                  return item;
+                })
+              }
+
               more.options = item.options;
+            }
+
+            if(extra && (extra?.hiddenFrontend == true)) {
+              _show = false;
             }
 
             return <Form.Item 
