@@ -78,8 +78,8 @@ a.remove:hover {
   max-width: 100%;
 }
 
-#PRODUCT_PRICING_MODE_APP {
-  margin-bottom: 10vw;
+.single-product .site-main .entry.product {
+  margin-top: 0;
 }
 
 .main-header {

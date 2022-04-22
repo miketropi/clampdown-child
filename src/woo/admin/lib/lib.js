@@ -150,6 +150,11 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
      * - @{MIX_Labels_TOTAL_Variant_Number_Units}
      * - @{MIX_DownloadCards_TOTAL_Variant_Number_Units}
      * - @{MIX_Inserts_TOTAL_Variant_Number_Units}
+     * 
+     * - @{TOTAL_ALL_Colour_No_Black_Number_Size7}
+     * - @{TOTAL_ALL_Colour_Is_Black_Number_Size7}
+     * - @{TOTAL_ALL_Deluxe_Colour_Number_Size7}
+     * - @{MIX_Full_Colour_Labels_TOTAL_Variant_Number_Units}
      */
 
     _tagVariables['@{sides_label}'] = () => {
@@ -172,6 +177,36 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{TOTAL_Variant_Number_Units}'] = () => {
       let total = 0;
       variables.map(v => { total += parseInt(v.number) });
+      return total;
+    }
+
+    _tagVariables['@{TOTAL_ALL_Colour_No_Black_Number_Size7}'] = () => {
+      let total = 0;
+      variables.forEach(v => {
+        if(v.colour != 'Black') {
+          total += parseInt(v.number);
+        }
+      })
+      return total;
+    }
+
+    _tagVariables['@{TOTAL_ALL_Colour_Is_Black_Number_Size7}'] = () => {
+      let total = 0;
+      variables.forEach(v => {
+        if(v.colour == 'Black') {
+          total += parseInt(v.number);
+        }
+      })
+      return total;
+    }
+
+    _tagVariables['@{TOTAL_ALL_Deluxe_Colour_Number_Size7}'] = () => {
+      let total = 0;
+      variables.forEach(v => {
+        if(['Split', 'Smash', 'Clash', 'Color In Color'].includes(v.style)) {
+          total += parseInt(v.number) * 2;
+        }
+      })
       return total;
     }
 
@@ -211,6 +246,13 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
     _tagVariables['@{MIX_Inserts_TOTAL_Variant_Number_Units}'] = () => {
       let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
       let _labelKey = opts?.insert == 'No' ? '__Insert_No' : `${ opts?.insert } Inserts`;
+      let _key = `${ _labelKey }:${ TotalNumberUnits }`;  
+      return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
+    }
+
+    _tagVariables['@{MIX_Full_Colour_Labels_TOTAL_Variant_Number_Units}'] = () => {
+      let TotalNumberUnits = _tagVariables['@{TOTAL_Variant_Number_Units}']();
+      let _labelKey = 'Full Colour Labels';
       let _key = `${ _labelKey }:${ TotalNumberUnits }`;  
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
@@ -287,7 +329,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
         return fn();
       });
 
-      // console.log(_tagVariablesWithValue);
+      console.log(_tagVariablesWithValue);
 
       try {
         let evalString = _total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));

@@ -480,14 +480,19 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                 })
                               }
                               
-                              <Mentions.Option value={ '{MIX_JacketType_TOTAL_Variant_Number_Units}' }>{ 'MIX_JacketType_TOTAL_Variant_Number_Units' }</Mentions.Option>
+                              {/* <Mentions.Option value={ '{MIX_JacketType_TOTAL_Variant_Number_Units}' }>{ 'MIX_JacketType_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_InnerSleeve_TOTAL_Variant_Number_Units}' }>{ 'MIX_InnerSleeve_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_Labels_TOTAL_Variant_Number_Units}' }>{ 'MIX_Labels_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_DownloadCards_TOTAL_Variant_Number_Units}' }>{ 'MIX_DownloadCards_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{MIX_Inserts_TOTAL_Variant_Number_Units}' }>{ 'MIX_Inserts_TOTAL_Variant_Number_Units' }</Mentions.Option>
                               <Mentions.Option value={ '{TOTAL_ALL_Variants_Price}' }>{ 'TOTAL_ALL_Variants_Price' }</Mentions.Option>
                               <Mentions.Option value={ '{Variants_Count_Number}' }>{ 'Variants_Count_Number' }</Mentions.Option>
-                              <Mentions.Option value={ '{TOTAL_Variant_Number_Units}' }>{ 'TOTAL_Variant_Number_Units' }</Mentions.Option>
+                              <Mentions.Option value={ '{TOTAL_Variant_Number_Units}' }>{ 'TOTAL_Variant_Number_Units' }</Mentions.Option> */}
+                              {
+                                map(MentionsGeneralOptions, (label, value) => {
+                                  return <Mentions.Option value={ value } key={ value }>{ label }</Mentions.Option>
+                                })
+                              }
                             </Mentions>
                           </Form.Item>
                         </Panel>

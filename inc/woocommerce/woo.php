@@ -21,6 +21,10 @@ function clampdown_child_woo_enqueue_scripts() {
 
 add_action('wp_enqueue_scripts', 'clampdown_child_woo_enqueue_scripts', 30);
 
+add_action('init', function() {
+  remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+});
+
 /**
  * Backend enqueue scripts 
  */

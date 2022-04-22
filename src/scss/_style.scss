@@ -86,5 +86,16 @@ a.remove:hover {
 }
 
 #PRODUCT_PRICING_MODE_APP {
-  margin-bottom: 10vw;
+  // margin-bottom: 10vw;
 }
+
+.single-product {
+
+  .site-main {
+
+    .entry.product {
+      margin-top: 0;
+    }
+  }
+}
+
