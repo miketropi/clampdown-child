@@ -8,12 +8,30 @@ const variantFields = {
       default: 300,
     }
   })(),
+  /**
+   * Extra fields 
+   */
+  Divider0: (() => {
+    return {
+      name: 'divider0',
+      label: 'Divider',
+      type: 'divider',
+    }
+  })(),
   Style: (() => {
     return {
       name: 'style',
       label: 'Style',
       type: 'select',
-      options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+      // options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+      options: [
+        { label: 'Standard Black Style', value: 'Standard Black' },
+        { label: 'Colour Style', value: 'Colour' },
+        { label: 'Split Style', value: 'Split' },
+        { label: 'Smash Style', value: 'Smash' },
+        { label: 'Clash Style', value: 'Clash' },
+        { label: 'Color In Color Style', value: 'Color In Color' },
+      ],
       default: 'Standard Black',
     }
   })(),
@@ -22,7 +40,12 @@ const variantFields = {
       name: 'colour',
       label: 'Colour',
       type: 'select',
-      options: ['Black', 'Orange', 'Red'],
+      // options: ['Black', 'Orange', 'Red'],
+      options: [
+        { label: 'Black Colour', value: 'Black' },
+        { label: 'Orange Colour', value: 'Orange' },
+        { label: 'Red Colour', value: 'Red' },
+      ],
       default: 'Black',
       // conditional: [
       //   {
@@ -37,7 +60,11 @@ const variantFields = {
       name: 'weight',
       label: 'Weight',
       type: 'select',
-      options: ['140g', '180g'],
+      // options: ['140g', '180g'],
+      options: [
+        {label: '140g Weight', value: '140g' },
+        {label: '180g Weight', value: '180g' },
+      ],
       default: '140g',
     }
   })(),
@@ -55,7 +82,10 @@ const variantFields = {
           field: 'sides',
           values: [4, 6]
         }
-      ]
+      ],
+      extra: {
+        frontendDividerLabel: 'A/B',
+      },
     }
   })(),
   Style2: (() => {
@@ -63,7 +93,15 @@ const variantFields = {
       name: 'style2',
       label: 'Style',
       type: 'select',
-      options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+      // options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+      options: [
+        { label: 'Standard Black Style', value: 'Standard Black' },
+        { label: 'Colour Style', value: 'Colour' },
+        { label: 'Split Style', value: 'Split' },
+        { label: 'Smash Style', value: 'Smash' },
+        { label: 'Clash Style', value: 'Clash' },
+        { label: 'Color In Color Style', value: 'Color In Color' },
+      ],
       default: 'Standard Black',
       conditional: [
         {
@@ -78,7 +116,12 @@ const variantFields = {
       name: 'colour2',
       label: 'Colour',
       type: 'select',
-      options: ['Black', 'Orange', 'Red'],
+      // options: ['Black', 'Orange', 'Red'],
+      options: [
+        { label: 'Black Colour', value: 'Black' },
+        { label: 'Orange Colour', value: 'Orange' },
+        { label: 'Red Colour', value: 'Red' },
+      ],
       default: 'Black',
       conditional: [
         {
@@ -93,7 +136,11 @@ const variantFields = {
       name: 'weight2',
       label: 'Weight',
       type: 'select',
-      options: ['140g', '180g'],
+      // options: ['140g', '180g'],
+      options: [
+        {label: '140g Weight', value: '140g' },
+        {label: '180g Weight', value: '180g' },
+      ],
       default: '140g',
       conditional: [
         {
@@ -117,7 +164,10 @@ const variantFields = {
           field: 'sides',
           values: [6]
         }
-      ]
+      ],
+      extra: {
+        frontendDividerLabel: 'C/D',
+      },
     }
   })(),
   Style3: (() => {
@@ -125,7 +175,15 @@ const variantFields = {
       name: 'style3',
       label: 'Style',
       type: 'select',
-      options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+      // options: ['Standard Black', 'Colour',	'Split', 'Smash', 'Clash', 'Color In Color'],
+      options: [
+        { label: 'Standard Black Style', value: 'Standard Black' },
+        { label: 'Colour Style', value: 'Colour' },
+        { label: 'Split Style', value: 'Split' },
+        { label: 'Smash Style', value: 'Smash' },
+        { label: 'Clash Style', value: 'Clash' },
+        { label: 'Color In Color Style', value: 'Color In Color' },
+      ],
       default: 'Standard Black',
       conditional: [
         {
@@ -140,7 +198,12 @@ const variantFields = {
       name: 'colour3',
       label: 'Colour',
       type: 'select',
-      options: ['Black', 'Orange', 'Red'],
+      // options: ['Black', 'Orange', 'Red'],
+      options: [
+        { label: 'Black Colour', value: 'Black' },
+        { label: 'Orange Colour', value: 'Orange' },
+        { label: 'Red Colour', value: 'Red' },
+      ],
       default: 'Black',
       conditional: [
         {
@@ -155,7 +218,11 @@ const variantFields = {
       name: 'weight3',
       label: 'Weight',
       type: 'select',
-      options: ['140g', '180g'],
+      // options: ['140g', '180g'],
+      options: [
+        {label: '140g Weight', value: '140g' },
+        {label: '180g Weight', value: '180g' },
+      ],
       default: '140g',
       conditional: [
         {

@@ -276,13 +276,11 @@ export default function ProductPricingSettingsForm({ onChange, fields }) {
                                         {
                                           (() => {
                                             if(_item != null && _item?.options) {
-
                                               if(['in', 'notIn'].includes(ruleItem.field_operator)) {
                                                 return <Input 
                                                   placeholder={ _item?.options.join(',') }
                                                   style={{ borderRadius: '1px' }} />
                                               }
-
                                               return <Select 
                                                 style={{ width: '100%' }}>
                                                 {

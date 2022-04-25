@@ -38,8 +38,8 @@ const generalFields = {
       type: 'select', 
       // options: ['33 1/3', '45'],
       options: [
-        { label: '33 1/3', value: '33 1/3' },
-        { label: '45 RPM', value: '45' },
+        { label: '33 1/3 Speed', value: '33 1/3' },
+        { label: '45 RPM Speed', value: '45' },
       ],
       default: '33 1/3',
       conditional: [ 
@@ -53,16 +53,26 @@ const generalFields = {
       name: 'jacket_type',
       label: 'Jacket Type',
       type: 'select',
+      // options: [
+      //   'No',
+      //   'Standard Jacket',
+      //   'Gatefold Jacket',
+      //   'Inner Loading Gatefold Jacket',
+      //   'Widespine',
+      //   'Foldover',
+      //   'Disco',
+      //   'Local Gatefold',
+      //   'PicDiscSleeves',
+      // ],
       options: [
-        'No',
-        'Standard Jacket',
-        'Gatefold Jacket',
-        'Inner Loading Gatefold Jacket',
-        'Widespine',
-        'Foldover',
-        'Disco',
-        'Local Gatefold',
-        'PicDiscSleeves',
+        { label: 'No Jacket', value: 'No' },
+        { label: 'Standard Jacket', value: 'Standard Jacket' },
+        { label: 'Gatefold Jacket', value: 'Gatefold Jacket' },
+        { label: 'Inner Loading Gatefold Jacket', value: 'Inner Loading Gatefold Jacket' },
+        { label: 'Widespine Jacket', value: 'Widespine' },
+        { label: 'Foldover Jacket', value: 'Foldover' },
+        { label: 'Disco Jacket', value: 'Disco' },
+        { label: 'PicDiscSleeves Jacket', value: 'PicDiscSleeves' },
       ],
       default: 'Standard Jacket',
     }
@@ -72,12 +82,19 @@ const generalFields = {
       name: 'inner_sleeve',
       label: 'Inner Sleeve',
       type: 'select',
+      // options: [
+      //   'White Paper',
+      //   'Black Paper',
+      //   'Printed 4/0',
+      //   'White Poly Lined',
+      //   'Black Poly Lined',
+      // ],
       options: [
-        'White Paper',
-        'Black Paper',
-        'Printed 4/0',
-        'White Poly Lined',
-        'Black Poly Lined',
+        { label: 'White Paper Inner Sleeve', value: 'White Paper' },
+        { label: 'Black Paper Inner Sleeve', value: 'Black Paper' },
+        { label: 'Printed 4/0 Inner Sleeve', value: 'Printed 4/0' },
+        { label: 'White Poly Lined Inner Sleeve', value: 'White Poly Lined' },
+        { label: 'Black Poly Lined Inner Sleeve', value: 'Black Poly Lined' },
       ],
       default: 'White Paper',
     }
@@ -87,11 +104,17 @@ const generalFields = {
       name: 'insert',
       label: 'Insert',
       type: 'select',
+      // options: [
+      //   'No',
+      //   'Printed',
+      //   '4 Panel',
+      //   '6 Panel',
+      // ],
       options: [
-        'No',
-        'Printed',
-        '4 Panel',
-        '6 Panel',
+        { label: 'No Insert', value: 'No' },
+        { label: 'Printed Insert', value: 'Printed' },
+        { label: '4 Panel Insert', value: '4 Panel' },
+        { label: '6 Panel Insert', value: '6 Panel' },
       ],
       default: 'No',
     }
@@ -101,10 +124,15 @@ const generalFields = {
       name: 'packaging',
       label: 'Packaging',
       type: 'select',
+      // options: [
+      //   'None', 
+      //   'Poly Bags',
+      //   'Shrink Wrap'
+      // ],
       options: [
-        'None', 
-        'Poly Bags',
-        'Shrink Wrap'
+        { label: 'None Packaging', value: 'None' },
+        { label: 'Poly Bags Packaging', value: 'Poly Bags' },
+        { label: 'Shrink Wrap Packaging', value: 'Shrink Wrap' },
       ],
       default: 'None'
     }
@@ -114,12 +142,17 @@ const generalFields = {
       name: 'download_cards',
       label: 'Download Cards',
       type: 'select',
+      // options: [
+      //   // 'No',
+      //   // 'Yes',
+      //   'None',
+      //   'Simple',
+      //   'Fancy',
+      // ],
       options: [
-        // 'No',
-        // 'Yes',
-        'None',
-        'Simple',
-        'Fancy',
+        { label: 'None Download Cards', value: 'None' },
+        { label: 'Simple Download Cards', value: 'Simple' },
+        { label: 'Fancy Download Cards', value: 'Fancy' },
       ],
       default: 'None',
     }
@@ -129,10 +162,15 @@ const generalFields = {
       name: 'marketing_stickers',
       label: 'Marketing Stickers',
       type: 'select',
+      // options: [
+      //   'None',
+      //   'Circle',
+      //   'Square',
+      // ],
       options: [
-        'None',
-        'Circle',
-        'Square',
+        { label: 'None Marketing Stickers', value: 'None' },
+        { label: 'Circle Marketing Stickers', value: 'Circle' },
+        { label: 'Square Marketing Stickers', value: 'Square' },
       ],
       default: 'None',
     }
@@ -158,9 +196,13 @@ const generalFields = {
       name: 'center_hole',
       label: 'Center Hole',
       type: 'select',
+      // options: [
+      //   'Big',
+      //   'Little',
+      // ],
       options: [
-        'Big',
-        'Little',
+        { label: 'Big Center Hole', value: 'Big' },
+        { label: 'Little Center Hole', value: 'Little' },
       ],
       default: 'Big',
       conditional: [ 
