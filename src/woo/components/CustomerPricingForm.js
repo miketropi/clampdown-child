@@ -13,6 +13,10 @@ const CustomerPricingFormContainer = styled.div`
   .ant-divider-horizontal.ant-divider-with-text::after {
     transform: none;
   }
+
+  @media(max-width: 767px) {
+    margin-bottom: 3em;
+  }
 `
 const FormInnerContainer = styled.div`
   display: flex;
@@ -20,7 +24,13 @@ const FormInnerContainer = styled.div`
   justify-content: space-between;
 
   > * {
-    width: calc(33% - 15px)
+    width: calc(33% - 15px);
+  }
+
+  @media(max-width: 695px) {
+    > * {
+      width: 100%; 
+    }
   }
 `
 

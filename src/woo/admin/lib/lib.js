@@ -115,7 +115,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
   let _tagVariables = {};
   let _fields = { ...opts };
   let JacketTypeNumber = mixDataJacketTypeNumber(opts?.size);
-
+  console.log(_fields);
   /**
    * Customer field tags
    */
@@ -136,6 +136,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
        */
     _tagVariables['@{MIX_JacketType_Number}'] = () => {
       let _key = `${ opts?.jacket_type }:${ opts?.number }`;
+      // console.log(JacketTypeNumber);
       return (JacketTypeNumber[_key] ? (JacketTypeNumber[_key] || 0) : 0);
     }
   } else {

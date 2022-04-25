@@ -82,7 +82,7 @@ export default function ProductPricingApp() {
 
   return <Fragment>
     <Row gutter={40}>
-      <Col md={16}>
+      <Col md={16} sm={24} xs={24}>
         <PreviewImage />
         <VariablesPlace onChange={ onChangeVariablePlace } />
         <CustomerPricingForm 
@@ -97,7 +97,7 @@ export default function ProductPricingApp() {
           } } 
           fields={ variables[currentVariable] } />
       </Col>
-      <Col md={8}>
+      <Col md={8} sm={24} xs={24}>
         <CustomerGeneralPricingForm 
           onChange={ (allFields) => { setGeneralOptions(allFields); } } 
           fields={ generalOptions }/>
