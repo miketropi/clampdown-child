@@ -14,6 +14,7 @@ export default function ProductPricingApp() {
   const { 
     productID, wp_nonce, 
     generalOptions, setGeneralOptions,
+    productExtraData, 
     variables, setVariables,
     currentVariable, 
     loading, 
@@ -83,8 +84,13 @@ export default function ProductPricingApp() {
   return <Fragment>
     <Row gutter={40}>
       <Col md={16} sm={24} xs={24}>
-        <PreviewImage />
+        <PreviewImage 
+          variant={ variables[currentVariable] } 
+          jacketcover={ productExtraData?.product_thumbnail_url }
+          sides={ generalOptions?.sides } />
+        
         <VariablesPlace onChange={ onChangeVariablePlace } />
+        
         <CustomerPricingForm 
           onChange={ allFields => {
             let _variables = [...variables];

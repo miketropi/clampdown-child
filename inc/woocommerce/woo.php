@@ -315,3 +315,23 @@ function clampdown_child_woo_raq_pdf_footer($order_id) {
 }
 
 add_action('yith_ywraq_quote_template_footer', 'clampdown_child_woo_raq_pdf_footer', 20);
+
+function clmapdown_child_woo_register_variant_record_images_settings() {
+  add_submenu_page(
+    'woocommerce', 
+    __('Record Images 💿', 'clampdown-child'),
+    __('Record Images 💿', 'clampdown-child'),
+    'manage_options',
+    'record-images-settings',
+    'clampdown_child_woo_variant_record_images_settings_callback');
+} 
+
+add_action('admin_menu', 'clmapdown_child_woo_register_variant_record_images_settings', 99);
+
+function clampdown_child_woo_variant_record_images_settings_callback() {
+  ?>
+  <div id="VARIANT_RECORD_IMAGES_SETTINGS">
+    <!-- React render -->
+  </div> <!-- #VARIANT_RECORD_IMAGES_SETTINGS -->
+  <?php
+}

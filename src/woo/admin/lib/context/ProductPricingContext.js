@@ -24,6 +24,7 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
   const [variables, setVariables] = useState([]);
   const [currentVariable, setCurrentVariable] = useState(0);
   const [productPricingSettings, setProductPricingSettings] = useState({});
+  const [productExtraData, setProductExtraData] = useState({});
   const [total, setTotal] = useState(0);
   const customerPricingFields = registerCustomerPricingFields();
   const generalCustomerPricingFields = registerGeneralCustomerPricingFields();
@@ -43,14 +44,15 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
     // console.log('__', pricingSettings?.settings);
 
     setProductPricingSettings(pricingSettings?.settings);
-    // console.log(pricingSettings);
+    setProductExtraData(pricingSettings?.extra);
+
     /**
      * General default value
      */
     let _generalOptions = { ...generalOptions };
     _generalOptions = getDefaultFields(pricingSettings?.settings?.general_default_opts);
     setGeneralOptions(_generalOptions)
-
+    
     /**
      * Variant default value
      */
@@ -133,6 +135,7 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
     customerPricingFields,
     loading, setLoading,
     productPricingSettings, setProductPricingSettings,
+    productExtraData,
     updateTagVariableViaSettingsRules,
     total, setTotal,
     generalOptions, setGeneralOptions,

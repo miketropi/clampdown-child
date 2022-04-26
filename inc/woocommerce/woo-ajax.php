@@ -6,9 +6,13 @@
 function clampdown_child_woo_ajax_get_product_pricing_settings() {
   $productID = $_POST['data']['product'];
   $data = clampdown_child_woo_get_product_pricing_settings($productID);
+
   wp_send_json([
     'successful' => true, 
     'settings' => $data,
+    'extra' => [
+      'product_thumbnail_url' => get_the_post_thumbnail_url($productID, 'full'),
+    ],
   ]); return;
 }
 
