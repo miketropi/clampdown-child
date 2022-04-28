@@ -23,7 +23,7 @@ import * as _7inch from '../../../json/7inch/7inch-data';
 import map from 'lodash/map';
 
 export const mixDataJacketTypeNumber = (size = '12') => { 
-  console.log('mixDataJacketTypeNumber: ', size);
+  // console.log('mixDataJacketTypeNumber: ', size);
   const mixDataBySize = {
     '12': { 
       ...disco, 
