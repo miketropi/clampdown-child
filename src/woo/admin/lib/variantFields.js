@@ -8,6 +8,7 @@ const STYLE_OPTS = [
 ];
 
 const COLOUR_OPTS = [
+  // OPAQUE COLOURS
   { label: 'Cherry Colour', value: 'Cherry' },
   { label: 'Bluegaloo Colour', value: 'Bluegaloo' },
   { label: 'Orange Colour', value: 'Orange' },
@@ -21,6 +22,7 @@ const COLOUR_OPTS = [
   { label: 'White Colour', value: 'White' },
   { label: 'Skyblue Colour', value: 'Skyblue' },
 
+  // TRANSPARENT COLOURS
   { label: 'Highlighter Yello Colour', value: 'Highlighter Yello' },
   { label: 'Mellow Yello - T Colour', value: 'Mellow Yello - T' },
   { label: 'Clear - T Colour', value: 'Clear - T' },
@@ -31,6 +33,7 @@ const COLOUR_OPTS = [
   { label: 'Bluegaloo - T Colour', value: 'Bluegaloo - T' },
   { label: 'Cherry - T Colour', value: 'Cherry - T' },
   
+  //METALLIC COLOURS
   { label: 'Metallic Gold Colour', value: 'Metallic Gold' },
   { label: 'Metalic Silver', value: 'Metalic Silver' },
 ];
