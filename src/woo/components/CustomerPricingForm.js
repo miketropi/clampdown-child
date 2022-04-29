@@ -21,10 +21,13 @@ const CustomerPricingFormContainer = styled.div`
 const FormInnerContainer = styled.div`
   display: flex;
   flex-wrap: wrap; 
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  margin: 0 -15px;
 
-  > * {
-    width: calc(33% - 15px);
+  > * { 
+    width: calc(100% / 3);
+    padding: 0 15px;
+    box-sizing: border-box;
   }
 
   @media(max-width: 695px) {

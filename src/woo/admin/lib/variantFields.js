@@ -8,9 +8,31 @@ const STYLE_OPTS = [
 ];
 
 const COLOUR_OPTS = [
-  { label: 'Black Colour', value: 'Black' },
+  { label: 'Cherry Colour', value: 'Cherry' },
+  { label: 'Bluegaloo Colour', value: 'Bluegaloo' },
   { label: 'Orange Colour', value: 'Orange' },
-  { label: 'Red Colour', value: 'Red' },
+  { label: 'Grape Colour', value: 'Grape' },
+  { label: 'Bubblegum Colour', value: 'Bubblegum' },
+  { label: 'Lime Colour', value: 'Lime' },
+  { label: 'Lemon Colour', value: 'Lemon' },
+  { label: 'Bone Colour', value: 'Bone' },
+  { label: 'Forrest Colour', value: 'Forrest' },
+  { label: 'Black Colour', value: 'Black' },
+  { label: 'White Colour', value: 'White' },
+  { label: 'Skyblue Colour', value: 'Skyblue' },
+
+  { label: 'Highlighter Yello Colour', value: 'Highlighter Yello' },
+  { label: 'Mellow Yello - T Colour', value: 'Mellow Yello - T' },
+  { label: 'Clear - T Colour', value: 'Clear - T' },
+  { label: 'Coke Bottle - T Colour', value: 'Coke Bottle - T' },
+  { label: 'Soft Pink - T Colour', value: 'Soft Pink - T' },
+  { label: 'Sky Blue - T Colour', value: 'Sky Blue - T' },
+  { label: 'Shocking Pink - T Colour', value: 'Shocking Pink - T' },
+  { label: 'Bluegaloo - T Colour', value: 'Bluegaloo - T' },
+  { label: 'Cherry - T Colour', value: 'Cherry - T' },
+  
+  { label: 'Metallic Gold Colour', value: 'Metallic Gold' },
+  { label: 'Metalic Silver', value: 'Metalic Silver' },
 ];
 
 const WEIGHT_OPTS = [
@@ -36,6 +58,9 @@ const variantFields = {
       name: 'divider0',
       label: 'Divider',
       type: 'divider',
+      extra: {
+        frontendDividerLabel: 'Default',
+      },
     }
   })(),
   Style: (() => {
@@ -56,12 +81,28 @@ const variantFields = {
       // options: ['Black', 'Orange', 'Red'],
       options: COLOUR_OPTS,
       default: 'Black',
-      // conditional: [
-      //   {
-      //     field: 'style',
-      //     values: ['Colour']
-      //   }
-      // ]
+      conditional: [
+        {
+          field: 'style',
+          values: ['Colour', 'Split', 'Smash', 'Clash', 'Color In Color']
+        }
+      ]
+    }
+  })(),
+  Colour_1_2: (() => {
+    return {
+      name: 'colour_1_2',
+      label: 'Colour 2',
+      type: 'select',
+      // options: ['Black', 'Orange', 'Red'],
+      options: COLOUR_OPTS,
+      default: 'Cherry',
+      conditional: [
+        {
+          field: 'style',
+          values: ['Split', 'Smash', 'Clash', 'Color In Color']
+        }
+      ]
     }
   })(),
   Weight: (() => {
@@ -72,6 +113,18 @@ const variantFields = {
       // options: ['140g', '180g'],
       options: WEIGHT_OPTS,
       default: '140g',
+    }
+  })(),
+  Splater: (() => {
+    return {
+      name: 'splater',
+      label: 'Splater',
+      type: 'select', 
+      options: [
+        { label: 'Yes Splater', value: 'yes' },
+        { label: 'No Splater', value: 'no' },
+      ],
+      default: 'yes'
     }
   })(),
 
@@ -122,6 +175,30 @@ const variantFields = {
         {
           field: 'sides',
           values: [4, 6]
+        },
+        {
+          field: 'style2',
+          values: ['Colour', 'Split', 'Smash', 'Clash', 'Color In Color']
+        }
+      ]
+    }
+  })(),
+  Colour_2_2: (() => {
+    return {
+      name: 'colour_2_2',
+      label: 'Colour 2',
+      type: 'select',
+      // options: ['Black', 'Orange', 'Red'],
+      options: COLOUR_OPTS,
+      default: 'Cherry',
+      conditional: [
+        {
+          field: 'sides',
+          values: [4, 6]
+        },
+        {
+          field: 'style2',
+          values: ['Split', 'Smash', 'Clash', 'Color In Color']
         }
       ]
     }
@@ -134,6 +211,24 @@ const variantFields = {
       // options: ['140g', '180g'],
       options: WEIGHT_OPTS,
       default: '140g',
+      conditional: [
+        {
+          field: 'sides',
+          values: [4, 6]
+        }
+      ]
+    }
+  })(),
+  Splater2: (() => {
+    return {
+      name: 'splater2',
+      label: 'Splater',
+      type: 'select', 
+      options: [
+        { label: 'Yes Splater', value: 'yes' },
+        { label: 'No Splater', value: 'no' },
+      ],
+      default: 'yes',
       conditional: [
         {
           field: 'sides',
@@ -190,6 +285,30 @@ const variantFields = {
         {
           field: 'sides',
           values: [6]
+        },
+        {
+          field: 'style3',
+          values: ['Colour', 'Split', 'Smash', 'Clash', 'Color In Color']
+        }
+      ]
+    }
+  })(),
+  Colour_3_2: (() => {
+    return {
+      name: 'colour_3_2',
+      label: 'Colour 2',
+      type: 'select',
+      // options: ['Black', 'Orange', 'Red'],
+      options: COLOUR_OPTS,
+      default: 'Cherry',
+      conditional: [
+        {
+          field: 'sides',
+          values: [6]
+        },
+        {
+          field: 'style3',
+          values: ['Split', 'Smash', 'Clash', 'Color In Color']
         }
       ]
     }
@@ -202,6 +321,24 @@ const variantFields = {
       // options: ['140g', '180g'],
       options: WEIGHT_OPTS,
       default: '140g',
+      conditional: [
+        {
+          field: 'sides',
+          values: [6]
+        }
+      ]
+    }
+  })(),
+  Splater3: (() => {
+    return {
+      name: 'splater3',
+      label: 'Splater',
+      type: 'select', 
+      options: [
+        { label: 'Yes Splater', value: 'yes' },
+        { label: 'No Splater', value: 'no' },
+      ],
+      default: 'yes',
       conditional: [
         {
           field: 'sides',

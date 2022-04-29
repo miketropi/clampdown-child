@@ -82,6 +82,26 @@ export default function ProductPricingApp() {
   }
 
   return <Fragment>
+    {
+      (sendRequestMessage.message != '') && 
+      <Fragment>
+        <Alert
+          message={ __('Request a Quote', 'clampdown-child') }
+          description={ sendRequestMessage.message }
+          type={ sendRequestMessage.type }
+          action={ sendRequestMessage.action }
+          showIcon
+          closable
+          onClose={ () => {
+            let newSendRequestMessage = { ...sendRequestMessage };
+            newSendRequestMessage.message = '';
+            setSendRequestMessage(newSendRequestMessage);
+          } }
+        />
+        <br />
+      </Fragment>
+    }
+    
     <Row gutter={40}>
       <Col md={16} sm={24} xs={24}>
         <PreviewImage 
@@ -112,26 +132,6 @@ export default function ProductPricingApp() {
           productPricingSettings?.product_pricing_summary_fields &&
           productPricingSettings?.product_pricing_summary_fields?.length > 0 && 
           <QuoteSummary />
-        }
-
-        {
-          (sendRequestMessage.message != '') && 
-          <Fragment>
-            <Alert
-              message={ __('Request a Quote', 'clampdown-child') }
-              description={ sendRequestMessage.message }
-              type={ sendRequestMessage.type }
-              action={ sendRequestMessage.action }
-              showIcon
-              closable
-              onClose={ () => {
-                let newSendRequestMessage = { ...sendRequestMessage };
-                newSendRequestMessage.message = '';
-                setSendRequestMessage(newSendRequestMessage);
-              } }
-            />
-            <br />
-          </Fragment>
         }
 
         <ButtonAddToCart  

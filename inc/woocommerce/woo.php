@@ -61,15 +61,21 @@ function clampdown_child_woo_get_product_pricing_settings($id = 0, $name = null)
       "number" => 300,
       "style" => "Standard Black",
       "colour" => "Black",
+      "colour_1_2" => "Cherry",
       "weight" => "140g",
+      "splater" => "yes",
 
       "style2" => "Standard Black",
       "colour2" => "Black",
+      "colour_2_2" => "Cherry",
       "weight2" => "140g",
+      "splater2" => "yes",
 
       "style3" => "Standard Black",
       "colour3" => "Black",
+      "colour_3_2" => "Cherry",
       "weight3" => "140g",
+      "splater3" => "yes",
     ],
     "product_pricing_custom_tag_price_rules" => [], 
     "product_pricing_total_price_foreach_variant" => "",
@@ -299,16 +305,16 @@ function clampdown_child_woo_raq_pdf_footer($order_id) {
   ?>
   <div class="raq-pdf-tc">
     <h4><?php _e('Terms & Conditions') ?></h4>
-    <p>- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum porta eros eu imperdiet.</p>
-    <p>- Pellentesque lobortis sagittis velit, non finibus dolor congue a.</p>
-    <p>- Donec interdum posuere auctor. </p>
+    <p><?php _e('- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum porta eros eu imperdiet.', 'clampdown-child'); ?></p>
+    <p><?php _e('- Pellentesque lobortis sagittis velit, non finibus dolor congue a.', 'clampdown-child') ?></p>
+    <p><?php _e('- Donec interdum posuere auctor.', 'clampdown-child') ?></p>
   </div>
   <div class="raq-pdf-footer">
     <div class="f-logo">
       <img src="<?php echo CLAMPDOWN_DIR . '/images/footer-logo.png'; ?>" width="100px" />
     </div>
     <div class="f-text">
-      Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+      <?php _e('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 'clampdown-child') ?> 
     </div>
   </div>
   <?php 
