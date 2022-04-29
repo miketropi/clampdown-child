@@ -74,8 +74,11 @@ export default function ProductPricingApp() {
       setSendRequestMessage(newSendRequestMessage);
 
       // redirect to request quote page Success
-      if(newSendRequestMessage.type == 'success')
+      if(newSendRequestMessage.type == 'success') {
         window.location.href = result.rqa_url;
+      } 
+      
+      document.scrollingElement.scrollTop = 0;
     }
 
     console.log(result);
@@ -101,7 +104,7 @@ export default function ProductPricingApp() {
         <br />
       </Fragment>
     }
-    
+
     <Row gutter={40}>
       <Col md={16} sm={24} xs={24}>
         <PreviewImage 
