@@ -78,6 +78,10 @@
 .product-pricing-data-list .__show-more-data-list:hover {
   border-bottom-width: 2px;
 }
+
+.woocommerce_page_record-images-settings {
+  background: #F7F7F7;
+}
 /*!**************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/antd/dist/antd.css ***!
   \**************************************************************************************************************************/

@@ -20,7 +20,7 @@ const COLOUR_OPTS = [
   { label: 'Forrest Colour', value: 'Forrest' },
   { label: 'Black Colour', value: 'Black' },
   { label: 'White Colour', value: 'White' },
-  { label: 'Skyblue Colour', value: 'Skyblue' },
+  { label: 'Sky Blue Colour', value: 'Sky Blue' }, 
 
   // TRANSPARENT COLOURS
   { label: 'Highlighter Yello Colour', value: 'Highlighter Yello' },

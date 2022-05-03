@@ -19,6 +19,7 @@ import whitePolyLinedInnerSleeves from '../../../json/white-poly-lined-inner-sle
 import { generalFields } from './generalCustomerPricingFields';
 import { variantFields } from './variantFields';
 import * as _7inch from '../../../json/7inch/7inch-data';
+import recordImages from '../../../json/image-records/image-records';
 
 import map from 'lodash/map';
 
@@ -340,4 +341,16 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
       }
     }
   };
+}
+
+export const getRecordImage = (name) => {
+  const { OPAQUE_COLOURS, TRANSPARENT_COLOURS, METALLIC_COLOURS, STYLES } = recordImages;
+  const _images = [
+    ...OPAQUE_COLOURS, 
+    ...TRANSPARENT_COLOURS, 
+    ...METALLIC_COLOURS, 
+    ...STYLES,
+  ];
+  let item = _images.find(item => (item.name == name));
+  return item?.image_url || false;
 }

@@ -9,6 +9,9 @@ const VariantRecordImagesSettingsContainer = styled.div`
   width: 880px;
   max-width: calc(100% - 20px);
   margin: 3em auto;
+  padding: 3em;
+  background: white;
+  border: solid 1px #eee;
 
   .ant-page-header {
     border: solid 1px #eee;
