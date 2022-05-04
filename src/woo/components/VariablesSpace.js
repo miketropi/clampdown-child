@@ -4,8 +4,7 @@ import { useProductPricing } from "../admin/lib/context/ProductPricingContext";
 import { Tooltip } from 'antd';
 import { PlusOutlined } from '@ant-design/icons'
 import { __ } from '@wordpress/i18n';
-
-// const { __ } = wp.i18n;
+import { Record } from './PreviewImage';
 
 const VariablesContainer = styled.div`
   margin-bottom: 2em;
@@ -27,6 +26,7 @@ const VariableItem = styled.div`
   width: 70px;
   height: 70px;
   border-radius: 70px;
+  overflow: hidden;
   background: ${ props => props.background || '#eee' };
   position: relative;
   display: flex;
@@ -68,12 +68,19 @@ export default function VariablesPlace({ onChange }) {
       {
         [...Array(space).keys()].map((n) => {
           let _active = (currentVariable == n ? true : false);
+          // console.log(n, variables[n]);
           return <li key={ n }>
             {
               variables[n] 
                 ? <Tooltip title={ variables[n].colour } placement="bottom" >
                     <VariableItem active={ _active } background={ variables[n].colour } onClick={ () => { onChange(n) } }>
-                      <span className="round-center"></span>
+                      {/* <span className="round-center"></span> */}
+                      <Record 
+                        style={ variables[n].style } 
+                        colour={ variables[n].colour } 
+                        colour2={ variables[n].colour_1_2 } 
+                        useSplatter={ variables[n].splatter }
+                        splatterName={ variables[n].splatter_image } />
                     </VariableItem>
                   </Tooltip>
                 : <Tooltip title={ __('Add variant', 'clampdown-child') } placement="bottom" >

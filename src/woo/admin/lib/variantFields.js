@@ -1,3 +1,5 @@
+import SplatterData from '../../../json/splatter/splatter';
+
 const STYLE_OPTS = [
   { label: 'Standard Black Style', value: 'Standard Black' },
   { label: 'Colour Style', value: 'Colour' },
@@ -42,6 +44,14 @@ const WEIGHT_OPTS = [
   {label: '140g Weight', value: '140g' },
   {label: '180g Weight', value: '180g' },
 ];
+
+const SPLATTERIMAGE_OPTS = SplatterData.map(s => {
+  const { label, name } = s;
+  return {
+    label: `${ label } Splatter`,
+    value: name,
+  }
+})
 
 const variantFields = {
   Number: (() => {
@@ -118,16 +128,31 @@ const variantFields = {
       default: '140g',
     }
   })(),
-  Splater: (() => {
+  Splatter: (() => {
     return {
-      name: 'splater',
-      label: 'Splater',
+      name: 'splatter',
+      label: 'Splatter',
       type: 'select', 
       options: [
-        { label: 'Yes Splater', value: 'yes' },
-        { label: 'No Splater', value: 'no' },
+        { label: 'Yes Splatter', value: 'yes' },
+        { label: 'No Splatter', value: 'no' },
       ],
-      default: 'yes'
+      default: 'no'
+    }
+  })(),
+  SplatterImage: (() => {
+    return {
+      name: 'splatter_image',
+      label: 'Splatter Image',
+      type: 'select', 
+      options: SPLATTERIMAGE_OPTS,
+      default: 'Purple',
+      conditional: [
+        {
+          field: 'splatter',
+          values: ['yes']
+        }
+      ]
     }
   })(),
 
@@ -222,20 +247,39 @@ const variantFields = {
       ]
     }
   })(),
-  Splater2: (() => {
+  Splatter2: (() => {
     return {
-      name: 'splater2',
-      label: 'Splater',
+      name: 'splatter2',
+      label: 'Splatter',
       type: 'select', 
       options: [
-        { label: 'Yes Splater', value: 'yes' },
-        { label: 'No Splater', value: 'no' },
+        { label: 'Yes Splatter', value: 'yes' },
+        { label: 'No Splatter', value: 'no' },
       ],
-      default: 'yes',
+      default: 'no',
       conditional: [
         {
           field: 'sides',
           values: [4, 6]
+        }
+      ]
+    }
+  })(),
+  SplatterImage2: (() => {
+    return {
+      name: 'splatter_image2',
+      label: 'Splatter Image',
+      type: 'select', 
+      options: SPLATTERIMAGE_OPTS,
+      default: 'Purple',
+      conditional: [
+        {
+          field: 'sides',
+          values: [4, 6]
+        },
+        {
+          field: 'splatter2',
+          values: ['yes']
         }
       ]
     }
@@ -332,20 +376,39 @@ const variantFields = {
       ]
     }
   })(),
-  Splater3: (() => {
+  Splatter3: (() => {
     return {
-      name: 'splater3',
-      label: 'Splater',
+      name: 'splatter3',
+      label: 'Splatter',
       type: 'select', 
       options: [
-        { label: 'Yes Splater', value: 'yes' },
-        { label: 'No Splater', value: 'no' },
+        { label: 'Yes Splatter', value: 'yes' },
+        { label: 'No Splatter', value: 'no' },
       ],
-      default: 'yes',
+      default: 'no',
       conditional: [
         {
           field: 'sides',
           values: [6]
+        }
+      ]
+    }
+  })(),
+  SplatterImage3: (() => {
+    return {
+      name: 'splatter_image3',
+      label: 'Splatter Image',
+      type: 'select', 
+      options: SPLATTERIMAGE_OPTS,
+      default: 'Purple',
+      conditional: [
+        {
+          field: 'sides',
+          values: [6]
+        },
+        {
+          field: 'splatter3',
+          values: ['yes']
         }
       ]
     }
