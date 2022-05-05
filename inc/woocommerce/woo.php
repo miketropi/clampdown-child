@@ -304,7 +304,7 @@ add_action('request_quote_pdf_after_tr_item', 'clampdown_child_woo_raq_pdf_info_
 function clampdown_child_woo_raq_pdf_footer($order_id) {
   ?>
   <div class="raq-pdf-tc">
-    <h4><?php _e('Terms & Conditions') ?></h4>
+    <h4><?php _e('Terms & Conditions', 'clampdown-child') ?></h4>
     <p><?php _e('- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum porta eros eu imperdiet.', 'clampdown-child'); ?></p>
     <p><?php _e('- Pellentesque lobortis sagittis velit, non finibus dolor congue a.', 'clampdown-child') ?></p>
     <p><?php _e('- Donec interdum posuere auctor.', 'clampdown-child') ?></p>

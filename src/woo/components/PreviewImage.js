@@ -119,8 +119,6 @@ export const Record = ({ style, colour, colour2, useSplatter, splatterName }) =>
 }
 
 export default ({ variant, jacketcover, sides }) => {
-  const [visible, setVisible] = useState(false);
-  // console.log('test', variant)
   return <PreviewImageContainer>
     <JacketCoverImageContainer coverimage={ jacketcover } />
     <RecordImageContainer>
