@@ -99,6 +99,12 @@ export const Record = ({ style, colour, colour2, useSplatter, splatterName }) =>
 
   if(style === 'Colour') {
     recordImage2 = false;
+  } else if(style === 'Smash') {
+    recordImage = getRecordImage('Smash');
+    recordImage2 = false;
+  } else if(style === 'Clash') {
+    recordImage = getRecordImage('Clash');
+    recordImage2 = false;
   }
 
   return <RecordContainer>

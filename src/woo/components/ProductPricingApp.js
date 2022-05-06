@@ -63,7 +63,7 @@ export default function ProductPricingApp() {
     {
       if(result.result == 'exists') {
         newSendRequestMessage.type = 'warning';
-        newSendRequestMessage.message = <Fragment>{ __('This product is already in your quote request list. Remove this product on request list after add a new request. Thank you!', 'clampdown-child') }</Fragment>
+        newSendRequestMessage.message = <Fragment>{ __('This product is already in your quote request list. Remove this product on request list before add a new request. Thank you!', 'clampdown-child') }</Fragment>
         newSendRequestMessage.action = <Button type="primary" target="_blank" href={ result.rqa_url }>{ __('Go to Request List', 'clampdown-child') }</Button>
       } else {
         newSendRequestMessage.type = 'success';

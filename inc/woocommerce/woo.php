@@ -178,29 +178,210 @@ function clamdown_child_woo_product_single_content() {
       ?>
       <li class="product-pricing-data-list__item"><strong>#<?php echo $index + 1; ?></strong></li>
       <li class="product-pricing-data-list__item"><span><?php _e('Number:', 'clampdown-child') ?></span> <?php echo $item['number'] ?></li>
-      <li class="product-pricing-data-list__item __divider"><hr /></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $item['style'] ?></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $item['colour'] ?></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $item['weight'] ?></li>
+      <li class="product-pricing-data-list__item __divider"><b>A/B</b> <hr /></li>
+      <?php clampdown_child_woo_render_sub_variants($item['style'], [
+        'colour' => $item['colour'],
+        'colour2' => $item['colour_1_2'],
+        'weight' => $item['weight'],
+        'useSplatter' => $item['splatter'],
+        'splatterImage' => $item['splatter_image'],
+      ]); ?>
       <?php
       if(in_array($sides, [4, 6, '4', '6'])) {
       ?>
-      <li class="product-pricing-data-list__item __divider"><hr /></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $item['style2'] ?></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $item['colour2'] ?></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $item['weight2'] ?></li>
+      <li class="product-pricing-data-list__item __divider"><b>C/D</b> <hr /></li>
+      <?php clampdown_child_woo_render_sub_variants($item['style2'], [
+        'colour' => $item['colour2'],
+        'colour2' => $item['colour_2_2'],
+        'weight' => $item['weight2'],
+        'useSplatter' => $item['splatter2'],
+        'splatterImage' => $item['splatter_image2'],
+      ]); ?>
       <?php
       }
 
       if(in_array($sides, [6, '6'])) {
       ?>
-      <li class="product-pricing-data-list__item __divider"><hr /></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $item['style3'] ?></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $item['colour3'] ?></li>
-      <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $item['weight3'] ?></li>
+      <li class="product-pricing-data-list__item __divider"><b>E/F</b> <hr /></li>
+      <?php clampdown_child_woo_render_sub_variants($item['style3'], [
+        'colour' => $item['colour3'],
+        'colour2' => $item['colour_3_2'],
+        'weight' => $item['weight3'],
+        'useSplatter' => $item['splatter3'],
+        'splatterImage' => $item['splatter_image3'],
+      ]); ?>
       <?php
       }
       echo '</ul>';
+    }
+  }
+
+  /**
+   * @param String $style
+   * @param Array $args
+   *  colour, colour2, weight, useSplatter, splatterImage
+   */
+  function clampdown_child_woo_render_sub_variants($style, $args = []) {
+    $useSplatter = $args['useSplatter'];
+    switch($style) {
+      case 'Standard Black': 
+        ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $style ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $args['weight'] ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Splatter:', 'clampdown-child') ?></span> <?php echo $useSplatter ?></li>
+        <?php if($useSplatter == 'yes') { ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('Splatter Colour:', 'clampdown-child') ?></span> <?php echo $args['splatterImage'] ?></li>
+        <?php } ?>
+        <?php
+        break;
+
+      case 'Colour': 
+        ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $style ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $args['colour'] ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $args['weight'] ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Splatter:', 'clampdown-child') ?></span> <?php echo $useSplatter ?></li>
+        <?php if($useSplatter == 'yes') { ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('Splatter Colour:', 'clampdown-child') ?></span> <?php echo $args['splatterImage'] ?></li>
+        <?php } ?>
+        <?php
+        break;
+
+      case 'Split': 
+      case 'Smash': 
+      case 'Clash': 
+      case 'Color In Color':
+        ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('Style:', 'clampdown-child') ?></span> <?php echo $style ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Colour:', 'clampdown-child') ?></span> <?php echo $args['colour'] ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Colour 2:', 'clampdown-child') ?></span> <?php echo $args['colour2'] ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Weight:', 'clampdown-child') ?></span> <?php echo $args['weight'] ?></li>
+        <li class="product-pricing-data-list__item"><span><?php _e('Splatter:', 'clampdown-child') ?></span> <?php echo $useSplatter ?></li>
+        <?php if($useSplatter == 'yes') { ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('Splatter Colour:', 'clampdown-child') ?></span> <?php echo $args['splatterImage'] ?></li>
+        <?php } ?>
+        <?php
+        break; 
+
+      defaut: 
+        ?>
+        <li class="product-pricing-data-list__item"><span><?php _e('#Undefined', 'clampdown-child') ?></span> #Undefined</li>
+        <?php
+        break;
+    }
+  }
+
+  function clampdown_child_woo_render_sub_variants_pdf($style, $args = []) {
+    $useSplatter = $args['useSplatter'];
+    switch($style) {
+      case 'Standard Black': 
+        ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $style; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $args['weight']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Splatter:', 'clampdown-child') ?> <?php echo $useSplatter; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php if($useSplatter == 'yes') { ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Splatter Colour:', 'clampdown-child') ?> <?php echo $args['splatterImage']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php } ?>
+        <?php
+        break;
+
+      case 'Colour': 
+        ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $style; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Colour:', 'clampdown-child') ?> <?php echo $args['colour']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $args['weight']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Splatter:', 'clampdown-child') ?> <?php echo $useSplatter; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php if($useSplatter == 'yes') { ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Splatter Colour:', 'clampdown-child') ?> <?php echo $args['splatterImage']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php } ?>
+        <?php
+        break;
+
+      case 'Split': 
+      case 'Smash': 
+      case 'Clash': 
+      case 'Color In Color':
+        ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Style:', 'clampdown-child') ?> <?php echo $style; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Colour:', 'clampdown-child') ?> <?php echo $args['colour']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Colour 2:', 'clampdown-child') ?> <?php echo $args['colour2']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Weight:', 'clampdown-child') ?> <?php echo $args['weight']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Splatter:', 'clampdown-child') ?> <?php echo $useSplatter; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php if($useSplatter == 'yes') { ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('Splatter Colour:', 'clampdown-child') ?> <?php echo $args['splatterImage']; ?></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php } ?>
+        <?php
+        break; 
+
+      defaut: 
+        ?>
+        <tr>
+          <td></td>
+          <td>↳ <?php _e('#Undefined:', 'clampdown-child') ?> #Undefined</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <?php
+        break;
     }
   }
 

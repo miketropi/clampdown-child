@@ -72,7 +72,7 @@ const variantFields = {
       label: 'Divider',
       type: 'divider',
       extra: {
-        frontendDividerLabel: 'Default',
+        frontendDividerLabel: 'A/B',
       },
     }
   })(),
@@ -171,7 +171,7 @@ const variantFields = {
         }
       ],
       extra: {
-        frontendDividerLabel: 'A/B',
+        frontendDividerLabel: 'C/D',
       },
     }
   })(),
@@ -300,7 +300,7 @@ const variantFields = {
         }
       ],
       extra: {
-        frontendDividerLabel: 'C/D',
+        frontendDividerLabel: 'E/F',
       },
     }
   })(),
