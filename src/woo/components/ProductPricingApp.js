@@ -138,7 +138,7 @@ export default function ProductPricingApp() {
         {
           styleWarningMessageShow == true &&
           <Alert
-            message="Warning"
+            // message="Warning"
             description={ __('These images are here for reference only. Colours will appear differently on different screens. We\'ve got lots of colours and can mix to your requirements.', 'clampdown-child') }
             type="warning"
             showIcon
