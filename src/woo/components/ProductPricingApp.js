@@ -25,6 +25,7 @@ export default function ProductPricingApp() {
 
   const [sendRequest, setSendRequest] = useState(false);
   const [sendRequestMessage, setSendRequestMessage] = useState({type: 'info', message: '', action: ''});
+  const [styleWarningMessageShow, setStyleWarningMessageShow] = useState(false);
 
   if(loading == true) {
     return <Fragment>{ __('Loading...', 'clampdown-child') }</Fragment>
@@ -84,6 +85,28 @@ export default function ProductPricingApp() {
     console.log(result);
   }
 
+  const styleWarningMessageShow_func = (variantFields) => {
+    let { sides } = generalOptions;
+    let { style, style2, style3 } = variantFields;
+
+    if(['Smash', 'Clash'].includes(style)) {
+      setStyleWarningMessageShow(true);
+      return;
+    }
+
+    if([4, 6].includes(sides) && ['Smash', 'Clash'].includes(style2)) {
+      setStyleWarningMessageShow(true);
+      return;
+    }
+
+    if([6].includes(sides) && ['Smash', 'Clash'].includes(style3)) {
+      setStyleWarningMessageShow(true);
+      return;
+    }
+
+    setStyleWarningMessageShow(false);
+  }
+
   return <Fragment>
     {
       (sendRequestMessage.message != '') && 
@@ -112,6 +135,18 @@ export default function ProductPricingApp() {
           jacketcover={ productExtraData?.product_thumbnail_url }
           sides={ generalOptions?.sides } />
         
+        {
+          styleWarningMessageShow == true &&
+          <Alert
+            message="Warning"
+            description={ __('These images are here for reference only. Colours will appear differently on different screens. We\'ve got lots of colours and can mix to your requirements.', 'clampdown-child') }
+            type="warning"
+            showIcon
+            closable
+            style={{ marginBottom: '3em' }}
+          />
+        }
+
         <VariablesPlace onChange={ onChangeVariablePlace } />
         
         <CustomerPricingForm 
@@ -123,6 +158,7 @@ export default function ProductPricingApp() {
             _variables[currentVariable].__TOTAL__ = _obj.eachVariantTotal();
 
             setVariables(_variables);
+            styleWarningMessageShow_func(allFields);
           } } 
           fields={ variables[currentVariable] } />
       </Col>

@@ -48,6 +48,16 @@ export default function CustomerPricingForm({ onChange, fields }) {
   const onFinish = (values) => {
     console.log(values);
   }
+
+  const warningPopupMessage = (changedValues, allValues) => {
+    const fieldName = Object.keys(changedValues)[0];
+    const fieldValue = Object.values(changedValues)[0];
+    console.log('__', fieldName, fieldValue);
+
+    if(['style', 'style2', 'style3'].includes(fieldName) && ['Smash', 'Clash'].includes(fieldValue)) {
+      alert('Hello...!');
+    }
+  }
   
   return <CustomerPricingFormContainer>
     {/* { JSON.stringify(fields) } */}
@@ -56,7 +66,10 @@ export default function CustomerPricingForm({ onChange, fields }) {
       layout={ 'vertical' }
       name={ 'customer_pricing_data' }
       onFinish={ onFinish }
-      onValuesChange={ (changedValues, allValues) => { onChange(allValues)} }>
+      onValuesChange={ (changedValues, allValues) => { 
+        // warningPopupMessage(changedValues, allValues)
+        onChange(allValues)} 
+      }>
       <FormInnerContainer>
         {
           Object.keys(customerPricingFields).length > 0 && 
