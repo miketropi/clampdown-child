@@ -87,6 +87,41 @@ a.remove:hover {
   z-index: 1;
 }
 
+.back-url-style {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1em;
+  color: black;
+  font-size: 16px;
+  line-height: normal;
+}
+.back-url-style .__icon {
+  display: inline-block;
+  line-height: 0;
+  width: 20px;
+  margin-right: 10px;
+}
+.back-url-style .__icon svg {
+  width: 100%;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+.back-url-style:hover svg {
+  fill: #40a9ff;
+}
+
+.woocommerce-message.woocommerce-info, .woocommerce-message.woocommerce-message,
+.woocommerce-Message.woocommerce-info,
+.woocommerce-Message.woocommerce-message {
+  border-top-color: black;
+}
+.woocommerce-message .woocommerce-Button,
+.woocommerce-Message .woocommerce-Button {
+  padding: 10px 20px;
+  line-height: normal;
+  font-size: 16px;
+}
+
 .main-header {
   padding: 1.5em 0;
 }
@@ -194,7 +229,7 @@ form#yith-ywraq-default-form input[type=submit] {
 .ywraq-view-quote-wrapper table.shop_table.order_details {
   background: none;
   border: solid black;
-  border-width: 0 1px 0 1px;
+  border-width: 0 1px 1px 1px;
 }
 .ywraq-view-quote-wrapper table.shop_table.order_details th, .ywraq-view-quote-wrapper table.shop_table.order_details td {
   padding: 15px !important;
@@ -253,19 +288,26 @@ form#yith-ywraq-default-form input[type=submit] {
   border-color: black;
 }
 
-.woocommerce-MyAccount-navigation ul {
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
   position: sticky;
   top: 60px;
+  padding: 1.5em !important;
+  border: solid 1px #cce7ff;
+  background: #f3f9ff;
+  border-radius: 2px;
 }
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link {
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link {
   margin: 0 !important;
   line-height: normal;
   display: flex;
   width: 100%;
   padding: 10px 0;
 }
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link > a {
-  font-size: 1.3rem;
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link > a {
+  font-size: 16px;
+}
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link.is-active > a {
+  font-weight: bold !important;
 }
 
 .ywraq-additional-information > div {
@@ -290,6 +332,27 @@ table.shop_table.shop_table_responsive.my_account_quotes.my_account_orders tbody
 
 .woocommerce-form-coupon-toggle a.showcoupon {
   border-bottom: solid 1px;
+}
+
+.ywraq-status.ywraq-new {
+  color: #000000;
+  padding: 4px;
+  border: solid 1px #ffd072;
+  font-size: 14px;
+  border-radius: 3px;
+  background: #fff9ed;
+}
+.ywraq-status.ywraq-accepted {
+  color: #000000;
+  padding: 4px;
+  border: solid 1px #cce7ff;
+  font-size: 14px;
+  border-radius: 3px;
+  background: #f3f9ff;
+}
+
+.woocommerce-account .woocommerce-MyAccount-content p {
+  margin: 10px 0;
 }
 
 .product-pricing-data-list {

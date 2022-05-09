@@ -85,7 +85,7 @@ form#yith-ywraq-default-form {
 .ywraq-view-quote-wrapper table.shop_table.order_details {
   background: none;
   border: solid black;
-  border-width: 0 1px 0 1px;
+  border-width: 0 1px 1px 1px;
 
   th, td {
     padding: 15px !important;
@@ -174,21 +174,36 @@ form#yith-ywraq-default-form {
   }
 }
 
-.woocommerce-MyAccount-navigation {
+.woocommerce-account {
 
-  ul {
-    position: sticky;
-    top: 60px;
+  .woocommerce-MyAccount-navigation {
 
-    li.woocommerce-MyAccount-navigation-link {
-      margin: 0 !important;
-      line-height: normal;
-      display: flex;
-      width: 100%; 
-      padding: 10px 0; 
-
-      > a {
-        font-size: 1.3rem;
+    ul {
+      position: sticky;
+      top: 60px;
+  
+      padding: 1.5em !important;
+      border: solid 1px #cce7ff;
+      background: #f3f9ff;
+      border-radius: 2px;
+  
+      li.woocommerce-MyAccount-navigation-link {
+        margin: 0 !important;
+        line-height: normal;
+        display: flex;
+        width: 100%; 
+        padding: 10px 0; 
+  
+        > a {
+          font-size: 16px;
+        }
+  
+        &.is-active {
+  
+          > a {
+            font-weight: bold !important;
+          }
+        }
       }
     }
   }
@@ -234,4 +249,29 @@ table.shop_table.shop_table_responsive.my_account_quotes.my_account_orders {
   a.showcoupon {
     border-bottom: solid 1px;
   }
+}
+
+.ywraq-status {
+
+  &.ywraq-new {
+    color: #000000;
+    padding: 4px;
+    border: solid 1px #ffd072;
+    font-size: 14px;
+    border-radius: 3px;
+    background: #fff9ed;
+  }
+
+  &.ywraq-accepted {
+    color: #000000;
+    padding: 4px;
+    border: solid 1px #cce7ff;
+    font-size: 14px;
+    border-radius: 3px;
+    background: #f3f9ff;
+  }
+}
+
+.woocommerce-account .woocommerce-MyAccount-content p {
+  margin: 10px 0;
 }
