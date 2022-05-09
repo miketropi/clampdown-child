@@ -99,3 +99,7 @@ a.remove:hover {
   }
 }
 
+#content {
+  position: relative;
+  z-index: 1;
+}
