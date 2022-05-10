@@ -127,6 +127,13 @@ form#yith-ywraq-default-form {
     border-top: solid 1px black;
     border-bottom: solid 1px black;
 
+    tr {
+
+      &:not(:last-child) {
+        border-bottom: solid 1px;
+      }
+    }
+
     th {
       text-align: right;
     }
@@ -181,11 +188,8 @@ form#yith-ywraq-default-form {
     ul {
       position: sticky;
       top: 60px;
-  
-      padding: 1.5em !important;
-      border: solid 1px #cce7ff;
-      background: #f3f9ff;
-      border-radius: 2px;
+      border: solid #e5e5e5;
+      border-width: 1px 0;
   
       li.woocommerce-MyAccount-navigation-link {
         margin: 0 !important;
@@ -193,15 +197,41 @@ form#yith-ywraq-default-form {
         display: flex;
         width: 100%; 
         padding: 10px 0; 
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #e5e5e5;
+        }
   
         > a {
           font-size: 16px;
+          position: relative;
+          display: block;
+          width: 100%;
+
+          &:focus {
+            background: none !important;
+          }
+
+          &:after {
+            content: "";
+            right: 0;
+            top: 0; 
+            position: absolute;
+            height: 100%;
+            width: 14px;
+            background: url('../../images/next-arrow.svg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center center;
+          }
         }
-  
+
         &.is-active {
   
           > a {
             font-weight: bold !important;
+            border-bottom: none !important;
+            text-decoration: none;
           }
         }
       }
@@ -274,4 +304,14 @@ table.shop_table.shop_table_responsive.my_account_quotes.my_account_orders {
 
 .woocommerce-account .woocommerce-MyAccount-content p {
   margin: 10px 0;
+}
+
+table.shop_table.shop_table_responsive.my_account_quotes.my_account_orders {
+  border: solid black;
+  border-width: 0 1px;
+}
+
+.woocommerce-account table.account-orders-table {
+  border: solid black !important;
+  border-width: 0 1px 1px !important;
 }

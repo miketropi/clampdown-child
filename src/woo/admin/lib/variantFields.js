@@ -1,4 +1,5 @@
 import SplatterData from '../../../json/splatter/splatter';
+import ColourInColour from '../../../json/colour-in-colour/colour-in-colour';
 
 const STYLE_OPTS = [
   { label: 'Standard Black Style', value: 'Standard Black' },
@@ -52,6 +53,14 @@ const SPLATTERIMAGE_OPTS = SplatterData.map(s => {
     value: name,
   }
 })
+
+const COLOURINCOLOUR_OPTS = ColourInColour.map(c => {
+  const { label, name } = c;
+  return {
+    label: `Colour In ${ label }`,
+    value: name,
+  }
+});
 
 const variantFields = {
   Number: (() => {
@@ -113,7 +122,22 @@ const variantFields = {
       conditional: [
         {
           field: 'style',
-          values: ['Split', 'Smash', 'Clash', 'Color In Color']
+          values: ['Split', 'Smash', 'Clash']
+        }
+      ]
+    }
+  })(),
+  ColourInColour: (() => {
+    return {
+      name: 'colour_in_colour',
+      label: 'Colour In Colour',
+      type: 'select',
+      options: COLOURINCOLOUR_OPTS,
+      default: 'Black',
+      conditional: [
+        {
+          field: 'style',
+          values: ['Color In Color'] 
         }
       ]
     }
