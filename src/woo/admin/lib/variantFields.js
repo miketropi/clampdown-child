@@ -250,7 +250,26 @@ const variantFields = {
         },
         {
           field: 'style2',
-          values: ['Split', 'Smash', 'Clash', 'Color In Color']
+          values: ['Split', 'Smash', 'Clash']
+        }
+      ]
+    }
+  })(),
+  ColourInColour2: (() => {
+    return {
+      name: 'colour_in_colour2',
+      label: 'Colour In Colour',
+      type: 'select',
+      options: COLOURINCOLOUR_OPTS,
+      default: 'Black',
+      conditional: [
+        {
+          field: 'sides',
+          values: [4, 6]
+        },
+        {
+          field: 'style2',
+          values: ['Color In Color'] 
         }
       ]
     }
@@ -380,6 +399,25 @@ const variantFields = {
         {
           field: 'style3',
           values: ['Split', 'Smash', 'Clash', 'Color In Color']
+        }
+      ]
+    }
+  })(),
+  ColourInColour3: (() => {
+    return {
+      name: 'colour_in_colour3',
+      label: 'Colour In Colour',
+      type: 'select',
+      options: COLOURINCOLOUR_OPTS,
+      default: 'Black',
+      conditional: [
+        {
+          field: 'sides',
+          values: [6]
+        },
+        {
+          field: 'style3',
+          values: ['Color In Color'] 
         }
       ]
     }

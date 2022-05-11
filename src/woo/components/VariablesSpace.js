@@ -80,7 +80,8 @@ export default function VariablesPlace({ onChange }) {
                         colour={ variables[n].colour } 
                         colour2={ variables[n].colour_1_2 } 
                         useSplatter={ variables[n].splatter }
-                        splatterName={ variables[n].splatter_image } />
+                        splatterName={ variables[n].splatter_image } 
+                        colourInColour={ variables[n].colour_in_colour } />
                     </VariableItem>
                   </Tooltip>
                 : <Tooltip title={ __('Add variant', 'clampdown-child') } placement="bottom" >

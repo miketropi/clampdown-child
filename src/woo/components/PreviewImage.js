@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { getRecordImage, getSplatterImage } from '../admin/lib/lib';
+import { getRecordImage, getSplatterImage, getColourInColourImage } from '../admin/lib/lib';
 import { Image } from 'antd';
 
 const PreviewImageContainer = styled.div`
@@ -72,6 +72,10 @@ const RecordContainer = styled.div`
     background-size: 100%;
     background-position: bottom left;
     background-repeat: no-repeat;
+
+    &.__style-Color-In-Color {
+      height: 100%;
+    }
   }
 
   .record-splatter-image {
@@ -87,10 +91,11 @@ const RecordContainer = styled.div`
   }
 `
 
-export const Record = ({ style, colour, colour2, useSplatter, splatterName }) => {
+export const Record = ({ style, colour, colour2, useSplatter, splatterName, colourInColour }) => {
   let recordImage = getRecordImage(colour);
   let recordImage2 = getRecordImage(colour2);
   let splatterImage = getSplatterImage(splatterName);
+  let colourInColourImage = getColourInColourImage(colourInColour);
 
   if(style === 'Standard Black') {
     recordImage = getRecordImage('Black');
@@ -105,6 +110,8 @@ export const Record = ({ style, colour, colour2, useSplatter, splatterName }) =>
   } else if(style === 'Clash') {
     recordImage = getRecordImage('Clash');
     recordImage2 = false;
+  } else if(style === 'Color In Color') {
+    recordImage2 = colourInColourImage;
   }
 
   return <RecordContainer>
@@ -114,7 +121,7 @@ export const Record = ({ style, colour, colour2, useSplatter, splatterName }) =>
     }
     {
       recordImage2 != false && 
-      <div className="record-image-2__shadow" style={{ 'backgroundImage': `url(${ recordImage2 })` }}></div>
+      <div className={ ['record-image-2__shadow', `__style-${ style.split(' ').join('-') }`].join(' ') } style={{ 'backgroundImage': `url(${ recordImage2 })` }}></div>
     }
     {
       useSplatter === 'yes' &&
@@ -133,7 +140,8 @@ export default ({ variant, jacketcover, sides }) => {
         colour={ variant?.colour } 
         colour2={ variant.colour_1_2 } 
         useSplatter={ variant.splatter }
-        splatterName={ variant.splatter_image } />
+        splatterName={ variant.splatter_image }
+        colourInColour={ variant.colour_in_colour } />
       {
         ([4, 6].includes(sides)) && 
         <Record 
@@ -141,7 +149,8 @@ export default ({ variant, jacketcover, sides }) => {
           colour={ variant?.colour2 } 
           colour2={ variant.colour_2_2 } 
           useSplatter={ variant.splatter2 }
-          splatterName={ variant.splatter_image2 } />
+          splatterName={ variant.splatter_image2 }
+          colourInColour={ variant.colour_in_colour2 } />
       }
       {
         (sides === 6) && 
@@ -150,7 +159,8 @@ export default ({ variant, jacketcover, sides }) => {
           colour={ variant?.colour3 } 
           colour2={ variant.colour_3_2 } 
           useSplatter={ variant.splatter3 }
-          splatterName={ variant.splatter_image3 } />
+          splatterName={ variant.splatter_image3 }
+          colourInColour={ variant.colour_in_colour3 } />
       }
     </RecordImageContainer>
   </PreviewImageContainer>

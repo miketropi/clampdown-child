@@ -21,6 +21,7 @@ import { variantFields } from './variantFields';
 import * as _7inch from '../../../json/7inch/7inch-data';
 import recordImages from '../../../json/image-records/image-records';
 import splatterImages from '../../../json/splatter/splatter';
+import ColourInColourImages from '../../../json/colour-in-colour/colour-in-colour';
 
 import map from 'lodash/map';
 
@@ -358,5 +359,10 @@ export const getRecordImage = (name) => {
 
 export const getSplatterImage = (name) => {
   let item = splatterImages.find(item => (item.name == name));
+  return item?.image_url || false;
+}
+
+export const getColourInColourImage = (name) => {
+  let item = ColourInColourImages.find(item => (item.name == name));
   return item?.image_url || false;
 }
