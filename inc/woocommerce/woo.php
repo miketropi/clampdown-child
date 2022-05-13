@@ -568,7 +568,7 @@ function clmapdown_child_woo_register_variant_record_images_settings() {
     'clampdown_child_woo_variant_record_images_settings_callback');
 } 
 
-add_action('admin_menu', 'clmapdown_child_woo_register_variant_record_images_settings', 99);
+// add_action('admin_menu', 'clmapdown_child_woo_register_variant_record_images_settings', 99);
 
 function clampdown_child_woo_variant_record_images_settings_callback() {
   ?>
@@ -577,3 +577,16 @@ function clampdown_child_woo_variant_record_images_settings_callback() {
   </div> <!-- #VARIANT_RECORD_IMAGES_SETTINGS -->
   <?php
 }
+
+function clampdown_child_create_new_order_button() {
+  ?>
+  <div class="new-order-buttons">
+    <a href="/pricing" target="_blank" class="button theme-button">
+      <span class="__icon"><?php echo clampdown_svg('order'); ?></span>
+      <?php _e('New Order', 'clampdown-child') ?>
+    </a>
+  </div>
+  <?php 
+}
+
+add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_order_button');
