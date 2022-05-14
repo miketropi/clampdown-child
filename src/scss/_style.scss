@@ -197,3 +197,31 @@ mark {
     }
   }
 }
+
+.woocommerce-MyAccount-navigation {
+
+  li.woocommerce-MyAccount-navigation-link {
+    opacity: .6;
+    transition: .3s ease;
+    -webkit-transition: .3s ease;
+
+    &:hover,
+    &.is-active {
+      opacity: 1;
+    }
+
+    a {
+
+      .__icon {
+        width: 22px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 6px;
+
+        svg {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

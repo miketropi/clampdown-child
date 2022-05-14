@@ -160,6 +160,24 @@ mark {
   fill: black;
 }
 
+.woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link {
+  opacity: 0.6;
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+}
+.woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link:hover, .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link.is-active {
+  opacity: 1;
+}
+.woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link a .__icon {
+  width: 22px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link a .__icon svg {
+  width: 100%;
+}
+
 .main-header {
   padding: 1.5em 0;
 }

@@ -590,3 +590,91 @@ function clampdown_child_create_new_order_button() {
 }
 
 add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_order_button');
+
+{
+  /**
+   * Add My Account Custom Link 
+   */
+
+  function clampdown_child_my_account_add_custom_link($menu_links){
+    $pos = 4;
+    $newItem = [
+      'upload-submit-files' => __('Upload / Submit Files', 'clampdown-child'),
+      'make-a-secure-payment' => __('Make a Secure Payment', 'clampdown-child'),
+      'upgrade-to-priority' => __('Upgrade To Priority?', 'clampdown-child'),
+    ];
+    $menu_links = array_slice($menu_links, 0, $pos) + $newItem + array_slice($menu_links, $pos);
+
+    $pos = 7;
+    $newItem = [
+      'update-payment-method' => __('Update Payment Method', 'clampdown-child'),
+      'tax-exemption' => __('Tax Exemption', 'clampdown-child'),
+      'submit-general-inquiry' => __('Submit General Inquiry', 'clampdown-child'),
+    ];
+    $menu_links = array_slice($menu_links, 0, $pos) + $newItem + array_slice($menu_links, $pos);
+
+    return $menu_links;
+
+  }
+
+  add_filter ( 'woocommerce_account_menu_items', 'clampdown_child_my_account_add_custom_link', 30 );
+
+  function clampdown_child_woo_add_custom_endpoint() {
+    // WP_Rewrite is my Achilles' heel, so please do not ask me for detailed explanation
+    add_rewrite_endpoint('upload-submit-files', EP_PAGES);
+    add_rewrite_endpoint('make-a-secure-payment', EP_PAGES);
+    add_rewrite_endpoint('upgrade-to-priority', EP_PAGES);
+    add_rewrite_endpoint('update-payment-method', EP_PAGES);
+    add_rewrite_endpoint('tax-exemption', EP_PAGES);
+    add_rewrite_endpoint('submit-general-inquiry', EP_PAGES);
+
+  }
+
+  add_action('init', 'clampdown_child_woo_add_custom_endpoint');
+
+  function clampdown_child_woo_my_account_upload_submit_files_endpoint_content() {
+    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+    _e('Upload / Submit Files...!', 'clampdown-child');
+  }
+
+  add_action( 'woocommerce_account_upload-submit-files_endpoint', 'clampdown_child_woo_my_account_upload_submit_files_endpoint_content' );
+  
+  function clampdown_child_woo_my_account_make_a_secure_payment_endpoint_content() {
+    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+    _e('Make a Secure Payment...!', 'clampdown-child');
+  }
+
+  add_action( 'woocommerce_account_make-a-secure-payment_endpoint', 'clampdown_child_woo_my_account_make_a_secure_payment_endpoint_content' );
+
+  function clampdown_child_woo_my_account_upgrade_to_priority_endpoint_content() {
+    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+    _e('Upgrade To Priority?', 'clampdown-child');
+  }
+
+  add_action( 'woocommerce_account_upgrade-to-priority_endpoint', 'clampdown_child_woo_my_account_upgrade_to_priority_endpoint_content' );
+
+  function clampdown_child_woo_my_account_update_payment_method_endpoint_content() {
+    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+    _e('Update Payment Method...!', 'clampdown-child');
+  }
+
+  add_action( 'woocommerce_account_update-payment-method_endpoint', 'clampdown_child_woo_my_account_update_payment_method_endpoint_content' );
+
+  function clampdown_child_woo_my_account_tax_exemption_endpoint_content() {
+    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+    _e('Tax Exemption...!', 'clampdown-child');
+  }
+
+  add_action( 'woocommerce_account_tax-exemption_endpoint', 'clampdown_child_woo_my_account_tax_exemption_endpoint_content' );
+
+  function clampdown_child_woo_my_account_submit_general_inquiry_endpoint_content() {
+    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+    _e('Submit General Inquiry...!', 'clampdown-child');
+  }
+
+  add_action( 'woocommerce_account_submit-general-inquiry_endpoint', 'clampdown_child_woo_my_account_submit_general_inquiry_endpoint_content' );
+
+  /**
+   * End
+   */
+}
