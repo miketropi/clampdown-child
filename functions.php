@@ -19,8 +19,10 @@
    */
   require(CLAMPDOWN_DIR . '/inc/static.php');
   require(CLAMPDOWN_DIR . '/inc/helpers.php');
+  require(CLAMPDOWN_DIR . '/inc/template-tags.php');
   require(CLAMPDOWN_DIR . '/inc/hooks.php');
   require(CLAMPDOWN_DIR . '/inc/ajax.php');
+  require(CLAMPDOWN_DIR . '/inc/options.php');
 
   if(class_exists('WooCommerce')) {
     require(CLAMPDOWN_DIR . '/inc/woocommerce/woo.php');

@@ -634,7 +634,8 @@ add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_orde
 
   function clampdown_child_woo_my_account_upload_submit_files_endpoint_content() {
     // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
-    _e('Upload / Submit Files...!', 'clampdown-child');
+    // _e('Upload / Submit Files...!', 'clampdown-child');
+    load_template(CLAMPDOWN_DIR . '/templates/woo/my-account/upload-submit-files.php', false);
   }
 
   add_action( 'woocommerce_account_upload-submit-files_endpoint', 'clampdown_child_woo_my_account_upload_submit_files_endpoint_content' );

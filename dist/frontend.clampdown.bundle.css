@@ -168,6 +168,11 @@ mark {
 .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link:hover, .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link.is-active {
   opacity: 1;
 }
+.woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px !important;
+  color: black;
+}
 .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link a .__icon {
   width: 22px;
   display: inline-block;
@@ -176,6 +181,116 @@ mark {
 }
 .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link a .__icon svg {
   width: 100%;
+}
+
+.cc-message-tag {
+  display: block;
+  padding: 1em;
+  border: solid 1px #eee;
+  background: white;
+  border-radius: 1px;
+  margin-bottom: 3em;
+}
+.cc-message-tag__title {
+  font-weight: bold;
+  font-size: 1em;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.cc-message-tag__content {
+  color: #5e5e5e;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.cc-message-tag__content > * {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.cc-message-tag__content p {
+  font-size: 0.9em !important;
+  line-height: normal;
+}
+.cc-message-tag__info {
+  border: solid 1px #d3eaff;
+  background: #f7fbff;
+}
+
+.upload-submit-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.upload-submit-form-container .wp-form-here {
+  width: calc(60% - 20px);
+}
+@media (max-width: 618px) {
+  .upload-submit-form-container .wp-form-here {
+    width: 100%;
+  }
+}
+.upload-submit-form-container .description-text {
+  width: calc(40% - 20px);
+}
+@media (max-width: 618px) {
+  .upload-submit-form-container .description-text {
+    width: 100%;
+  }
+}
+.upload-submit-form-container .description-text .sticky-inner {
+  position: sticky;
+  top: 42px;
+  padding: 1em;
+  border: solid 1px #eee;
+  border-top: solid 2px black;
+}
+.upload-submit-form-container .description-text .sticky-inner h4 {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+}
+.upload-submit-form-container .description-text .sticky-inner a {
+  border-bottom: solid 1px;
+}
+.upload-submit-form-container .description-text .sticky-inner ul, .upload-submit-form-container .description-text .sticky-inner ol {
+  padding: 0 0 0 17px;
+  margin: 0;
+}
+.upload-submit-form-container .description-text .sticky-inner ul li, .upload-submit-form-container .description-text .sticky-inner ol li {
+  font-size: 0.9em;
+  padding: 10px 0;
+  line-height: 1.5em;
+}
+.upload-submit-form-container .description-text .sticky-inner ul li:not(:last-child), .upload-submit-form-container .description-text .sticky-inner ol li:not(:last-child) {
+  border-bottom: solid 1px #eee;
+}
+
+.wpforms-form .wpforms-field-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px !important;
+  color: black !important;
+}
+
+.wpforms-form button[type=submit] {
+  background: black !important;
+  color: white !important;
+  border: none !important;
+  width: 100% !important;
+  font-family: Arial;
+}
+.wpforms-form button[type=submit]:hover {
+  opacity: 0.8;
+}
+
+.my-account-page-title {
+  font-size: 1.5em;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.wpforms-confirmation-container-full,
+div[submit-success] > .wpforms-confirmation-container-full:not(.wpforms-redirection-message) {
+  background: #f2ffeb !important;
+  border: 1px solid #d7efc5 !important;
+  padding: 6px 10px !important;
 }
 
 .main-header {

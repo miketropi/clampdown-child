@@ -20,8 +20,25 @@ import './scss/main.scss';
     })
   }
 
+  const uploadSubmitFilesCustomOrderOptions_Func = () => {
+    let $selects = $('.custom-options-order-by-user-logged select');
+    // console.log($fields);
+    $.each($selects, (index, $s) => {
+      const choices = new Choices($s);
+      choices.setChoices(async () => {
+        try {
+          
+        } catch(err) {
+          console.log(err)
+        }
+      })
+    })
+    
+  }
+
   const Ready = () => {
     requestQuoteShowMoreDataList_Func();
+    uploadSubmitFilesCustomOrderOptions_Func();
   }
 
   /**
