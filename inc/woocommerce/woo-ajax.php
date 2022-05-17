@@ -35,12 +35,7 @@ add_action('wp_ajax_clampdown_child_woo_ajax_save_product_pricing_settings', 'cl
 add_action('wp_ajax_nopriv_clampdown_child_woo_ajax_save_product_pricing_settings', 'clampdown_child_woo_ajax_save_product_pricing_settings');
 
 function clampdown_child_woo_get_orders_by_user_logged_in() {
-  $result = wc_get_orders([
-    'customer_id' => get_current_user_id(),
-    'limit' => -1,
-  ]);
-
-  wp_send_json([get_current_user_id(), $result]);
+  wp_send_json(clampdown_child_woo_render_option_orders_by_user(get_current_user_id()));
 }
 
 add_action('wp_ajax_clampdown_child_woo_get_orders_by_user_logged_in', 'clampdown_child_woo_get_orders_by_user_logged_in');

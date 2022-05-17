@@ -679,3 +679,38 @@ add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_orde
    * End
    */
 }
+
+/**
+ * Render choices options orders by user ID
+ * 
+ * @param Int $userID
+ * @return Array 
+ */
+function clampdown_child_woo_render_option_orders_by_user($userID = 0) {
+  $allStatus = wc_get_order_statuses();
+  $orders = wc_get_orders([
+    'limit' => -1,
+    'customer_id' => $userID,
+  ]);
+
+  if(!$orders || count($orders) <= 0) return;
+  $result = [];
+
+  foreach($orders as $key => $o) {
+    $o_status = $allStatus['wc-' . $o->get_status()];
+    $o_date = date('F j, Y g:i a', strtotime($o->get_date_created()));
+    $label = sprintf('#%s - %s(%s) / %s / %s', $o->get_id(), $o->get_total(), $o->get_currency(), $o_date, $o_status);
+    $opt = [
+      'label' => $label,
+      'value' => $o->get_id()
+    ];
+
+    if($key == 0) {
+      $opt['selected'] = 1;
+    }
+
+    array_push($result, $opt);
+  }
+
+  return $result;
+}

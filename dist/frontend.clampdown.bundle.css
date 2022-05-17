@@ -292,6 +292,10 @@ div[submit-success] > .wpforms-confirmation-container-full:not(.wpforms-redirect
   border: 1px solid #d7efc5 !important;
   padding: 6px 10px !important;
 }
+.wpforms-confirmation-container-full p,
+div[submit-success] > .wpforms-confirmation-container-full:not(.wpforms-redirection-message) p {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .main-header {
   padding: 1.5em 0;

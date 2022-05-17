@@ -25,10 +25,19 @@ import './scss/main.scss';
     // console.log($fields);
     $.each($selects, (index, $s) => {
       const choices = new Choices($s);
+      choices.clearChoices();
+      choices.setChoiceByValue(null);
+    
       choices.setChoices(async () => {
         try {
-          const orders = await fetch(`${ CLAMPDOWN_PHP_DATA.ajaxurl }?action=clampdown_child_woo_get_orders_by_user_logged_in`);
-          console.log(orders.json());
+          const orders = await fetch(`${ CLAMPDOWN_PHP_DATA.ajaxurl }?action=clampdown_child_woo_get_orders_by_user_logged_in`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+          });
+          return await orders.json();
         } catch(err) {
           console.log(err)
         }
