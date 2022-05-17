@@ -701,7 +701,7 @@ function clampdown_child_woo_render_option_orders_by_user($userID = 0) {
     $o_date = date('F j, Y g:i a', strtotime($o->get_date_created()));
     $label = sprintf('#%s - %s(%s) / %s / %s', $o->get_id(), $o->get_total(), $o->get_currency(), $o_date, $o_status);
     $opt = [
-      'label' => $label,
+      'text' => $label,
       'value' => $o->get_id()
     ];
 
@@ -714,3 +714,21 @@ function clampdown_child_woo_render_option_orders_by_user($userID = 0) {
 
   return $result;
 }
+
+function clampdown_child_render_opts_order_gform($form) {
+  foreach ( $form['fields'] as &$field ) {
+    if ( $field->type != 'select' || strpos( $field->cssClass, 're-render-options-orders-by-current-user' ) === false ) {
+      continue;
+    }
+
+    $field->placeholder = 'Select a Order';
+    $field->choices = clampdown_child_woo_render_option_orders_by_user(get_current_user_id());
+  }
+
+  return $form;
+}
+
+add_filter( 'gform_pre_render_1', 'clampdown_child_render_opts_order_gform' );
+add_filter( 'gform_pre_validation_1', 'clampdown_child_render_opts_order_gform' );
+add_filter( 'gform_pre_submission_filter_1', 'clampdown_child_render_opts_order_gform' );
+add_filter( 'gform_admin_pre_render_1', 'clampdown_child_render_opts_order_gform' );

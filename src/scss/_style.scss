@@ -373,3 +373,8 @@ input[type=file]::file-selector-button {
   cursor: pointer;
   padding: 10px;
 }
+
+select {
+  padding: 10px !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}  
