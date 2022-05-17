@@ -235,7 +235,7 @@ mark {
   border: solid 1px #eee;
   background: white;
   border-radius: 1px;
-  margin-bottom: 3em;
+  margin-bottom: 1.5em;
 
   &__title {
     font-weight: bold;
@@ -290,6 +290,7 @@ mark {
       padding: 1em;
       border: solid 1px #eee; 
       border-top: solid 2px black;
+      margin-top: 1.5em;
 
       h4 {
         font-size: 1em;
@@ -353,4 +354,22 @@ div[submit-success]>.wpforms-confirmation-container-full:not(.wpforms-redirectio
   p {
     font-family: Arial, Helvetica, sans-serif;
   }
+}
+
+input[type=file] {
+  border: solid;
+  padding: 5px;
+  width: 100% !important;
+  display: block;
+  border-color: black;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type=file]::file-selector-button {
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
 }

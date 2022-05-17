@@ -16,7 +16,7 @@ clampdown_child_message_tag(
 
 <div class="upload-submit-form-container">
   <div class="wp-form-here">
-    <?php echo do_shortcode('[wpforms id="'. get_field('upload_submit_files_wp_form', 'option') .'"]') ?>
+    <?php echo do_shortcode(get_field('upload_submit_files_gform', 'option')) ?>
   </div>
   <div class="description-text">
     <div class="sticky-inner">
