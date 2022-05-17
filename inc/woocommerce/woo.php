@@ -642,7 +642,8 @@ add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_orde
   
   function clampdown_child_woo_my_account_make_a_secure_payment_endpoint_content() {
     // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
-    _e('Make a Secure Payment...!', 'clampdown-child');
+    // _e('Make a Secure Payment...!', 'clampdown-child');
+    load_template(CLAMPDOWN_DIR . '/templates/woo/my-account/make-a-secure-payment.php', false);
   }
 
   add_action( 'woocommerce_account_make-a-secure-payment_endpoint', 'clampdown_child_woo_my_account_make_a_secure_payment_endpoint_content' );
@@ -721,14 +722,19 @@ function clampdown_child_render_opts_order_gform($form) {
       continue;
     }
 
-    $field->placeholder = 'Select a Order';
+    $field->placeholder = __('Select your order', 'clampdown-child');
     $field->choices = clampdown_child_woo_render_option_orders_by_user(get_current_user_id());
   }
 
   return $form;
 }
 
-add_filter( 'gform_pre_render_1', 'clampdown_child_render_opts_order_gform' );
-add_filter( 'gform_pre_validation_1', 'clampdown_child_render_opts_order_gform' );
-add_filter( 'gform_pre_submission_filter_1', 'clampdown_child_render_opts_order_gform' );
-add_filter( 'gform_admin_pre_render_1', 'clampdown_child_render_opts_order_gform' );
+add_filter('gform_pre_render_1', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_pre_validation_1', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_pre_submission_filter_1', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_admin_pre_render_1', 'clampdown_child_render_opts_order_gform');
+
+add_filter('gform_pre_render_2', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_pre_validation_2', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_pre_submission_filter_2', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_admin_pre_render_2', 'clampdown_child_render_opts_order_gform');

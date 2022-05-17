@@ -321,6 +321,16 @@ select {
   font-family: Arial, Helvetica, sans-serif !important;
 }
 
+.gchoice .gfield-choice-input {
+  margin: 0 10px 0 0 !important;
+}
+
+.ginput_container_custom_card_fields {
+  padding: 20px;
+  background: #f3f3f3;
+  border: #e3e3e3 solid 1px;
+}
+
 .main-header {
   padding: 1.5em 0;
 }
