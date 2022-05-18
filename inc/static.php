@@ -17,8 +17,18 @@ function clampdown_enqueue_scripts() {
   wp_enqueue_style('clampdown-childtheme-style', CLAMPDOWN_URI . '/dist/frontend.clampdown.bundle.css', false, CLAMPDOWN_VER);
   wp_enqueue_script('clampdown-childtheme-script', CLAMPDOWN_URI . '/dist/frontend.clampdown.bundle.js', ['jquery'], CLAMPDOWN_VER, true); 
 
+  $user_info = get_userdata(get_current_user_id());
+  $first_name = $user_info ? $user_info->first_name : '';
+  $last_name = $user_info ? $user_info->last_name : '';
+  $user_email = $user_info ? $user_info->user_email : '';
+
   wp_localize_script('clampdown-childtheme-script', 'CLAMPDOWN_PHP_DATA', [
     'ajaxurl' => admin_url('admin-ajax.php'),
+    'autofill' => [
+      'fname' => $first_name,
+      'lname' => $last_name,
+      'user_email' => $user_email,
+    ],
     'lang' => [],
   ]);
 }

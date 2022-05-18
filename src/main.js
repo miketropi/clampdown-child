@@ -22,7 +22,8 @@ import './scss/main.scss';
 
   const uploadSubmitFilesCustomOrderOptions_Func = () => {
     let $selects = $('.custom-options-order-by-user-logged select');
-    // console.log($fields);
+    if($selects.length == 0) return; 
+
     $.each($selects, (index, $s) => {
       const choices = new Choices($s);
       choices.clearChoices();
@@ -43,7 +44,21 @@ import './scss/main.scss';
         }
       })
     })
-    
+  }
+
+  const autoFillGFormField = () => {
+    const { fname, lname, user_email } = CLAMPDOWN_PHP_DATA.autofill;
+
+    /**
+     * Name field
+     */
+    $('.autofill-billing-name').find('.name_first input').val(fname);
+    $('.autofill-billing-name').find('.name_last input').val(lname);
+
+    /**
+     * User email field
+     */
+    $('.autofill-user-email').find('input').val(user_email);
   }
 
   const Ready = () => {
@@ -56,4 +71,11 @@ import './scss/main.scss';
    * 
    */
   $(Ready);
+
+  /**
+   * 
+   */
+  $(w).on('load', () => {
+    autoFillGFormField();
+  })
 })(window, jQuery)
