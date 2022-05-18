@@ -18,6 +18,13 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'Custom My Account',
 		'parent_slug'	=> 'clampdown-settings',
   ]);
+
+	acf_add_options_sub_page([
+    'page_title' 	=> 'Email Template 📧',
+		'menu_title'	=> 'Email Template 📧',
+		'menu_slug' 	=> 'clampdown-settings-email-template',
+		'parent_slug'	=> 'clampdown-settings',
+  ]);
 }
 
 if( function_exists('acf_add_local_field_group') ):

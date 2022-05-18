@@ -592,6 +592,16 @@ function clampdown_child_create_new_order_button() {
 add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_order_button');
 
 {
+  function clampdown_child_my_account_remove_some_link($menu_links) {
+    unset($menu_links['downloads']);
+    unset($menu_links['make-a-secure-payment']);
+    unset($menu_links['upgrade-to-priority']);
+    unset($menu_links['update-payment-method']);
+    return $menu_links;
+  }
+
+  add_filter ( 'woocommerce_account_menu_items', 'clampdown_child_my_account_remove_some_link', 40 );
+
   /**
    * Add My Account Custom Link 
    */
