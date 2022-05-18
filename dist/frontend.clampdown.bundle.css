@@ -598,6 +598,10 @@ table.shop_table.shop_table_responsive.my_account_quotes.my_account_orders {
   border-width: 0 1px 1px !important;
 }
 
+.return-to-shop {
+  display: none;
+}
+
 .product-pricing-data-list {
   margin-top: 1em;
   padding-top: 1em;

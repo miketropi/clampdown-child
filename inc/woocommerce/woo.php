@@ -748,3 +748,32 @@ add_filter('gform_pre_render_2', 'clampdown_child_render_opts_order_gform');
 add_filter('gform_pre_validation_2', 'clampdown_child_render_opts_order_gform');
 add_filter('gform_pre_submission_filter_2', 'clampdown_child_render_opts_order_gform');
 add_filter('gform_admin_pre_render_2', 'clampdown_child_render_opts_order_gform');
+
+function clampdown_child_woo_raq_after_create_order($order_id, $POST, $raq) {
+  $order = new WC_Order($order_id);
+  $order->update_status('ywraq-accepted');
+  update_post_meta($order_id, '_ywraq_deposit_enable', 1); // enable deposit
+  update_post_meta($order_id, '_ywraq_deposit_rate', 50); // set deposit rate 50%
+}
+
+add_action('ywraq_after_create_order', 'clampdown_child_woo_raq_after_create_order', 20, 3);
+
+function clampdown_child_woo_raq_custom_thanks_message($message, $new_order, $quote_number_link) {
+  $order = new WC_Order($new_order);
+  ob_start();
+  ?>
+  <a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay">
+    <?php esc_html_e('Pay Now', 'clampdown-child'); ?>
+  </a>
+  <?php 
+  $buttonGoCheckout = ob_get_clean();
+  $message .= $buttonGoCheckout;
+  return $message;
+}
+
+add_filter('ywraq_simple_thank_you_message', 'clampdown_child_woo_raq_custom_thanks_message', 20, 3);
+// add_action('init', function() {
+//   if(!isset($_GET['dev'])) return;
+//   update_post_meta(211, '_ywraq_deposit_enable', 1);
+//   update_post_meta(211, '_ywraq_deposit_rate', 50);
+// });
