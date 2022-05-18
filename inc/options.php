@@ -20,9 +20,9 @@ if( function_exists('acf_add_options_page') ) {
   ]);
 
 	acf_add_options_sub_page([
-    'page_title' 	=> 'Email Template 📧',
-		'menu_title'	=> 'Email Template 📧',
-		'menu_slug' 	=> 'clampdown-settings-email-template',
+    'page_title' 	=> 'RaQ Email Template 📧',
+		'menu_title'	=> 'RaQ Email 📧',
+		'menu_slug' 	=> 'clampdown-settings-raq-email-template',
 		'parent_slug'	=> 'clampdown-settings',
   ]);
 }

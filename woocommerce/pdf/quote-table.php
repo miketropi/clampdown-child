@@ -182,6 +182,8 @@ $colspan = 0;
 			if ( 'no' === get_option( 'ywraq_pdf_hide_total_row', 'no' ) ) {
 				foreach ( $order->get_order_item_totals() as $key => $total ) {
 					if ( ! apply_filters( 'ywraq_hide_payment_method_pdf', false ) || 'payment_method' !== $key ) :
+						// Clampdown custom code (show price without tax & ship)
+						if($total['label'] != 'Subtotal:') continue;
 						?>
 						<tr>
 							<th scope="col" colspan="<?php echo esc_attr( ( $colspan > 0 ) ? $colspan - 1 : 0 ); ?>"
