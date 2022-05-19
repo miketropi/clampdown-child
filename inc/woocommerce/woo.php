@@ -777,3 +777,11 @@ add_filter('ywraq_simple_thank_you_message', 'clampdown_child_woo_raq_custom_tha
 //   update_post_meta(211, '_ywraq_deposit_enable', 1);
 //   update_post_meta(211, '_ywraq_deposit_rate', 50);
 // });
+
+add_action('wp_head', function() {
+  if( is_shop() ) :
+
+    wp_redirect('/pricing');
+
+  endif;
+});

@@ -14,8 +14,9 @@ if( function_exists('acf_add_options_page') ) {
   ]);
 
   acf_add_options_sub_page([
-    'page_title' 	=> 'Custom My Account',
-		'menu_title'	=> 'Custom My Account',
+    'page_title' 	=> 'My Account 🙎‍♂️',
+		'menu_title'	=> 'My Account 🙎‍♂️',
+		'menu_slug' 	=> 'acf-options-custom-my-account',
 		'parent_slug'	=> 'clampdown-settings',
   ]);
 
@@ -23,6 +24,13 @@ if( function_exists('acf_add_options_page') ) {
     'page_title' 	=> 'RaQ Email Template 📧',
 		'menu_title'	=> 'RaQ Email 📧',
 		'menu_slug' 	=> 'clampdown-settings-raq-email-template',
+		'parent_slug'	=> 'clampdown-settings',
+  ]);
+
+	acf_add_options_sub_page([
+    'page_title' 	=> 'RaQ PDF 🧾',
+		'menu_title'	=> 'RaQ PDF 🧾',
+		'menu_slug' 	=> 'clampdown-settings-raq-pdf',
 		'parent_slug'	=> 'clampdown-settings',
   ]);
 }
