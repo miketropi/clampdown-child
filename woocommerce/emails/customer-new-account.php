@@ -21,7 +21,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p>Welcome to Clampdown Record Pressing</p>
 
-<p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></p>,
+<p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></p>
 
 <p>Thanks for creating an account on Clampdown Record Pressing. Your username is <?php echo $user_login; ?>.</p>
 
