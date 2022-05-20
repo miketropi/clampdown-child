@@ -789,7 +789,7 @@ add_action('wp_head', function() {
 function clampdown_child_woo_add_custom_email_format_string($string, $email) {
   $placeholder = '{order_id}'; // The corresponding placeholder to be used
   $order = $email->object; // Get the instance of the WC_Order Object
-  $value = $order ? $order->get_id() : ''; // Get the value
+  $value = $order ? 'Order #' . $order->get_id() : ''; // Get the value
 
   // Return the clean replacement value string for "{order_id}" placeholder
   return str_replace($placeholder, $value, $string);
