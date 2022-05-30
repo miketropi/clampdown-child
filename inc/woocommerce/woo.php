@@ -750,6 +750,11 @@ add_filter('gform_pre_validation_2', 'clampdown_child_render_opts_order_gform');
 add_filter('gform_pre_submission_filter_2', 'clampdown_child_render_opts_order_gform');
 add_filter('gform_admin_pre_render_2', 'clampdown_child_render_opts_order_gform');
 
+add_filter('gform_pre_render_3', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_pre_validation_3', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_pre_submission_filter_3', 'clampdown_child_render_opts_order_gform');
+add_filter('gform_admin_pre_render_3', 'clampdown_child_render_opts_order_gform');
+
 function clampdown_child_woo_raq_after_create_order($order_id, $POST, $raq) {
   $order = new WC_Order($order_id);
   $order->update_status('ywraq-accepted');
