@@ -11,5 +11,5 @@ function clampdown_load_header() {
  */
 function clampdown_svg($name) {
   $icons = require(__DIR__ . '/svg.php'); 
-  return ($icons[$name]) ? $icons[$name] : '';
+  return (isset($icons[$name])) ? $icons[$name] : '';
 }

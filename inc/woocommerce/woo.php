@@ -618,7 +618,7 @@ add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_orde
     $pos = 7;
     $newItem = [
       'update-payment-method' => __('Update Payment Method', 'clampdown-child'),
-      'tax-exemption' => __('Tax Exemption', 'clampdown-child'),
+      // 'tax-exemption' => __('Tax Exemption', 'clampdown-child'),
       'submit-general-inquiry' => __('Submit General Inquiry', 'clampdown-child'),
     ];
     $menu_links = array_slice($menu_links, 0, $pos) + $newItem + array_slice($menu_links, $pos);
@@ -635,7 +635,7 @@ add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_orde
     add_rewrite_endpoint('make-a-secure-payment', EP_PAGES);
     add_rewrite_endpoint('upgrade-to-priority', EP_PAGES);
     add_rewrite_endpoint('update-payment-method', EP_PAGES);
-    add_rewrite_endpoint('tax-exemption', EP_PAGES);
+    // add_rewrite_endpoint('tax-exemption', EP_PAGES);
     add_rewrite_endpoint('submit-general-inquiry', EP_PAGES);
 
   }
@@ -672,16 +672,17 @@ add_action('woocommerce_before_account_orders', 'clampdown_child_create_new_orde
 
   add_action( 'woocommerce_account_update-payment-method_endpoint', 'clampdown_child_woo_my_account_update_payment_method_endpoint_content' );
 
-  function clampdown_child_woo_my_account_tax_exemption_endpoint_content() {
-    // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
-    _e('Tax Exemption...!', 'clampdown-child');
-  }
+  // function clampdown_child_woo_my_account_tax_exemption_endpoint_content() {
+  //   // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
+  //   _e('Tax Exemption...!', 'clampdown-child');
+  // }
 
-  add_action( 'woocommerce_account_tax-exemption_endpoint', 'clampdown_child_woo_my_account_tax_exemption_endpoint_content' );
-
+  // add_action( 'woocommerce_account_tax-exemption_endpoint', 'clampdown_child_woo_my_account_tax_exemption_endpoint_content' );
+ 
   function clampdown_child_woo_my_account_submit_general_inquiry_endpoint_content() {
     // of course you can print dynamic content here, one of the most useful functions here is get_current_user_id()
-    _e('Submit General Inquiry...!', 'clampdown-child');
+    // _e('Submit General Inquiry...!', 'clampdown-child');
+    load_template(CLAMPDOWN_DIR . '/templates/woo/my-account/submit-general-inquiry.php', false);
   }
 
   add_action( 'woocommerce_account_submit-general-inquiry_endpoint', 'clampdown_child_woo_my_account_submit_general_inquiry_endpoint_content' );

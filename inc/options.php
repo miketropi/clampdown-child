@@ -20,12 +20,12 @@ if( function_exists('acf_add_options_page') ) {
 		'parent_slug'	=> 'clampdown-settings',
   ]);
 
-	acf_add_options_sub_page([
-    'page_title' 	=> 'RaQ Email Template 📧',
-		'menu_title'	=> 'RaQ Email 📧',
-		'menu_slug' 	=> 'clampdown-settings-raq-email-template',
-		'parent_slug'	=> 'clampdown-settings',
-  ]);
+	// acf_add_options_sub_page([
+  //   'page_title' 	=> 'RaQ Email Template 📧',
+	// 	'menu_title'	=> 'RaQ Email 📧',
+	// 	'menu_slug' 	=> 'clampdown-settings-raq-email-template',
+	// 	'parent_slug'	=> 'clampdown-settings',
+  // ]);
 
 	acf_add_options_sub_page([
     'page_title' 	=> 'RaQ PDF 🧾',
