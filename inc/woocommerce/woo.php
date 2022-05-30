@@ -802,3 +802,24 @@ function clampdown_child_woo_add_custom_email_format_string($string, $email) {
 }
 
 add_filter('woocommerce_email_format_string' , 'clampdown_child_woo_add_custom_email_format_string', 10, 2);
+
+/**
+ * Handle filters for including additional woocommerce statuses
+ *
+ * @param array $query_vars Query vars.
+ * @return array
+ */
+function clampdown_child_woo_include_order_status($query_vars) {
+  /**
+   * Using wc_get_order_types() instead of 'shop_order' as other order types could be added by other plugins
+   */
+  if(isset($_GET['post_type']) && $_GET['post_type'] == 'shop_order') {
+    if(isset($_GET['include_status']) && '' != $_GET['include_status'] && isset($query_vars['post_status'])) {
+      $include_status = explode(',', $_GET['include_status']);
+      $q_post_status[]  = $query_vars['post_status'];
+      $query_vars['post_status'] = array_merge($q_post_status, $include_status);
+    }
+  }
+  return $query_vars;
+}
+add_filter('request', 'clampdown_child_woo_include_order_status', 99, 1);
