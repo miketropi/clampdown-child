@@ -541,9 +541,7 @@ function clampdown_child_woo_raq_pdf_footer($order_id) {
   ?>
   <div class="raq-pdf-tc">
     <h4><?php _e('Terms & Conditions', 'clampdown-child') ?></h4>
-    <p><?php _e('- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum porta eros eu imperdiet.', 'clampdown-child'); ?></p>
-    <p><?php _e('- Pellentesque lobortis sagittis velit, non finibus dolor congue a.', 'clampdown-child') ?></p>
-    <p><?php _e('- Donec interdum posuere auctor.', 'clampdown-child') ?></p>
+    <p>This quote is valid for 7 days. Please note that an extra shipping and handling charge will be added at checkout. We simply charge what our carrier charges and they receive a discounted rate with their account because of the volume that they do and we are happy to pass that along to our customers.</p>
   </div>
   <div class="raq-pdf-footer">
     <div class="f-logo">
@@ -839,3 +837,23 @@ add_action('woocommerce_account_tax-exempt_endpoint', function() {
   </div>
   <?php
 }, 1);
+
+function clampdown_child_woo_attach_file_to_emails($attachments, $email_id, $order, $email) {
+  // $email_ids = array('new_order', 'customer_processing_order');
+  // if (in_array ( $email_id, $email_ids ) ) {
+  //   $upload_dir = wp_upload_dir();
+  //   $attachments[] = $upload_dir['basedir'] . "/2020/09/example.pdf";
+  // }
+
+  $file = get_field('clampdown_select_file_attachments', $args['order_id']);
+  if($file) {
+    $attachments[] = $file['url'];
+  }
+  return $attachments;
+}
+
+add_filter('woocommerce_email_attachments', 'clampdown_child_woo_attach_file_to_emails', 10, 4);
+
+// add_action('init', function() {
+//   var_dump(get_field('clampdown_select_file_attachments', 288));
+// });

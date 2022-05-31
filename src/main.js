@@ -61,6 +61,17 @@ import './scss/main.scss';
     $('.autofill-user-email').find('input').val(user_email);
   }
 
+  const autoFieldRaQFormField = () => {
+    const $form = $('form#yith-ywraq-default-form');
+    if($form.length <= 0) return;
+
+    const { fname, lname, user_email } = CLAMPDOWN_PHP_DATA.autofill;
+
+    $form.find('input[name=first_name]').val(fname)
+    $form.find('input[name=last_name]').val(lname)
+    $form.find('input[name=email]').val(user_email)
+  }
+
   const Ready = () => {
     requestQuoteShowMoreDataList_Func();
     uploadSubmitFilesCustomOrderOptions_Func();
@@ -77,5 +88,6 @@ import './scss/main.scss';
    */
   $(w).on('load', () => {
     autoFillGFormField();
+    autoFieldRaQFormField();
   })
 })(window, jQuery)

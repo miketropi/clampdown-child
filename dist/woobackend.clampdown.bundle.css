@@ -80,6 +80,10 @@
 .woocommerce_page_record-images-settings {
   background: #F7F7F7;
 }
+
+.yith-default-form__popup_wrapper.ui-dialog-content.ui-widget-content {
+  width: 100% !important;
+}
 /*!**************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/antd/dist/antd.css ***!
   \**************************************************************************************************************************/
