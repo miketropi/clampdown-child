@@ -845,10 +845,15 @@ function clampdown_child_woo_attach_file_to_emails($attachments, $email_id, $ord
   //   $attachments[] = $upload_dir['basedir'] . "/2020/09/example.pdf";
   // }
 
-  $file = get_field('clampdown_select_file_attachments', $order['order_id']);
-  if($file) {
-    $attachments[] = $file['url'];
+  // var_dump($order->get_data()['id']); die;
+  // var_dump($order->get_data()['status']); die;
+  if(!empty($order) && $order->get_data()) {
+    $file = get_field('clampdown_select_file_attachments', $order->get_data()['id']);
+    if($file) {
+      $attachments[] = $file['url'];
+    }
   }
+  
   return $attachments;
 }
 
