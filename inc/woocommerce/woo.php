@@ -850,8 +850,11 @@ function clampdown_child_woo_attach_file_to_emails($attachments, $email_id, $ord
   if(!empty($order) && $order->get_data()) {
     $file = get_field('clampdown_select_file_attachments', $order->get_data()['id']);
     if($file) {
-      $attachments[] = $file['url'];
+      // var_dump(get_attached_file($file['ID'])); die;
+      $attachments[] = get_attached_file($file['ID']);
     }
+
+    // var_dump($attachments); die;
   }
   
   return $attachments;
