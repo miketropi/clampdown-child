@@ -823,3 +823,19 @@ function clampdown_child_woo_include_order_status($query_vars) {
   return $query_vars;
 }
 add_filter('request', 'clampdown_child_woo_include_order_status', 99, 1);
+
+add_action('woocommerce_account_tax-exempt_endpoint', function() {
+  ?>
+  <div class="__tax-message-container">
+    <strong>Taxes sometimes need to be charged depending on where you are ordering from. If you have a tax number and feel you should be exempt, please enter in your details below and we will do our best to verify and exempt you. Read below for details:</strong>
+
+    <ul>
+      <li>If you are ordering from outside of Canada, don’t worry, we won't charge you tax on your records and you don't have to give us your tax number.</li>
+      <li>If you are ordering from inside of Canada, we have to charge you the 5% GST</li>
+      <li>If you are from Alberta you won't be charged PST</li>
+      <li>For anywhere else inside Canada,  if you have a PST# please enter it in here and we can exempt you from having to pay the PST to us directly</li>
+      <li>If you do not have a PST# and you are ordering from inside Canada, we will have to charge you both PST and GST at checkout</li>
+    </ul>
+  </div>
+  <?php
+}, 1);
