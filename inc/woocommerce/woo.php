@@ -845,7 +845,7 @@ function clampdown_child_woo_attach_file_to_emails($attachments, $email_id, $ord
   //   $attachments[] = $upload_dir['basedir'] . "/2020/09/example.pdf";
   // }
 
-  $file = get_field('clampdown_select_file_attachments', $args['order_id']);
+  $file = get_field('clampdown_select_file_attachments', $order['order_id']);
   if($file) {
     $attachments[] = $file['url'];
   }
