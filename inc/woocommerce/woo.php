@@ -791,12 +791,16 @@ add_action('wp_head', function() {
 });
 
 function clampdown_child_woo_add_custom_email_format_string($string, $email) {
-  $placeholder = '{order_id}'; // The corresponding placeholder to be used
   $order = $email->object; // Get the instance of the WC_Order Object
-  $value = $order ? 'Order #' . $order->get_id() : ''; // Get the value
+
+  $replaceMap = [
+    '{order_id}' => ($order ? 'Order #' . $order->get_id() : ''),
+    '{give_a_date}' => ($order ? get_field('give_a_date', $order->get_id()) : ''),
+  ];
 
   // Return the clean replacement value string for "{order_id}" placeholder
-  return str_replace($placeholder, $value, $string);
+  // return str_replace($placeholder, $value, $string);
+  return str_replace(array_keys($replaceMap), array_values($replaceMap), $string);
 }
 
 add_filter('woocommerce_email_format_string' , 'clampdown_child_woo_add_custom_email_format_string', 10, 2);
@@ -839,29 +843,38 @@ add_action('woocommerce_account_tax-exempt_endpoint', function() {
 }, 1);
 
 function clampdown_child_woo_attach_file_to_emails($attachments, $email_id, $order, $email) {
-  // $email_ids = array('new_order', 'customer_processing_order');
-  // if (in_array ( $email_id, $email_ids ) ) {
-  //   $upload_dir = wp_upload_dir();
-  //   $attachments[] = $upload_dir['basedir'] . "/2020/09/example.pdf";
-  // }
-
-  // var_dump($order->get_data()['id']); die;
-  // var_dump($order->get_data()['status']); die;
   if(!empty($order) && $order->get_data()) {
-    $file = get_field('clampdown_select_file_attachments', $order->get_data()['id']);
-    if($file) {
-      // var_dump(get_attached_file($file['ID'])); die;
-      $attachments[] = get_attached_file($file['ID']);
-    }
-
-    // var_dump($attachments); die;
+    $order_id = $order->get_data()['id'];
+    $order_status = $order->get_data()['status'];
+    $att = clampdown_child_woo_get_attachment_order_by_status($order_id, 'wc-' . $order_status);
+    $attachments = array_merge($attachments, $att);
   }
-  
+  // var_dump($attachments);die;
   return $attachments;
 }
 
 add_filter('woocommerce_email_attachments', 'clampdown_child_woo_attach_file_to_emails', 10, 4);
 
+function clampdown_child_woo_get_attachment_order_by_status($order_id, $status) {
+  $att = get_field('attachment_by_order_status', $order_id);
+  $files = [];
+  $attFilterByStatus = array_filter($att, function($item) use($status) {
+    return ($item['enable'] == true && $item['order_status_name'] == $status && $item['attachment']);
+  });
+
+  if(count($attFilterByStatus) > 0) {
+    foreach($attFilterByStatus as $item) {
+      $files[] = get_attached_file($item['attachment']['ID']);
+    }
+  }
+
+  return $files;
+}
+
 // add_action('init', function() {
-//   var_dump(get_field('clampdown_select_file_attachments', 288));
+//   if(isset($_GET['dev'])) {
+//     // var_dump(get_field('attachment_by_order_status', 288));
+//     $result = clampdown_child_woo_get_attachment_order_by_status(288, 'wc-invoice_11');
+//     var_dump($result);
+//   }
 // });
