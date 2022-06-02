@@ -891,3 +891,11 @@ add_action('init', function() {
     // return isset($formatted['formatted_tracking_link']) ? $formatted['formatted_tracking_link'] : '';
   }
 });
+
+add_filter('woocommerce_registration_error_email_exists', function($mess, $email) {
+  ob_start();
+  ?>
+  An account is already registered with your email address. <a href="/my-account" class="showlogin">Please log in.</a>
+  <?php
+  return ob_get_clean();
+}, 10, 2);
