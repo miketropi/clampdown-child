@@ -796,6 +796,7 @@ function clampdown_child_woo_add_custom_email_format_string($string, $email) {
   $replaceMap = [
     '{order_id}' => ($order ? 'Order #' . $order->get_id() : ''),
     '{give_a_date}' => ($order ? get_field('give_a_date', $order->get_id()) : ''),
+    '{tracking_url}' => ($order ? clampdown_child_woo_get_tracking_url_by_order($order->get_id()) : ''),
   ];
 
   // Return the clean replacement value string for "{order_id}" placeholder
@@ -871,10 +872,22 @@ function clampdown_child_woo_get_attachment_order_by_status($order_id, $status) 
   return $files;
 }
 
-// add_action('init', function() {
-//   if(isset($_GET['dev'])) {
-//     // var_dump(get_field('attachment_by_order_status', 288));
-//     $result = clampdown_child_woo_get_attachment_order_by_status(288, 'wc-invoice_11');
-//     var_dump($result);
-//   }
-// });
+function clampdown_child_woo_get_tracking_url_by_order($order_id = 0) {
+  if(!class_exists('WC_Shipment_Tracking_Actions')) return '';
+  $items = get_post_meta($order_id, '_wc_shipment_tracking_items', true);
+  if(empty($items)) return '(__NO_TRACKING_URL__)'; 
+  $formatted = WC_Shipment_Tracking_Actions::get_instance()->get_formatted_tracking_item($order_id, $items[0]);
+  return isset($formatted['formatted_tracking_link']) ? $formatted['formatted_tracking_link'] : '(__NO_TRACKING_URL__)';
+}
+
+add_action('init', function() {
+  if(isset($_GET['dev'])) {
+    // var_dump(get_field('attachment_by_order_status', 288));
+    // $result = clampdown_child_woo_get_attachment_order_by_status(288, 'wc-invoice_11');
+    // var_dump($result);
+    // $item = get_post_meta(288, '_wc_shipment_tracking_items', true);
+    // $formatted = WC_Shipment_Tracking_Actions::get_instance()->get_formatted_tracking_item(288, $item[0]);
+    // var_dump($formatted);
+    // return isset($formatted['formatted_tracking_link']) ? $formatted['formatted_tracking_link'] : '';
+  }
+});
