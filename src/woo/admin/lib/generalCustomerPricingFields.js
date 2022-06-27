@@ -22,7 +22,7 @@ const generalFields = {
       type: 'select', 
       // options: [0, 1, 2, 4, 6],
       options: [
-        { label: 'Zero Side', value: 0 },
+        { label: 'Zero Sides', value: 0 },
         { label: 'One Side', value: 1 },
         { label: 'Two Sides', value: 2 },
         { label: 'Four Sides', value: 4 },
@@ -130,7 +130,7 @@ const generalFields = {
       //   'Shrink Wrap'
       // ],
       options: [
-        { label: 'None Packaging', value: 'None' },
+        { label: 'No Packaging', value: 'None' },
         { label: 'Poly Bags Packaging', value: 'Poly Bags' },
         { label: 'Shrink Wrap Packaging', value: 'Shrink Wrap' },
       ],
@@ -150,7 +150,7 @@ const generalFields = {
       //   'Fancy',
       // ],
       options: [
-        { label: 'None Download Cards', value: 'None' },
+        { label: 'No Download Cards', value: 'None' },
         { label: 'Simple Download Cards', value: 'Simple' },
         { label: 'Fancy Download Cards', value: 'Fancy' },
       ],
@@ -168,7 +168,7 @@ const generalFields = {
       //   'Square',
       // ],
       options: [
-        { label: 'None Marketing Stickers', value: 'None' },
+        { label: 'No Marketing Stickers', value: 'None' },
         { label: 'Circle Marketing Stickers', value: 'Circle' },
         { label: 'Square Marketing Stickers', value: 'Square' },
       ],
