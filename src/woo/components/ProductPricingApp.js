@@ -139,7 +139,7 @@ export default function ProductPricingApp() {
           styleWarningMessageShow == true &&
           <Alert
             // message="Warning"
-            description={ __('These images are here for reference only to show you what a Clash Style looks like. Please choose the colour options you\'d like to use below. We\'ve got lots of colours and can mix to your requirements.', 'clampdown-child') }
+            description={ __('These images are here for reference only to show you what a Clash / Smash Style looks like. Please choose the colour options you\'d like to use below. We\'ve got lots of colours and can mix to your requirements.', 'clampdown-child') }
             type="warning"
             showIcon
             closable
