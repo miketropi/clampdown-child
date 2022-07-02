@@ -411,3 +411,26 @@ select {
     }
   }
 }
+
+#PRODUCT_PRICING_MODE_APP {
+
+  .ant-form-item {
+    margin-bottom: 20px;
+  }
+}
+
+html {
+  height: auto;
+}
+
+.product-template-default.single {
+  height: auto !important;
+
+  .main-header {
+    padding: 10px 0;
+  }
+
+  #main {
+    padding: 10px 0;
+  }
+}

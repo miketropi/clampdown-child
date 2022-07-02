@@ -150,7 +150,9 @@ export default function ProductPricingApp() {
         <VariablesPlace onChange={ onChangeVariablePlace } />
         
         <CustomerPricingForm 
-          onChange={ allFields => {
+          onChange={ (allFields, fieldChange) => {
+            // console.log('__', fieldChange, allFields);
+
             let _variables = [...variables];
             _variables[currentVariable] = allFields;
 

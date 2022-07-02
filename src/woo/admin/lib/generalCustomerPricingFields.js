@@ -70,7 +70,7 @@ const generalFields = {
         { label: 'Gatefold Jacket', value: 'Gatefold Jacket' },
         { label: 'Inner Loading Gatefold Jacket', value: 'Inner Loading Gatefold Jacket' },
         { label: 'Widespine Jacket', value: 'Widespine' },
-        { label: 'Foldover Jacket', value: 'Foldover' },
+        // { label: 'Foldover Jacket', value: 'Foldover' },
         { label: 'Disco Jacket', value: 'Disco' },
         { label: 'PicDiscSleeves Jacket', value: 'PicDiscSleeves' },
       ],

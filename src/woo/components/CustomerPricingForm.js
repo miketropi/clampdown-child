@@ -68,7 +68,8 @@ export default function CustomerPricingForm({ onChange, fields }) {
       onFinish={ onFinish }
       onValuesChange={ (changedValues, allValues) => { 
         // warningPopupMessage(changedValues, allValues)
-        onChange(allValues)} 
+        // console.log(changedValues);
+        onChange(allValues, changedValues)} 
       }>
       <FormInnerContainer>
         {

@@ -100,7 +100,7 @@ export default () => {
         })
       }
     </ul>
-    <div className="total-price">{ total }<span style={{ color: '#d5208b' }}>$</span></div>
+    <div className="total-price"><span style={{ color: '#d5208b' }}>$</span>{ total }</div>
     <small>{ __('Estimates are in CAD and excludes tax and shipping.', 'clampdown-child') }</small>
   </QuoteSummaryContainer>
 }

@@ -346,6 +346,24 @@ select {
   font-size: 0.9em;
 }
 
+#PRODUCT_PRICING_MODE_APP .ant-form-item {
+  margin-bottom: 20px;
+}
+
+html {
+  height: auto;
+}
+
+.product-template-default.single {
+  height: auto !important;
+}
+.product-template-default.single .main-header {
+  padding: 10px 0;
+}
+.product-template-default.single #main {
+  padding: 10px 0;
+}
+
 .main-header {
   padding: 1.5em 0;
 }

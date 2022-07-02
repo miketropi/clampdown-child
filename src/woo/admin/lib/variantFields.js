@@ -2,12 +2,12 @@ import SplatterData from '../../../json/splatter/splatter';
 import ColourInColour from '../../../json/colour-in-colour/colour-in-colour';
 
 const STYLE_OPTS = [
-  { label: 'Standard Black Style', value: 'Standard Black' },
-  { label: 'Colour Style', value: 'Colour' },
-  { label: 'Split Style', value: 'Split' },
-  { label: 'Smash Style', value: 'Smash' },
-  { label: 'Clash Style', value: 'Clash' },
-  { label: 'Color In Color Style', value: 'Color In Color' },
+  { label: 'Standard Black', value: 'Standard Black' },
+  { label: 'Colour', value: 'Colour' },
+  { label: 'Split', value: 'Split' },
+  { label: 'Smash', value: 'Smash' },
+  { label: 'Clash', value: 'Clash' },
+  { label: 'Color In Color', value: 'Color In Color' },
 ];
 
 const COLOUR_OPTS = [
