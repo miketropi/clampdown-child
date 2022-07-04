@@ -23,10 +23,10 @@ const generalFields = {
       // options: [0, 1, 2, 4, 6],
       options: [
         { label: 'Zero Sides', value: 0 },
-        { label: 'One Side', value: 1 },
-        { label: 'Two Sides', value: 2 },
-        { label: 'Four Sides', value: 4 },
-        { label: 'Six Sides', value: 6 },
+        { label: 'Single Sided Record (One Side Blank)', value: 1 },
+        { label: 'Standard Double Sided Record (Two Sides)', value: 2 },
+        { label: 'Double Album (Four Sides)', value: 4 },
+        { label: 'Triple Album (Six Sides)', value: 6 },
       ],
       default: 2,
     }

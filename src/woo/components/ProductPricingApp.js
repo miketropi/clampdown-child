@@ -153,6 +153,20 @@ export default function ProductPricingApp() {
           onChange={ (allFields, fieldChange) => {
             // console.log('__', fieldChange, allFields);
 
+            const fieldName = Object.keys(fieldChange).shift();
+            const fieldValue = Object.values(fieldChange).shift();
+            const mapFields = {
+              style: 'colour',
+              style2: 'colour2',
+              style3: 'colour3',
+            };
+
+            if(Object.keys(mapFields).includes(fieldName) && fieldValue == "Standard Black") {
+              allFields[mapFields[fieldName]] = 'Black';
+            } else if(Object.keys(mapFields).includes(fieldName) && fieldValue != "Standard Black") {
+              allFields[mapFields[fieldName]] = 'Forrest';
+            }
+
             let _variables = [...variables];
             _variables[currentVariable] = allFields;
 
