@@ -26,6 +26,7 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
   const [productPricingSettings, setProductPricingSettings] = useState({});
   const [productExtraData, setProductExtraData] = useState({});
   const [total, setTotal] = useState(0);
+  const [totalUnits, setTotalUnits] = useState(0);
   const customerPricingFields = registerCustomerPricingFields();
   const generalCustomerPricingFields = registerGeneralCustomerPricingFields();
 
@@ -94,10 +95,17 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
 
   useEffect(() => {
     let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions }, variables);
-    console.log(_obj)
+    // console.log(_obj)
     let total = _obj?.total() || 0;
-
     setTotal(total.toFixed(2));
+
+    // totalUnits
+    let _totalUnits = variables.reduce((_total, item) => {
+      return _total + parseInt(item.number);
+    }, 0);
+
+    setTotalUnits(_totalUnits)
+
   }, [variables])
 
   const onChangeVariablePlace = (num) => {
@@ -142,12 +150,9 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
       onOk: () => { 
 
         _variables.splice(index, 1);
-        // console.log('1___', _variables);
         _variables.filter(element => {
           return element != undefined;
         });
-
-        // console.log('2___', _variables);
 
         setVariables(_variables);
         setCurrentVariable(0);
@@ -171,6 +176,7 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
     currentVariable, setCurrentVariable,
     onChangeVariablePlace,
     onRemoveVariant,
+    totalUnits,
   };
 
   return <ProductPricingContext.Provider value={ value }>

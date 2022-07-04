@@ -39,7 +39,8 @@ export default function ProductPricingApp() {
     productPricingSettings, 
     updateTagVariableViaSettingsRules, 
     onChangeVariablePlace, 
-    total, onRemoveVariant } = useProductPricing();
+    total, onRemoveVariant,
+    totalUnits } = useProductPricing();
 
   const [sendRequest, setSendRequest] = useState(false);
   const [sendRequestMessage, setSendRequestMessage] = useState({type: 'info', message: '', action: ''});
@@ -158,6 +159,19 @@ export default function ProductPricingApp() {
           <Alert
             // message="Warning"
             description={ __('These images are here for reference only to show you what a Clash / Smash Style looks like. Please choose the colour options you\'d like to use below. We\'ve got lots of colours and can mix to your requirements.', 'clampdown-child') }
+            type="warning"
+            showIcon
+            closable
+            style={{ marginBottom: '3em' }}
+          />
+        }
+
+        {
+          totalUnits <  500 &&
+          generalOptions.jacket_type == 'Gatefold Jacket' && 
+          <Alert
+            // message="Warning"
+            description={ __('We need to tell for you that we can only print gatefolds in QTY of 500, please charged for 500 jackets.', 'clampdown-child') }
             type="warning"
             showIcon
             closable
