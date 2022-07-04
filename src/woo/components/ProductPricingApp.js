@@ -10,6 +10,24 @@ import PreviewImage from './PreviewImage';
 import QuoteSummary from './QuoteSummary';
 import { __ } from '@wordpress/i18n';
 
+const ButtonRemoveVariant = styled(Button)`
+  width: 100%;
+  background: #ff4d4f !important;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  color: white !important;
+  padding: 1.5em;
+  line-height: 0;
+  height: auto;
+  margin-bottom: 4px;
+
+  &:hover {
+    background: #ff4d4f;
+    opacity: .8;
+  }
+`
+
 export default function ProductPricingApp() {
   const { 
     productID, wp_nonce, 
@@ -21,7 +39,7 @@ export default function ProductPricingApp() {
     productPricingSettings, 
     updateTagVariableViaSettingsRules, 
     onChangeVariablePlace, 
-    total } = useProductPricing();
+    total, onRemoveVariant } = useProductPricing();
 
   const [sendRequest, setSendRequest] = useState(false);
   const [sendRequestMessage, setSendRequestMessage] = useState({type: 'info', message: '', action: ''});
@@ -187,6 +205,16 @@ export default function ProductPricingApp() {
           productPricingSettings?.product_pricing_summary_fields &&
           productPricingSettings?.product_pricing_summary_fields?.length > 0 && 
           <QuoteSummary />
+        }
+
+        {
+          currentVariable != 0 &&
+          <ButtonRemoveVariant
+            style={{ width: '100%' }}
+            size={ 'large' }
+            onClick={ e => onRemoveVariant(currentVariable) } >
+            { __('Remove Variant', 'clampdown-child') }
+          </ButtonRemoveVariant>
         }
 
         <ButtonAddToCart  

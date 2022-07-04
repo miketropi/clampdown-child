@@ -116,16 +116,44 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
         cancelButtonProps: { style: { background: 'none', color: 'black', border: 'none', boxShadow: 'none' } },
         okButtonProps: { style: { border: 'none', boxShadow: 'none' } },
         onOk: () => { 
-          _variables[num] = getDefaultFields(productPricingSettings?.variant_default_opts, (_f) => {
+          let number = _variables.length;
+          _variables[number] = getDefaultFields(productPricingSettings?.variant_default_opts, (_f) => {
             let _obj = updateTagVariableViaSettingsRules(productPricingSettings, { ...generalOptions, ..._f });
             return { __TOTAL__: _obj?.eachVariantTotal() || 0 }
           });
           setVariables(_variables);
-          setCurrentVariable(num);
+          setCurrentVariable(number);
         }
       });
     }
   }
+
+  const onRemoveVariant = (index) => {
+    let _variables = [...variables];
+    // console.log(index, _variables, _variables.splice(index, 1)); return;
+    Modal.confirm({
+      title: __('Confirm', 'clampdown-child'),
+      icon: <InfoCircleOutlined />,
+      content: __('Remove variant item?', 'clampdown-child'),
+      okText: __('OK', 'clampdown-child'),
+      cancelText: __('Cancel', 'clampdown-child'),
+      cancelButtonProps: { style: { background: 'none', color: 'black', border: 'none', boxShadow: 'none' } },
+      okButtonProps: { style: { border: 'none', boxShadow: 'none' } },
+      onOk: () => { 
+
+        _variables.splice(index, 1);
+        // console.log('1___', _variables);
+        _variables.filter(element => {
+          return element != undefined;
+        });
+
+        // console.log('2___', _variables);
+
+        setVariables(_variables);
+        setCurrentVariable(0);
+      }
+    });
+  } 
 
   const value = {
     version: '1.0.0',
@@ -142,7 +170,8 @@ const ProductPricingProvider = ({ productID, wp_nonce, children }) => {
     variables, setVariables,
     currentVariable, setCurrentVariable,
     onChangeVariablePlace,
-  }
+    onRemoveVariant,
+  };
 
   return <ProductPricingContext.Provider value={ value }>
     {/* { JSON.stringify(variables) } */}
