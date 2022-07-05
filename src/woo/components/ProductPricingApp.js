@@ -167,11 +167,11 @@ export default function ProductPricingApp() {
         }
 
         {
-          totalUnits <  500 &&
+          totalUnits < 500 &&
           generalOptions.jacket_type == 'Gatefold Jacket' && 
           <Alert
             // message="Warning"
-            description={ __('We need to tell for you that we can only print gatefolds in QTY of 500, please charged for 500 jackets.', 'clampdown-child') }
+            description={ __('Gatefold jackets have a minimum quantity of 500. If you are ordering less than 500 records and wish to have Gatefold jackets you will have to pay the minimum Gatefold fee.', 'clampdown-child') }
             type="warning"
             showIcon
             closable

@@ -321,6 +321,8 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
         return fn();
       });
 
+      // console.log('Variant___', _tagVariablesWithValue);
+
       try {
         let evalString = _each_variant_total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
         return eval(evalString);
@@ -333,7 +335,7 @@ export const updateTagVariableViaSettingsRules = (settings, opts, variables = nu
         return fn();
       });
 
-      console.log(_tagVariablesWithValue);
+      // console.log('Total___', _tagVariablesWithValue);
 
       try {
         let evalString = _total.replaceArray(Object.keys(_tagVariablesWithValue), Object.values(_tagVariablesWithValue));
